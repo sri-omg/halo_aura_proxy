@@ -1,0 +1,6 @@
+Installing soap4r:
+  - don't use the gem (at least on OS X); it doesn't work
+  - download the code from http://dev.ctor.org/download/soap4r-1.5.8.tar.gz
+  - see install instructions at http://blog.unifia.fr/?tag=wsdl2ruby-problem
+  - check that the code installed in the correct location (it seems to want to add site_ruby to the install path)
+  - run wsdl2ruby.rb from the bin directory in the downloaded code directory, not from the installed code directory

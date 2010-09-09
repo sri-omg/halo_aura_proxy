@@ -1,0 +1,3113 @@
+<?xml version="1.0"?>
+
+
+<wsdl:definitions
+       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+       xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+       xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+       xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+       xmlns:AURA="urn:auraUserData"
+       xmlns:KM="urn:auraKnowledgeBase"
+       xmlns:SHAKEN="urn:shakenOperations"
+       targetNamespace="urn:auraUserData">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:auraUserData">
+      <xsd:complexType name="TableCell">
+        <xsd:all>
+          <xsd:element
+               name="class"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="value"
+               type="AURA:PropertyValue"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Literal">
+        <xsd:sequence>
+          <xsd:element
+               name="source"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="targets"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+          <xsd:element
+               name="relation"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="isNegated"
+               type="xsd:boolean"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="NAryArgument">
+        <xsd:all>
+          <xsd:element
+               name="var"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="ival"
+               type="xsd:int"
+               minOccurs="0" />
+          <xsd:element
+               name="fval"
+               type="xsd:float"
+               minOccurs="0" />
+          <xsd:element
+               name="subnode"
+               type="AURA:NAryNode"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="TableRow">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:TableCell[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="TableColumn">
+        <xsd:sequence>
+          <xsd:element
+               name="header"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="order"
+               type="xsd:int"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="clibClass">
+        <xsd:all>
+          <xsd:element
+               name="value"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="Entity"
+               type="AURA:Entity-Type"
+               minOccurs="0" />
+          <xsd:element
+               name="Event"
+               type="AURA:Event-Type"
+               minOccurs="0" />
+          <xsd:element
+               name="Role"
+               type="AURA:Role-Type"
+               minOccurs="0" />
+          <xsd:element
+               name="Property-Value"
+               type="AURA:Property-Value-Type"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="templateInstance">
+        <xsd:sequence>
+          <xsd:element
+               name="instance"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="description"
+               type="xsd:string"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Entity-Type">
+        <xsd:all>
+          <xsd:element
+               name="class"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="templateInstance"
+               type="AURA:templateInstance"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Event-Type">
+        <xsd:all>
+          <xsd:element
+               name="class"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="templateInstance"
+               type="AURA:templateInstance"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Role-Type">
+        <xsd:all>
+          <xsd:element
+               name="class"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="templateInstance"
+               type="AURA:templateInstance"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Property-Value-Type">
+        <xsd:all>
+          <xsd:element
+               name="class"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="templateInstance"
+               type="AURA:templateInstance"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Slot-Type">
+        <xsd:sequence>
+          <xsd:element
+               name="name"
+               type="xsd:QName"
+               minOccurs="0"
+               maxOccurs="unbounded" />
+          <xsd:element
+               name="domain"
+               type="AURA:clibClass"
+               minOccurs="0"
+               maxOccurs="unbounded" />
+          <xsd:element
+               name="range"
+               type="AURA:clibClass"
+               minOccurs="0"
+               maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Atom">
+        <xsd:sequence>
+          <xsd:element
+               name="elementType"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="count"
+               type="xsd:int"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfTableColumns">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:TableColumn[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfTableRows">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:TableRow[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="QNameMap">
+        <xsd:sequence>
+          <xsd:element
+               name="key"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="value"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="NAryArgumentArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:NAryArgument[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="CardinalityConstraintTerm">
+        <xsd:sequence>
+          <xsd:element
+               name="operator"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="count"
+               type="xsd:int"
+               minOccurs="0" />
+          <xsd:element
+               name="class"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TypeConstraintTerm">
+        <xsd:sequence>
+          <xsd:element
+               name="operator"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="class"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfLiterals">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:Literal[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfLogicalFormulas">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:LogicalFormula[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="DocumentationElement">
+        <xsd:all>
+          <xsd:element
+               name="string"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="reference"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Molecule">
+        <xsd:sequence>
+          <xsd:element
+               name="formula"
+               type="AURA:Formula"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BasicNode">
+        <xsd:all>
+          <xsd:element
+               name="identifier"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="label"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="documentation"
+               type="AURA:Documentation"
+               minOccurs="0" />
+          <xsd:element
+               name="position"
+               type="AURA:Position"
+               minOccurs="0" />
+          <xsd:element
+               name="isVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNeverVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isViewed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isDisplayed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isEnclosed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNew"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="userDefinedLabel"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="type"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="comment"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="expansionState"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="isRoot"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isQueryNode"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNamedIndividual"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="paraphrase"
+               type="xsd:integer"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="BigNode">
+        <xsd:all>
+          <xsd:element name="identifier" type="xsd:QName" />
+          <xsd:element name="label" type="xsd:string" />
+          <xsd:element name="documentation" type="AURA:Documentation" />
+          <xsd:element name="position" type="AURA:Position" />
+          <xsd:element name="isVisible" type="xsd:boolean" />
+          <xsd:element name="isNeverVisible" type="xsd:boolean" />
+          <xsd:element name="isViewed" type="xsd:boolean" />
+          <xsd:element name="isDisplayed" type="xsd:boolean" />
+          <xsd:element name="isEnclosed" type="xsd:boolean" />
+          <xsd:element name="isNew" type="xsd:boolean" />
+          <xsd:element name="userDefinedLabel" type="xsd:string" />
+          <xsd:element name="type" type="xsd:QName" />
+          <xsd:element name="comment" type="xsd:string" />
+          <xsd:element name="expansionState" type="xsd:QName" />
+          <xsd:element name="isRoot" type="xsd:boolean" />
+          <xsd:element name="isOpen" type="xsd:boolean" />
+          <xsd:element name="canBeTrigger" type="xsd:boolean" />
+          <xsd:element name="canBeNegation" type="xsd:boolean" />
+          <xsd:element name="canBeSalient" type="xsd:boolean" />
+          <xsd:element name="subGraph" type="AURA:QNameArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Documentation">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:DocumentationElement[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Position">
+        <xsd:all>
+          <xsd:element name="x" type="xsd:int" />
+          <xsd:element name="y" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LogicalFormula">
+        <xsd:sequence>
+          <xsd:element
+               name="operator"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="literals"
+               type="AURA:ArrayOfLiterals"
+               minOccurs="0" />
+          <xsd:element
+               name="formulas"
+               type="AURA:ArrayOfLogicalFormulas"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConstraintTermHolder">
+        <xsd:all>
+          <xsd:element
+               name="cardinalityConstraint"
+               type="AURA:CardinalityConstraintTerm"
+               minOccurs="0" />
+          <xsd:element
+               name="typeConstraint"
+               type="AURA:TypeConstraintTerm"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ConstraintNodeAttributes">
+        <xsd:sequence>
+          <xsd:element
+               name="identifier"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="label"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="documentation"
+               type="AURA:Documentation"
+               minOccurs="0" />
+          <xsd:element
+               name="position"
+               type="AURA:Position"
+               minOccurs="0" />
+          <xsd:element
+               name="isVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNeverVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isViewed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isDisplayed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isEnclosed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNew"
+               type="xsd:boolean"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConstraintEdgeAttributes">
+        <xsd:sequence>
+          <xsd:element
+               name="identifier"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="label"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="documentation"
+               type="AURA:Documentation"
+               minOccurs="0" />
+          <xsd:element
+               name="position"
+               type="AURA:Position"
+               minOccurs="0" />
+          <xsd:element
+               name="isVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNeverVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isViewed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isDisplayed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isEnclosed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNew"
+               type="xsd:boolean"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="NAryNode">
+        <xsd:sequence>
+          <xsd:element
+               name="operator"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="arguments"
+               type="AURA:NAryArgumentArray"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="QNameTable">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:QNameMap[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Table">
+        <xsd:sequence>
+          <xsd:element
+               name="columns"
+               type="AURA:ArrayOfTableColumns"
+               minOccurs="0" />
+          <xsd:element
+               name="rows"
+               type="AURA:ArrayOfTableRows"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UnificationDiff">
+        <xsd:sequence>
+          <xsd:element
+               name="node1"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="node2"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="result"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfConstraintTerms">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:ConstraintTermHolder[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AtomArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:Atom[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="resultItem">
+        <xsd:all>
+          <xsd:element
+               name="value"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="Entity"
+               type="AURA:Entity-Type"
+               minOccurs="0" />
+          <xsd:element
+               name="Event"
+               type="AURA:Event-Type"
+               minOccurs="0" />
+          <xsd:element
+               name="Role"
+               type="AURA:Role-Type"
+               minOccurs="0" />
+          <xsd:element
+               name="Property-Value"
+               type="AURA:Property-Value-Type"
+               minOccurs="0" />
+          <xsd:element
+               name="Slot"
+               type="AURA:Slot-Type"
+               minOccurs="0" />
+          <xsd:element
+               name="instance"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Paraphrase">
+        <xsd:sequence>
+          <xsd:element
+               name="sentence"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="node"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="source"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="relation"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="target"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ResultItemArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:resultItem[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="FormulaComponent">
+        <xsd:all>
+          <xsd:element
+               name="atomArray"
+               type="AURA:AtomArray"
+               minOccurs="0" />
+          <xsd:element
+               name="formula"
+               type="AURA:Formula"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="CardinalValueScale">
+        <xsd:sequence>
+          <xsd:element
+               name="name"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="isSpecializable"
+               type="xsd:boolean"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CategoricalValueScale">
+        <xsd:sequence>
+          <xsd:element
+               name="values"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ScalarValueScale">
+        <xsd:sequence>
+          <xsd:element
+               name="name"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="domains"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+          <xsd:element
+               name="values"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UIAttributesForNode">
+        <xsd:sequence>
+          <xsd:element
+               name="name"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="position"
+               type="AURA:Position"
+               minOccurs="0" />
+          <xsd:element
+               name="isVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNeverVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UIAttributesForEdge">
+        <xsd:sequence>
+          <xsd:element
+               name="source"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="relation"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="targets"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+          <xsd:element
+               name="position"
+               type="AURA:Position"
+               minOccurs="0" />
+          <xsd:element
+               name="isVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNeverVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UIAttributesForTable">
+        <xsd:sequence>
+          <xsd:element
+               name="name"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="position"
+               type="AURA:Position"
+               minOccurs="0" />
+          <xsd:element
+               name="isVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNeverVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="LMapArgumentValue">
+        <xsd:all>
+          <xsd:element
+               name="concept"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="conceptList"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+          <xsd:element
+               name="gaf"
+               type="AURA:GAF"
+               minOccurs="0" />
+          <xsd:element
+               name="gafList"
+               type="AURA:ArrayOfGAFs"
+               minOccurs="0" />
+          <xsd:element
+               name="stringValue"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="intValue"
+               type="xsd:int"
+               minOccurs="0" />
+          <xsd:element
+               name="boolValue"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="operatorTree"
+               type="AURA:NAryNode"
+               minOccurs="0" />
+          <xsd:element
+               name="nameMap"
+               type="AURA:QNameTable"
+               minOccurs="0" />
+          <xsd:element
+               name="constraintTerms"
+               type="AURA:ArrayOfConstraintTerms"
+               minOccurs="0" />
+          <xsd:element
+               name="logicalFormula"
+               type="AURA:LogicalFormula"
+               minOccurs="0" />
+          <xsd:element
+               name="propertyValues"
+               type="AURA:ArrayOfValues"
+               minOccurs="0" />
+          <xsd:element
+               name="documentation"
+               type="AURA:Documentation"
+               minOccurs="0" />
+          <xsd:element
+               name="table"
+               type="AURA:Table"
+               minOccurs="0" />
+          <xsd:element
+               name="synonyms"
+               type="AURA:VocabularyArray"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ConceptMapDiff">
+        <xsd:all>
+          <xsd:element
+               name="unification"
+               type="AURA:UnificationDiff"
+               minOccurs="0" />
+          <xsd:element
+               name="addedFact"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="addedIndividual"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="deletedFact"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="deletedIndividual"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="NodeTable">
+        <xsd:all>
+          <xsd:element
+               name="identifier"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="label"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="documentation"
+               type="AURA:Documentation"
+               minOccurs="0" />
+          <xsd:element
+               name="position"
+               type="AURA:Position"
+               minOccurs="0" />
+          <xsd:element
+               name="isVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNeverVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isViewed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isDisplayed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isEnclosed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNew"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="node"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="identifier"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="table"
+               type="AURA:Table"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Equation">
+        <xsd:all>
+          <xsd:element
+               name="identifier"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="equation"
+               type="AURA:NAryNode"
+               minOccurs="0" />
+          <xsd:element
+               name="bindings"
+               type="AURA:QNameTable"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Constraint">
+        <xsd:sequence>
+          <xsd:element
+               name="constraintTerm"
+               type="AURA:ConstraintTermHolder"
+               minOccurs="0" />
+          <xsd:element
+               name="node"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="slot"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="constrainedNodes"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+          <xsd:element
+               name="nodeAttributes"
+               type="AURA:ConstraintNodeAttributes"
+               minOccurs="0" />
+          <xsd:element
+               name="edgeAttributes"
+               type="AURA:ConstraintEdgeAttributes"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Edge">
+        <xsd:all>
+          <xsd:element
+               name="identifier"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="label"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="documentation"
+               type="AURA:Documentation"
+               minOccurs="0" />
+          <xsd:element
+               name="position"
+               type="AURA:Position"
+               minOccurs="0" />
+          <xsd:element
+               name="isVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNeverVisible"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isViewed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isDisplayed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isEnclosed"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="isNew"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="gaf"
+               type="AURA:GAF"
+               minOccurs="0" />
+          <xsd:element
+               name="condition"
+               type="AURA:LogicalFormula"
+               minOccurs="0" />
+          <xsd:element
+               name="isQuery"
+               type="xsd:boolean"
+               minOccurs="0" />
+          <xsd:element
+               name="paraphrase"
+               type="xsd:integer"
+               minOccurs="0" />
+          <xsd:element
+               name="supports"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+          <xsd:element
+               name="isInterface"
+               type="xsd:boolean"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="PropertyValue">
+        <xsd:all>
+          <xsd:element
+               name="identifier"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="label"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="type"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="unit"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="magnitude"
+               type="xsd:float"
+               minOccurs="0" />
+          <xsd:element
+               name="scale"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="GenericNode">
+        <xsd:all>
+          <xsd:element
+               name="basicNode"
+               type="AURA:BasicNode"
+               minOccurs="0" />
+          <xsd:element
+               name="bigNode"
+               type="AURA:BigNode"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ReactionParticipant">
+        <xsd:sequence>
+          <xsd:element
+               name="count"
+               type="xsd:int"
+               minOccurs="0" />
+          <xsd:element
+               name="molecule"
+               type="AURA:Molecule"
+               minOccurs="0" />
+          <xsd:element
+               name="state"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DirtParaphrase">
+        <xsd:sequence>
+          <xsd:element
+               name="paraphraseID"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="paraphraseString"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="blockedP"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ReactionParticipantList">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:ReactionParticipant[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="documentSelection">
+        <xsd:all>
+          <xsd:element name="selectionName" type="xsd:QName" />
+          <xsd:element name="selectionType" type="xsd:QName" />
+          <xsd:element name="selectionURI" type="xsd:anyURI" />
+          <xsd:element name="selectionPath" type="xsd:string" />
+          <xsd:element name="selectionStart" type="xsd:int" />
+          <xsd:element name="selectionEnd" type="xsd:int" />
+          <xsd:element name="selectionSummary" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="QuestionUninterpretableType">
+        <xsd:sequence>
+          <xsd:element
+               name="html"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="partialCmap"
+               type="AURA:QuestionConceptMap"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WordConceptMap">
+        <xsd:sequence>
+          <xsd:element
+               name="word"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="partOfSpeech"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="concept"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PartitionData">
+        <xsd:sequence>
+          <xsd:element
+               name="id"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="members"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PartitionEdit">
+        <xsd:sequence>
+          <xsd:element
+               name="operation"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="id"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="concept"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="members"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RelationInformation">
+        <xsd:sequence>
+          <xsd:element
+               name="relation"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="arity"
+               type="xsd:int"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WordSense">
+        <xsd:all>
+          <xsd:element name="concept" type="xsd:QName" />
+          <xsd:element name="definition" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfNodes">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:GenericNode[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfValues">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:PropertyValue[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfEdges">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:Edge[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfConstraints">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:Constraint[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfEquations">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:Equation[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfTables">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:NodeTable[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ConceptMapDiffsArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:ConceptMapDiff[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LMapArgument">
+        <xsd:sequence>
+          <xsd:element
+               name="name"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="value"
+               type="AURA:LMapArgumentValue"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UIAttributes">
+        <xsd:all>
+          <xsd:element
+               name="node"
+               type="AURA:UIAttributesForNode"
+               minOccurs="0" />
+          <xsd:element
+               name="edge"
+               type="AURA:UIAttributesForEdge"
+               minOccurs="0" />
+          <xsd:element
+               name="table"
+               type="AURA:UIAttributesForTable"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="RelationOption">
+        <xsd:all>
+          <xsd:element name="relation" type="xsd:QName" />
+          <xsd:element name="description" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ConnectRelationInvisibleType">
+        <xsd:sequence>
+          <xsd:element
+               name="source"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="relation"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="target"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="nodeToExpand"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="InheritedContentModificationType">
+        <xsd:sequence>
+          <xsd:element
+               name="operation"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="content"
+               type="AURA:StringArray"
+               minOccurs="0" />
+          <xsd:element
+               name="cause"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="sourceAxiomClasses"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+          <xsd:element
+               name="sourcePrototypeClasses"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ValidValueScales">
+        <xsd:sequence>
+          <xsd:element
+               name="cardinal"
+               type="AURA:CardinalValueScale"
+               minOccurs="0" />
+          <xsd:element
+               name="categorical"
+               type="AURA:CategoricalValueScale"
+               minOccurs="0" />
+          <xsd:element
+               name="scalar"
+               type="AURA:ScalarValueScale"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FormulaComponentList">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:FormulaComponent[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="termResult">
+        <xsd:sequence>
+          <xsd:element
+               name="term"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="exact"
+               type="AURA:ResultItemArray"
+               minOccurs="0" />
+          <xsd:element
+               name="partial"
+               type="AURA:ResultItemArray"
+               minOccurs="0" />
+          <xsd:element
+               name="semantic"
+               type="AURA:ResultItemArray"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GAF">
+        <xsd:all>
+          <xsd:element
+               name="source"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="relation"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="targets"
+               type="AURA:QNameArray"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfParaphrases">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:Paraphrase[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfSentences">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="QuestionConceptMap">
+        <xsd:sequence>
+          <xsd:element
+               name="conceptMap"
+               type="AURA:ConceptMap"
+               minOccurs="0" />
+          <xsd:element
+               name="paraphrases"
+               type="AURA:ArrayOfParaphrases"
+               minOccurs="0" />
+          <xsd:element
+               name="sources"
+               type="AURA:ArrayOfSentences"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="QNameArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:QName[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Viewpoint">
+        <xsd:all>
+          <xsd:element name="identifier" type="xsd:QName" />
+          <xsd:element name="conceptMap" type="AURA:ConceptMap" />
+          <xsd:element name="concept" type="xsd:QName" />
+          <xsd:element name="setupEdges" type="AURA:QNameArray" />
+          <xsd:element name="setupNodes" type="AURA:QNameArray" />
+          <xsd:element name="queryEdges" type="AURA:QNameArray" />
+          <xsd:element name="queryNodes" type="AURA:QNameArray" />
+          <xsd:element name="conceptEdges" type="AURA:QNameArray" />
+          <xsd:element name="conceptNodes" type="AURA:QNameArray" />
+          <xsd:element name="otherEdges" type="AURA:QNameArray" />
+          <xsd:element name="otherNodes" type="AURA:QNameArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfGAFs">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:GAF[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="StringArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfTermResult">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:termResult[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Formula">
+        <xsd:sequence>
+          <xsd:element
+               name="title"
+               type="xsd:string"
+               minOccurs="0" />
+          <xsd:element
+               name="formalCharge"
+               type="xsd:int"
+               minOccurs="0" />
+          <xsd:element
+               name="count"
+               type="xsd:int"
+               minOccurs="0" />
+          <xsd:element
+               name="formulaComponents"
+               type="AURA:FormulaComponentList"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ValidValuesArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:ValidValueScales[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="SOAPServerType">
+        <xsd:sequence>
+          <xsd:element
+               name="el0"
+               type="AURA:ConnectRelationInvisibleType"
+               minOccurs="0" />
+          <xsd:element
+               name="el1"
+               type="AURA:InheritedContentModificationType"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfViewpoints">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:Viewpoint[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfRelationOptions">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:RelationOption[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="UIAttributeArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:UIAttributes[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LMapArgumentTable">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:LMapArgument[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ConceptMapEditSummary">
+        <xsd:sequence>
+          <xsd:element
+               name="initial"
+               type="AURA:ConceptMap"
+               minOccurs="0" />
+          <xsd:element
+               name="final"
+               type="AURA:ConceptMap"
+               minOccurs="0" />
+          <xsd:element
+               name="differences"
+               type="AURA:ConceptMapDiffsArray"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConceptMap">
+        <xsd:all>
+          <xsd:element name="name" type="xsd:QName" />
+          <xsd:element name="isEditable" type="xsd:boolean" />
+          <xsd:element name="isDisconnected" type="xsd:boolean" />
+          <xsd:element name="nodes" type="AURA:ArrayOfNodes" />
+          <xsd:element name="values" type="AURA:ArrayOfValues" />
+          <xsd:element name="edges" type="AURA:ArrayOfEdges" />
+          <xsd:element name="constraints" type="AURA:ArrayOfConstraints" />
+          <xsd:element name="equations" type="AURA:ArrayOfEquations" />
+          <xsd:element name="tables" type="AURA:ArrayOfTables" />
+          <xsd:element name="knockonUnifications" type="AURA:QNameArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfWordSenses">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:WordSense[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="SOAPServerType002">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:RelationInformation[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="PartitionEditsArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:PartitionEdit[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="PartitionsArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:PartitionData[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="VocabularyArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:WordConceptMap[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="SOAPServerType003">
+        <xsd:sequence>
+          <xsd:element
+               name="el0"
+               type="AURA:QuestionUninterpretableType"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DocumentSelectionArray">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:documentSelection[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Reaction">
+        <xsd:sequence>
+          <xsd:element
+               name="reactantList"
+               type="AURA:ReactionParticipantList"
+               minOccurs="0" />
+          <xsd:element
+               name="productList"
+               type="AURA:ReactionParticipantList"
+               minOccurs="0" />
+          <xsd:element
+               name="direction"
+               type="xsd:QName"
+               minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfDirtParaphrases">
+        <xsd:complexContent>
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="AURA:DirtParaphrase[]" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="dummy" type="AURA:SOAPServerType" />
+      <xsd:element name="relationsArray" type="AURA:SOAPServerType002" />
+      <xsd:element name="dummy2" type="AURA:SOAPServerType003" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="askQuestion">
+    <wsdl:part name="question" type="xsd:string" />
+    <wsdl:part name="forceWord" type="xsd:string" />
+    <wsdl:part name="pos" type="xsd:QName" />
+    <wsdl:part name="uofm" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="askQuestionResponse">
+    <wsdl:part name="conceptMap" type="AURA:QuestionConceptMap" />
+    <wsdl:part name="errors" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="whyNot">
+    <wsdl:part name="concept" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="whyNotResponse">
+    <wsdl:part name="viewpoint" type="AURA:Viewpoint" />
+    <wsdl:part name="setupMatched" type="AURA:QNameArray" />
+    <wsdl:part name="setupNotMatched" type="AURA:QNameArray" />
+    <wsdl:part name="conceptMatched" type="AURA:QNameArray" />
+    <wsdl:part name="conceptNotMatched" type="AURA:QNameArray" />
+  </wsdl:message>
+  <wsdl:message name="pingServer">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="pingServerResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="changeRelation">
+    <wsdl:part name="rootIndividual" type="xsd:QName" />
+    <wsdl:part name="edges" type="AURA:ArrayOfGAFs" />
+    <wsdl:part name="relation" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="changeRelationResponse">
+    <wsdl:part name="conceptMap" type="AURA:QuestionConceptMap" />
+    <wsdl:part name="errors" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getNonVisibleClasses">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getNonVisibleClassesResponse">
+    <wsdl:part name="classes" type="AURA:QNameArray" />
+  </wsdl:message>
+  <wsdl:message name="deleteSmeConcept">
+    <wsdl:part name="concept" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="deleteSmeConceptResponse">
+    <wsdl:part name="reviewList" type="AURA:QNameArray" />
+  </wsdl:message>
+  <wsdl:message name="stemString">
+    <wsdl:part name="inputString" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="stemStringResponse">
+    <wsdl:part name="outputString" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="checkpointSuccess">
+    <wsdl:part name="idCreated" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="checkpointSuccessResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="genericSearch">
+    <wsdl:part name="inputs" type="AURA:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="genericSearchResponse">
+    <wsdl:part name="termResultList" type="AURA:ArrayOfTermResult" />
+  </wsdl:message>
+  <wsdl:message name="createCompound">
+    <wsdl:part name="compound" type="AURA:Formula" />
+    <wsdl:part name="className" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="createCompoundResponse">
+    <wsdl:part name="compoundClass" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getClassRelatedClasses">
+    <wsdl:part name="class" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getClassRelatedClassesResponse">
+    <wsdl:part name="classes" type="AURA:QNameArray" />
+  </wsdl:message>
+  <wsdl:message name="answerCorrect">
+    <wsdl:part name="id" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="answerCorrectResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="initialize">
+    <wsdl:part name="pingInterval" type="xsd:int" />
+    <wsdl:part name="checkpointInterval" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="initializeResponse">
+    <wsdl:part name="idToRecover" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getValidPropertyValues">
+    <wsdl:part name="individual" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getValidPropertyValuesResponse">
+    <wsdl:part name="relationsArray" type="AURA:ValidValuesArray" />
+  </wsdl:message>
+  <wsdl:message name="shakenFaultExporter">
+    <wsdl:part name="SOAPServerPart" element="AURA:dummy" />
+  </wsdl:message>
+  <wsdl:message name="shakenFaultExporterResponse">
+    <wsdl:part name="concept" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getDebugNames">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDebugNamesResponse">
+    <wsdl:part name="viewpoints" type="AURA:ArrayOfViewpoints" />
+  </wsdl:message>
+  <wsdl:message name="getViewpointInfo">
+    <wsdl:part name="viewpoint" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getViewpointInfoResponse">
+    <wsdl:part name="viewpoint" type="AURA:Viewpoint" />
+  </wsdl:message>
+  <wsdl:message name="getAsynchronousCallStatus">
+    <wsdl:part name="callName" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getAsynchronousCallStatusResponse">
+    <wsdl:part name="currentStage" type="xsd:int" />
+    <wsdl:part name="maxStage" type="xsd:int" />
+    <wsdl:part name="positionInStage" type="xsd:int" />
+    <wsdl:part name="maxInStage" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="drilldownExplanation">
+    <wsdl:part name="function" type="xsd:string" />
+    <wsdl:part name="arguments" type="AURA:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="drilldownExplanationResponse">
+    <wsdl:part name="explanation" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getRelationOptions">
+    <wsdl:part name="source" type="xsd:QName" />
+    <wsdl:part name="relation" type="xsd:QName" />
+    <wsdl:part name="target" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getRelationOptionsResponse">
+    <wsdl:part name="options" type="AURA:ArrayOfRelationOptions" />
+  </wsdl:message>
+  <wsdl:message name="callLMapFunction">
+    <wsdl:part name="rootIndividual" type="xsd:QName" />
+    <wsdl:part name="action" type="xsd:QName" />
+    <wsdl:part name="arguments" type="AURA:LMapArgumentTable" />
+    <wsdl:part name="uiAttributes" type="AURA:UIAttributeArray" />
+  </wsdl:message>
+  <wsdl:message name="callLMapFunctionResponse">
+    <wsdl:part name="conceptMap" type="AURA:ConceptMap" />
+    <wsdl:part name="conceptList" type="AURA:QNameArray" />
+    <wsdl:part name="cmapList" type="AURA:QNameArray" />
+    <wsdl:part name="conceptEditSummary" type="AURA:ConceptMapEditSummary" />
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getWordSenses">
+    <wsdl:part name="instance" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getWordSensesResponse">
+    <wsdl:part name="senses" type="AURA:ArrayOfWordSenses" />
+  </wsdl:message>
+  <wsdl:message name="answerQuestion">
+    <wsdl:part name="questionID" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="answerQuestionResponse">
+    <wsdl:part name="answer" type="xsd:string" />
+    <wsdl:part name="canContinue" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="initializeComplete">
+    <wsdl:part name="idRecovered" type="xsd:int" />
+    <wsdl:part name="isSuccess" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="initializeCompleteResponse">
+    <wsdl:part name="idToRecover" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="changeWordSense">
+    <wsdl:part name="instance" type="xsd:QName" />
+    <wsdl:part name="sense" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="changeWordSenseResponse">
+    <wsdl:part name="conceptMap" type="AURA:QuestionConceptMap" />
+    <wsdl:part name="errors" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getValidRelations">
+    <wsdl:part name="source" type="xsd:QName" />
+    <wsdl:part name="target" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getValidRelationsResponse">
+    <wsdl:part name="SOAPServerPart002" element="AURA:relationsArray" />
+  </wsdl:message>
+  <wsdl:message name="findPartitionsForClass">
+    <wsdl:part name="class" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="findPartitionsForClassResponse">
+    <wsdl:part name="partitions" type="AURA:PartitionsArray" />
+    <wsdl:part name="edits" type="AURA:PartitionEditsArray" />
+  </wsdl:message>
+  <wsdl:message name="driCreateSelection">
+    <wsdl:part name="selectionType" type="xsd:QName" />
+    <wsdl:part name="selectionPath" type="xsd:string" />
+    <wsdl:part name="selectionURI" type="xsd:anyURI" />
+    <wsdl:part name="selectionRangeStart" type="xsd:int" />
+    <wsdl:part name="selectionRangeEnd" type="xsd:int" />
+    <wsdl:part name="selectionName" type="xsd:QName" />
+    <wsdl:part name="selectionSummary" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="driCreateSelectionResponse">
+    <wsdl:part name="driCreateSelectionDisposition" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="blockDirtParaphrase">
+    <wsdl:part name="dirtParaphrase" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="blockDirtParaphraseResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDebugInfo">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDebugInfoResponse">
+    <wsdl:part name="viewpoints" type="AURA:ArrayOfViewpoints" />
+  </wsdl:message>
+  <wsdl:message name="continueAnswerQuestion">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="continueAnswerQuestionResponse">
+    <wsdl:part name="answer" type="xsd:string" />
+    <wsdl:part name="canContinue" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="abortAsynchronousCall">
+    <wsdl:part name="callName" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="abortAsynchronousCallResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="shutdown">
+    <wsdl:part name="errorStatus" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="shutdownResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSmeDefinedConcepts">
+    <wsdl:part name="root" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getSmeDefinedConceptsResponse">
+    <wsdl:part name="clibConcepts" type="AURA:QNameArray" />
+    <wsdl:part name="newConcepts" type="AURA:QNameArray" />
+  </wsdl:message>
+  <wsdl:message name="getExampleCPLSentences">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getExampleCPLSentencesResponse">
+    <wsdl:part name="sentences" type="AURA:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="createNewClass">
+    <wsdl:part name="concept" type="xsd:QName" />
+    <wsdl:part name="conceptList" type="AURA:QNameArray" />
+  </wsdl:message>
+  <wsdl:message name="createNewClassResponse">
+    <wsdl:part name="concept" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getClassSynonyms">
+    <wsdl:part name="concept" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getClassSynonymsResponse">
+    <wsdl:part name="vocabulary" type="AURA:VocabularyArray" />
+  </wsdl:message>
+  <wsdl:message name="assertAsEqual">
+    <wsdl:part name="instance1" type="xsd:QName" />
+    <wsdl:part name="instance2" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="assertAsEqualResponse">
+    <wsdl:part name="conceptMap" type="AURA:QuestionConceptMap" />
+    <wsdl:part name="errors" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="startQASession">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="startQASessionResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getMostGeneralInstanceClasses">
+    <wsdl:part name="individual" type="xsd:QName" />
+    <wsdl:part name="classBeingEdited" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getMostGeneralInstanceClassesResponse">
+    <wsdl:part name="classes" type="AURA:QNameArray" />
+  </wsdl:message>
+  <wsdl:message name="auraFaultExporter">
+    <wsdl:part name="SOAPServerPart003" element="AURA:dummy2" />
+  </wsdl:message>
+  <wsdl:message name="auraFaultExporterResponse">
+    <wsdl:part name="concept" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getVocabulary">
+    <wsdl:part name="pattern" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getVocabularyResponse">
+    <wsdl:part name="vocabulary" type="AURA:VocabularyArray" />
+  </wsdl:message>
+  <wsdl:message name="driGetSelection">
+    <wsdl:part name="selectionURI" type="xsd:anyURI" />
+    <wsdl:part name="selectionPath" type="xsd:string" />
+    <wsdl:part name="selectionRangeStart" type="xsd:int" />
+    <wsdl:part name="selectionRangeEnd" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="driGetSelectionResponse">
+    <wsdl:part name="driGetSelectionDisposition" type="AURA:DocumentSelectionArray" />
+  </wsdl:message>
+  <wsdl:message name="getAllPartitions">
+    <wsdl:part name="classes" type="AURA:QNameArray" />
+  </wsdl:message>
+  <wsdl:message name="getAllPartitionsResponse">
+    <wsdl:part name="partitions" type="AURA:PartitionsArray" />
+    <wsdl:part name="edits" type="AURA:PartitionEditsArray" />
+  </wsdl:message>
+  <wsdl:message name="createChemicalReaction">
+    <wsdl:part name="reaction" type="AURA:Reaction" />
+    <wsdl:part name="className" type="xsd:QName" />
+    <wsdl:part name="balance" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="createChemicalReactionResponse">
+    <wsdl:part name="reactionClass" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="commitEdits">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="commitEditsResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="driRemoveSelection">
+    <wsdl:part name="selectionURI" type="xsd:anyURI" />
+    <wsdl:part name="selectionPath" type="xsd:string" />
+    <wsdl:part name="selectionRangeStart" type="xsd:int" />
+    <wsdl:part name="selectionRangeEnd" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="driRemoveSelectionResponse">
+    <wsdl:part name="driRemoveSelectionDisposition" type="AURA:DocumentSelectionArray" />
+  </wsdl:message>
+  <wsdl:message name="getClassDocumentation">
+    <wsdl:part name="concept" type="xsd:QName" />
+    <wsdl:part name="type" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getClassDocumentationResponse">
+    <wsdl:part name="documentation" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="prepareIndividual">
+    <wsdl:part name="concept" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="prepareIndividualResponse">
+    <wsdl:part name="concept" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="exportOWL">
+    <wsdl:part name="destination" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="exportOWLResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="unBlockDirtParaphrase">
+    <wsdl:part name="dirtParaphrase" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="unBlockDirtParaphraseResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getCheckpointedGraph">
+    <wsdl:part name="rootIndividual" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getCheckpointedGraphResponse">
+    <wsdl:part name="conceptMap" type="AURA:ConceptMap" />
+  </wsdl:message>
+  <wsdl:message name="getSmeConceptDependencies">
+    <wsdl:part name="concept" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getSmeConceptDependenciesResponse">
+    <wsdl:part name="subclasses" type="AURA:QNameArray" />
+    <wsdl:part name="referrers" type="AURA:QNameArray" />
+  </wsdl:message>
+  <wsdl:message name="endQASession">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="endQASessionResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="lastDirtParaphrasesUsed">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="lastDirtParaphrasesUsedResponse">
+    <wsdl:part name="listOfDirtParaphrasesUsed" type="AURA:ArrayOfDirtParaphrases" />
+  </wsdl:message>
+  <wsdl:message name="resetQASession">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="resetQASessionResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="extractConceptsFromText">
+    <wsdl:part name="textbooktext" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="extractConceptsFromTextResponse">
+    <wsdl:part name="vocabulary" type="AURA:VocabularyArray" />
+  </wsdl:message>
+  <wsdl:portType name="SOAPServerPort">
+    <wsdl:operation name="askQuestion">
+      <wsdl:input message="AURA:askQuestion" />
+      <wsdl:output message="AURA:askQuestionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="whyNot">
+      <wsdl:input message="AURA:whyNot" />
+      <wsdl:output message="AURA:whyNotResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="pingServer">
+      <wsdl:input message="AURA:pingServer" />
+      <wsdl:output message="AURA:pingServerResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="changeRelation">
+      <wsdl:input message="AURA:changeRelation" />
+      <wsdl:output message="AURA:changeRelationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getNonVisibleClasses">
+      <wsdl:input message="AURA:getNonVisibleClasses" />
+      <wsdl:output message="AURA:getNonVisibleClassesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteSmeConcept">
+      <wsdl:input message="AURA:deleteSmeConcept" />
+      <wsdl:output message="AURA:deleteSmeConceptResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="stemString">
+      <wsdl:input message="AURA:stemString" />
+      <wsdl:output message="AURA:stemStringResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkpointSuccess">
+      <wsdl:input message="AURA:checkpointSuccess" />
+      <wsdl:output message="AURA:checkpointSuccessResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="genericSearch">
+      <wsdl:input message="AURA:genericSearch" />
+      <wsdl:output message="AURA:genericSearchResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createCompound">
+      <wsdl:input message="AURA:createCompound" />
+      <wsdl:output message="AURA:createCompoundResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getClassRelatedClasses">
+      <wsdl:input message="AURA:getClassRelatedClasses" />
+      <wsdl:output message="AURA:getClassRelatedClassesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="answerCorrect">
+      <wsdl:input message="AURA:answerCorrect" />
+      <wsdl:output message="AURA:answerCorrectResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="initialize">
+      <wsdl:input message="AURA:initialize" />
+      <wsdl:output message="AURA:initializeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getValidPropertyValues">
+      <wsdl:input message="AURA:getValidPropertyValues" />
+      <wsdl:output message="AURA:getValidPropertyValuesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="shakenFaultExporter">
+      <wsdl:input message="AURA:shakenFaultExporter" />
+      <wsdl:output message="AURA:shakenFaultExporterResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDebugNames">
+      <wsdl:input message="AURA:getDebugNames" />
+      <wsdl:output message="AURA:getDebugNamesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getViewpointInfo">
+      <wsdl:input message="AURA:getViewpointInfo" />
+      <wsdl:output message="AURA:getViewpointInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAsynchronousCallStatus">
+      <wsdl:input message="AURA:getAsynchronousCallStatus" />
+      <wsdl:output message="AURA:getAsynchronousCallStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="drilldownExplanation">
+      <wsdl:input message="AURA:drilldownExplanation" />
+      <wsdl:output message="AURA:drilldownExplanationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getRelationOptions">
+      <wsdl:input message="AURA:getRelationOptions" />
+      <wsdl:output message="AURA:getRelationOptionsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="callLMapFunction">
+      <wsdl:input message="AURA:callLMapFunction" />
+      <wsdl:output message="AURA:callLMapFunctionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getWordSenses">
+      <wsdl:input message="AURA:getWordSenses" />
+      <wsdl:output message="AURA:getWordSensesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="answerQuestion">
+      <wsdl:input message="AURA:answerQuestion" />
+      <wsdl:output message="AURA:answerQuestionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="initializeComplete">
+      <wsdl:input message="AURA:initializeComplete" />
+      <wsdl:output message="AURA:initializeCompleteResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="changeWordSense">
+      <wsdl:input message="AURA:changeWordSense" />
+      <wsdl:output message="AURA:changeWordSenseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getValidRelations">
+      <wsdl:input message="AURA:getValidRelations" />
+      <wsdl:output message="AURA:getValidRelationsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="findPartitionsForClass">
+      <wsdl:input message="AURA:findPartitionsForClass" />
+      <wsdl:output message="AURA:findPartitionsForClassResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="driCreateSelection">
+      <wsdl:input message="AURA:driCreateSelection" />
+      <wsdl:output message="AURA:driCreateSelectionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="blockDirtParaphrase">
+      <wsdl:input message="AURA:blockDirtParaphrase" />
+      <wsdl:output message="AURA:blockDirtParaphraseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDebugInfo">
+      <wsdl:input message="AURA:getDebugInfo" />
+      <wsdl:output message="AURA:getDebugInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="continueAnswerQuestion">
+      <wsdl:input message="AURA:continueAnswerQuestion" />
+      <wsdl:output message="AURA:continueAnswerQuestionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="abortAsynchronousCall">
+      <wsdl:input message="AURA:abortAsynchronousCall" />
+      <wsdl:output message="AURA:abortAsynchronousCallResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="shutdown">
+      <wsdl:input message="AURA:shutdown" />
+      <wsdl:output message="AURA:shutdownResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSmeDefinedConcepts">
+      <wsdl:input message="AURA:getSmeDefinedConcepts" />
+      <wsdl:output message="AURA:getSmeDefinedConceptsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getExampleCPLSentences">
+      <wsdl:input message="AURA:getExampleCPLSentences" />
+      <wsdl:output message="AURA:getExampleCPLSentencesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createNewClass">
+      <wsdl:input message="AURA:createNewClass" />
+      <wsdl:output message="AURA:createNewClassResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getClassSynonyms">
+      <wsdl:input message="AURA:getClassSynonyms" />
+      <wsdl:output message="AURA:getClassSynonymsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="assertAsEqual">
+      <wsdl:input message="AURA:assertAsEqual" />
+      <wsdl:output message="AURA:assertAsEqualResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="startQASession">
+      <wsdl:input message="AURA:startQASession" />
+      <wsdl:output message="AURA:startQASessionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getMostGeneralInstanceClasses">
+      <wsdl:input message="AURA:getMostGeneralInstanceClasses" />
+      <wsdl:output message="AURA:getMostGeneralInstanceClassesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="auraFaultExporter">
+      <wsdl:input message="AURA:auraFaultExporter" />
+      <wsdl:output message="AURA:auraFaultExporterResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getVocabulary">
+      <wsdl:input message="AURA:getVocabulary" />
+      <wsdl:output message="AURA:getVocabularyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="driGetSelection">
+      <wsdl:input message="AURA:driGetSelection" />
+      <wsdl:output message="AURA:driGetSelectionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllPartitions">
+      <wsdl:input message="AURA:getAllPartitions" />
+      <wsdl:output message="AURA:getAllPartitionsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createChemicalReaction">
+      <wsdl:input message="AURA:createChemicalReaction" />
+      <wsdl:output message="AURA:createChemicalReactionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="commitEdits">
+      <wsdl:input message="AURA:commitEdits" />
+      <wsdl:output message="AURA:commitEditsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="driRemoveSelection">
+      <wsdl:input message="AURA:driRemoveSelection" />
+      <wsdl:output message="AURA:driRemoveSelectionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getClassDocumentation">
+      <wsdl:input message="AURA:getClassDocumentation" />
+      <wsdl:output message="AURA:getClassDocumentationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="prepareIndividual">
+      <wsdl:input message="AURA:prepareIndividual" />
+      <wsdl:output message="AURA:prepareIndividualResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="exportOWL">
+      <wsdl:input message="AURA:exportOWL" />
+      <wsdl:output message="AURA:exportOWLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="unBlockDirtParaphrase">
+      <wsdl:input message="AURA:unBlockDirtParaphrase" />
+      <wsdl:output message="AURA:unBlockDirtParaphraseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCheckpointedGraph">
+      <wsdl:input message="AURA:getCheckpointedGraph" />
+      <wsdl:output message="AURA:getCheckpointedGraphResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSmeConceptDependencies">
+      <wsdl:input message="AURA:getSmeConceptDependencies" />
+      <wsdl:output message="AURA:getSmeConceptDependenciesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="endQASession">
+      <wsdl:input message="AURA:endQASession" />
+      <wsdl:output message="AURA:endQASessionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="lastDirtParaphrasesUsed">
+      <wsdl:input message="AURA:lastDirtParaphrasesUsed" />
+      <wsdl:output message="AURA:lastDirtParaphrasesUsedResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="resetQASession">
+      <wsdl:input message="AURA:resetQASession" />
+      <wsdl:output message="AURA:resetQASessionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="extractConceptsFromText">
+      <wsdl:input message="AURA:extractConceptsFromText" />
+      <wsdl:output message="AURA:extractConceptsFromTextResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SOAPServerBinding" type="AURA:SOAPServerPort">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="askQuestion">
+      <soap:operation soapAction="askQuestion" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="whyNot">
+      <soap:operation soapAction="whyNot" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pingServer">
+      <soap:operation soapAction="pingServer" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeRelation">
+      <soap:operation soapAction="changeRelation" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNonVisibleClasses">
+      <soap:operation soapAction="getNonVisibleClasses" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteSmeConcept">
+      <soap:operation soapAction="deleteSmeConcept" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="stemString">
+      <soap:operation soapAction="stemString" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkpointSuccess">
+      <soap:operation soapAction="checkpointSuccess" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="genericSearch">
+      <soap:operation soapAction="genericSearch" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createCompound">
+      <soap:operation soapAction="createCompound" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClassRelatedClasses">
+      <soap:operation soapAction="getClassRelatedClasses" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="answerCorrect">
+      <soap:operation soapAction="answerCorrect" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="initialize">
+      <soap:operation soapAction="initialize" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getValidPropertyValues">
+      <soap:operation soapAction="getValidPropertyValues" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="shakenFaultExporter">
+      <soap:operation soapAction="shakenFaultExporter" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDebugNames">
+      <soap:operation soapAction="getDebugNames" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getViewpointInfo">
+      <soap:operation soapAction="getViewpointInfo" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAsynchronousCallStatus">
+      <soap:operation soapAction="getAsynchronousCallStatus" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="drilldownExplanation">
+      <soap:operation soapAction="drilldownExplanation" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRelationOptions">
+      <soap:operation soapAction="getWordSenses" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="callLMapFunction">
+      <soap:operation soapAction="callLMapFunction" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWordSenses">
+      <soap:operation soapAction="getWordSenses" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="answerQuestion">
+      <soap:operation soapAction="answerQuestion" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="initializeComplete">
+      <soap:operation soapAction="initializeComplete" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeWordSense">
+      <soap:operation soapAction="changeWordSense" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getValidRelations">
+      <soap:operation soapAction="getValidRelations" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findPartitionsForClass">
+      <soap:operation soapAction="findPartitionsForClass" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="driCreateSelection">
+      <soap:operation soapAction="driCreateSelection" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="blockDirtParaphrase">
+      <soap:operation soapAction="blockDirtParaphrase" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDebugInfo">
+      <soap:operation soapAction="getDebugInfo" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="continueAnswerQuestion">
+      <soap:operation soapAction="continueAnswerQuestion" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="abortAsynchronousCall">
+      <soap:operation soapAction="abortAsynchronousCall" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="shutdown">
+      <soap:operation soapAction="shutdown" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSmeDefinedConcepts">
+      <soap:operation soapAction="getSmeDefinedConcepts" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getExampleCPLSentences">
+      <soap:operation soapAction="getExampleCPLSentences" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createNewClass">
+      <soap:operation soapAction="createNewClass" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClassSynonyms">
+      <soap:operation soapAction="getClassSynonyms" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="assertAsEqual">
+      <soap:operation soapAction="assertAsEqual" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="startQASession">
+      <soap:operation soapAction="startQASession" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMostGeneralInstanceClasses">
+      <soap:operation soapAction="getMostGeneralInstanceClasses" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="auraFaultExporter">
+      <soap:operation soapAction="auraFaultExporter" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getVocabulary">
+      <soap:operation soapAction="getVocabulary" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="driGetSelection">
+      <soap:operation soapAction="driGetSelection" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllPartitions">
+      <soap:operation soapAction="getAllPartitions" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createChemicalReaction">
+      <soap:operation soapAction="createChemicalReaction" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="commitEdits">
+      <soap:operation soapAction="commitEdits" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="driRemoveSelection">
+      <soap:operation soapAction="driRemoveSelection" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClassDocumentation">
+      <soap:operation soapAction="getClassDocumentation" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="prepareIndividual">
+      <soap:operation soapAction="prepareIndividual" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="exportOWL">
+      <soap:operation soapAction="exportOWL" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="unBlockDirtParaphrase">
+      <soap:operation soapAction="unBlockDirtParaphrase" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCheckpointedGraph">
+      <soap:operation soapAction="getCheckpointedGraph" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSmeConceptDependencies">
+      <soap:operation soapAction="getSmeConceptDependencies" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="endQASession">
+      <soap:operation soapAction="endQASession" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lastDirtParaphrasesUsed">
+      <soap:operation soapAction="lastDirtParaphrasesUsed" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resetQASession">
+      <soap:operation soapAction="resetQASession" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="extractConceptsFromText">
+      <soap:operation soapAction="extractConceptsFromText" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AuraService">
+    <wsdl:port name="SOAPServerPort" binding="AURA:SOAPServerBinding">
+      <soap:address location="http://localhost:8000/SOAP" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,3 +1,14 @@
+#! /usr/bin/ruby
+require 'rubygems'
+require 'sinatra'
+require 'soap/rpc/driver'
+
+# $stdout.sync = true
+WAIT_TIME = 0
+
+post "/answers" do
+  content_type 'application/html', :charset => 'utf-8'
+<<-response
 <div class="answer-page">
 
   <p class="question"><span class="q-label">Q.</span> What is a DNA template?</p>
@@ -38,3 +49,21 @@
       .The deoxyribonucleoside monophosphate is a phosphate group and a nucleoside.</p>
   </div>
 </div>
+
+response
+end
+
+get "*" do
+  puts "#{params[:splat]} 404 not found"
+  pass
+end
+
+def wait
+  return if WAIT_TIME == 0
+  puts "waiting"
+  WAIT_TIME.times do
+    print "."
+    sleep 1
+  end
+  puts "replying"
+end

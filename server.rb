@@ -5,10 +5,13 @@ require 'soap/defaultDriver'
 
 # $stdout.sync = true
 WAIT_TIME = 2
-AURA = "http://localhost:8000/SOAP"
-aura = SOAPServerPort.new(AURA)
+AURA_ENDPOINT = "http://localhost:8000/SOAP"
+aura = SOAPServerPort.new(AURA_ENDPOINT)
+aura.startQASession(nil);
 
 post "/answers" do
+  aura.resetQASession(nil);
+
   wait
 
   aura.askQuestion(params[:question], nil, nil, nil)

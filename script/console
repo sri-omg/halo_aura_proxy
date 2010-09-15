@@ -1,0 +1,4 @@
+#! /usr/bin/ruby
+irb_command =  RUBY_PLATFORM =~ /(:?mswin|mingw)/ ? 'irb.bat' : 'irb'
+setup_file = File.join(File.dirname(__FILE__), "console_setup")
+exec "#{irb_command} -r #{setup_file}"

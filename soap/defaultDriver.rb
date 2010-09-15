@@ -1,4 +1,4 @@
-require 'default.rb'
+require 'soap/default.rb'
 
 require 'soap/rpc/driver'
 

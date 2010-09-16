@@ -34,13 +34,20 @@ class Aura
     @connection.resetQASession(nil)
   end
 
-  def answer_question(question)
-    question_response = @connection.askQuestion(question, nil, nil, nil)
-    if question_response.nil? || question_response.is_a?(QuestionConceptMap)
-      @connection.answerQuestion(nil).first
-    else
-      question_response
-    end
+  def ask_question(question)
+    @question_response = @connection.askQuestion(question, nil, nil, nil)
+  end
+
+  def answer_question
+    @connection.answerQuestion(nil).first
+  end
+
+  def valid_question?
+    @question_response.nil? || @question_response.is_a?(QuestionConceptMap)
+  end
+
+  def question_errors
+    @question_response
   end
 
   private

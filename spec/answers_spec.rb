@@ -67,8 +67,8 @@ describe "/answers" do
         @request_proc.call
       end
 
-      it "should return 200" do
-        response.status.should == 200
+      it "should return 400" do
+        response.status.should == 400
       end
 
       it "should return the errors returned by AURA" do

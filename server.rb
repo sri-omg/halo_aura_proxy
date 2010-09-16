@@ -14,7 +14,14 @@ post "/answers" do
   wait
 
   content_type 'application/html', :charset => 'utf-8'
-  aura.answer_question(params[:question])
+  aura.ask_question(params[:question])
+  if aura.valid_question?
+    status 200
+    aura.answer_question
+  else
+    status 400
+    aura.question_errors
+  end
 end
 
 get "*" do

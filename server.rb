@@ -1,24 +1,20 @@
 #! /usr/bin/ruby
 require 'rubygems'
 require 'sinatra'
-require 'soap/defaultDriver'
+require 'models/aura'
 
-# $stdout.sync = true
 WAIT_TIME = 2
 AURA_ENDPOINT = "http://localhost:8000/SOAP"
-aura = SOAPServerPort.new(AURA_ENDPOINT)
-aura.startQASession(nil);
+
+aura = Aura.instance
 
 post "/answers" do
-  aura.resetQASession(nil);
+  aura.new_question
 
   wait
 
-  aura.askQuestion(params[:question], nil, nil, nil)
-  answer = aura.answerQuestion(nil)
-
   content_type 'application/html', :charset => 'utf-8'
-  answer.first
+  aura.answer_question(params[:question])
 end
 
 get "*" do
@@ -27,7 +23,7 @@ get "*" do
 end
 
 def wait
-  return if WAIT_TIME == 0
+  return if WAIT_TIME == 0 || test?
   puts "waiting"
   WAIT_TIME.times do
     print "."

@@ -39,7 +39,7 @@ class Aura
   end
 
   def answer_question
-    @connection.answerQuestionIpad(nil).first
+    @connection.answerQuestionIpad(nil).first << '<a href="chap17-2.htm#para05" class="text-ref">Test link to Chapter 17-2 #para05</a>'
   end
 
   def valid_question?

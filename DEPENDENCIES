@@ -1,0 +1,5 @@
+Gems:
+- sinatra v1.0 (MIT License)
+- rack v1.2.1 (MIT License)
+- rack-test v0.5.4 (MIT License)
+- rspec v1.3.0 (MIT License)

@@ -571,6 +571,19 @@ selectionURI = selectionPath = selectionRangeStart = selectionRangeEnd = nil
 puts obj.driGetSelection(selectionURI, selectionPath, selectionRangeStart, selectionRangeEnd)
 
 # SYNOPSIS
+#   answerQuestionIpad(questionID)
+#
+# ARGS
+#   questionID      String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   answer          String - {http://www.w3.org/2001/XMLSchema}string
+#   canContinue     Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#
+questionID = nil
+puts obj.answerQuestionIpad(questionID)
+
+# SYNOPSIS
 #   getAllPartitions(classes)
 #
 # ARGS

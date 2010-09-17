@@ -1925,6 +1925,13 @@
   <wsdl:message name="driGetSelectionResponse">
     <wsdl:part name="driGetSelectionDisposition" type="AURA:DocumentSelectionArray" />
   </wsdl:message>
+  <wsdl:message name="answerQuestionIpad">
+    <wsdl:part name="questionID" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="answerQuestionIpadResponse">
+    <wsdl:part name="answer" type="xsd:string" />
+    <wsdl:part name="canContinue" type="xsd:boolean" />
+  </wsdl:message>
   <wsdl:message name="getAllPartitions">
     <wsdl:part name="classes" type="AURA:QNameArray" />
   </wsdl:message>
@@ -2189,6 +2196,10 @@
     <wsdl:operation name="driGetSelection">
       <wsdl:input message="AURA:driGetSelection" />
       <wsdl:output message="AURA:driGetSelectionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="answerQuestionIpad">
+      <wsdl:input message="AURA:answerQuestionIpad" />
+      <wsdl:output message="AURA:answerQuestionIpadResponse" />
     </wsdl:operation>
     <wsdl:operation name="getAllPartitions">
       <wsdl:input message="AURA:getAllPartitions" />
@@ -2881,6 +2892,21 @@
     </wsdl:operation>
     <wsdl:operation name="driGetSelection">
       <soap:operation soapAction="driGetSelection" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="answerQuestionIpad">
+      <soap:operation soapAction="answerQuestionIpad" />
       <wsdl:input>
         <soap:body
              use="encoded"

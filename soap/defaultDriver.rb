@@ -1,4 +1,4 @@
-require 'soap/default.rb'
+require 'default.rb'
 
 require 'soap/rpc/driver'
 
@@ -720,6 +720,15 @@ class SOAPServerPort < ::SOAP::RPC::Driver
         ["in", "selectionRangeStart", ["::SOAP::SOAPInt"]],
         ["in", "selectionRangeEnd", ["::SOAP::SOAPInt"]],
         ["retval", "driGetSelectionDisposition", ["DocumentSelection[]", "urn:auraUserData", "documentSelection"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "answerQuestionIpad"),
+      "answerQuestionIpad",
+      "answerQuestionIpad",
+      [ ["in", "questionID", ["::SOAP::SOAPString"]],
+        ["retval", "answer", ["::SOAP::SOAPString"]],
+        ["out", "canContinue", ["::SOAP::SOAPBoolean"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],

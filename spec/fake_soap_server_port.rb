@@ -12,7 +12,7 @@ class FakeSoapServerPort
     ask_response
   end
 
-  def answerQuestion(dummy)
+  def answerQuestionIpad(dummy)
     [answer_response, true]
   end
 

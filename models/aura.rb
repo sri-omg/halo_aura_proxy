@@ -39,7 +39,7 @@ class Aura
   end
 
   def answer_question
-    @connection.answerQuestion(nil).first
+    @connection.answerQuestionIpad(nil).first
   end
 
   def valid_question?

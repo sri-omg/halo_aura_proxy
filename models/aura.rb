@@ -39,7 +39,11 @@ class Aura
   end
 
   def answer_question
-    @connection.answerQuestionIpad(nil).first << '<a href="chap17-2.htm#para05" class="text-ref">Test link to Chapter 17-2 #para05</a>'
+    <<-html
+#{@connection.answerQuestionIpad(nil).first}
+<p><a href="chap17-2.htm#para05" class="text-ref">Test link to Chapter 17-2 #para05</a></p>
+<p><a class="keywords" href="../concepts/rna.html">Test keyword link: RNA</a></p>
+html
   end
 
   def valid_question?

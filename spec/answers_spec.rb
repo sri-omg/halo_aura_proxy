@@ -55,7 +55,12 @@ describe "/answers" do
       end
 
       it "should return the answer returned by AURA for the question" do
+        pending "check equality when we're not longer returning fake links"
         response.body.should == @answer
+      end
+
+      it "should return the answer returned by AURA for the question, plus some fake links" do
+        response.body.should include(@answer)
       end
     end
 
@@ -89,7 +94,12 @@ describe "/answers" do
       end
 
       it "should return the answer returned by AURA for the question" do
+        pending "check equality when we're not longer returning fake links"
         response.body.should == @answer
+      end
+
+      it "should return the answer returned by AURA for the question, plus some fake links" do
+        response.body.should include(@answer)
       end
     end
   end

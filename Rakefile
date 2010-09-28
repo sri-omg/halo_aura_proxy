@@ -8,5 +8,5 @@ def system_or_exit(cmd, stdout = nil)
 end
 
 task :spec do
-    system_or_exit("script/spec #{Dir.glob("spec/**/*_spec.rb")}")
+    system_or_exit("script/spec #{Dir.glob("spec/**/*_spec.rb").join(' ')}")
 end

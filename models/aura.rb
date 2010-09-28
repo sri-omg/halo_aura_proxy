@@ -54,6 +54,16 @@ html
     @question_response
   end
 
+  def suggested_questions(section, text)
+    if test?
+      @connection.suggestedQuestions(section, text)
+    end
+    "<questions>" +
+    "<question>What are the questions in #{section} for '#{text}'?</question>" +
+    "<question>What is another question for '#{text}' in #{section}?</question>" +
+    "</questions>"
+  end
+
   private
 
   def initialize(endpoint)

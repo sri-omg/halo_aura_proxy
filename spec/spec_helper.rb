@@ -18,6 +18,10 @@ class Aura
     @connection.asked_questions
   end
 
+  def suggested_questions_requests
+    @connection.suggested_questions_requests
+  end
+
   def valid_question!(options)
     reset_question!
     if (!options[:return_nil])

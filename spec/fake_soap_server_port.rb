@@ -16,12 +16,20 @@ class FakeSoapServerPort
     [answer_response, true]
   end
 
+  def suggestedQuestions(section, text)
+    suggested_questions_requests << {:section => section, :text => text}
+  end
+
   def started?
     @started
   end
 
   def asked_questions
     @asked_questions ||= []
+  end
+  
+  def suggested_questions_requests
+    @suggested_questions_requests ||= []
   end
 
   attr_accessor :ask_response

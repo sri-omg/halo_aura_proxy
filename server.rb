@@ -24,6 +24,10 @@ post "/answers" do
   end
 end
 
+post "/suggested_questions" do
+  aura.suggested_questions(params[:section], params[:text])
+end
+
 get "*" do
   puts "#{params[:splat]} 404 not found"
   pass

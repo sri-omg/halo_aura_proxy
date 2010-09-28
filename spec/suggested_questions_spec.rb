@@ -20,7 +20,7 @@ describe "/suggested_questions" do
       @section = "section0-0"
       @text = "Messenger RNA is fun!"
       @request_proc = lambda do
-        post "/suggested_questions", { :section => @section, :text => @text }
+        post "/suggested_questions_lists", { :section => @section, :text => @text }
       end
     end
 

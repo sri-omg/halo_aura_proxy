@@ -54,7 +54,7 @@ html
     @question_response
   end
 
-  def suggested_questions(section, text)
+  def suggested_questions_lists(section, text)
     if test?
       @connection.suggestedQuestions(section, text)
     end

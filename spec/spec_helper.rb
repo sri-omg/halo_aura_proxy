@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra'
+require 'nokogiri'
 require 'rack/test'
 require 'spec'
 require 'spec/autorun'

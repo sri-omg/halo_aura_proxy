@@ -11,14 +11,14 @@ obj.wiredump_dev = STDERR if $DEBUG
 #   askQuestion(question, forceWord, pos, uofm)
 #
 # ARGS
-#   question        String - {http://www.w3.org/2001/XMLSchema}string
-#   forceWord       String - {http://www.w3.org/2001/XMLSchema}string
+#   question        C_String - {http://www.w3.org/2001/XMLSchema}string
+#   forceWord       C_String - {http://www.w3.org/2001/XMLSchema}string
 #   pos             QName - {http://www.w3.org/2001/XMLSchema}QName
 #   uofm            Boolean - {http://www.w3.org/2001/XMLSchema}boolean
 #
 # RETURNS
 #   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
-#   errors          String - {http://www.w3.org/2001/XMLSchema}string
+#   errors          C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 question = forceWord = pos = uofm = nil
 puts obj.askQuestion(question, forceWord, pos, uofm)
@@ -43,10 +43,10 @@ puts obj.whyNot(concept)
 #   pingServer(dummy)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 dummy = nil
 puts obj.pingServer(dummy)
@@ -61,7 +61,7 @@ puts obj.pingServer(dummy)
 #
 # RETURNS
 #   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
-#   errors          String - {http://www.w3.org/2001/XMLSchema}string
+#   errors          C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 rootIndividual = edges = relation = nil
 puts obj.changeRelation(rootIndividual, edges, relation)
@@ -70,7 +70,7 @@ puts obj.changeRelation(rootIndividual, edges, relation)
 #   getNonVisibleClasses(dummy)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
 #   classes         QNameArray - {urn:auraUserData}QNameArray
@@ -94,10 +94,10 @@ puts obj.deleteSmeConcept(concept)
 #   stemString(inputString)
 #
 # ARGS
-#   inputString     String - {http://www.w3.org/2001/XMLSchema}string
+#   inputString     C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   outputString    String - {http://www.w3.org/2001/XMLSchema}string
+#   outputString    C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 inputString = nil
 puts obj.stemString(inputString)
@@ -109,7 +109,7 @@ puts obj.stemString(inputString)
 #   idCreated       Int - {http://www.w3.org/2001/XMLSchema}int
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 idCreated = nil
 puts obj.checkpointSuccess(idCreated)
@@ -143,7 +143,7 @@ puts obj.createCompound(compound, className)
 #   getClassRelatedClasses(v_class)
 #
 # ARGS
-#   v_class         String - {http://www.w3.org/2001/XMLSchema}string
+#   v_class         C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
 #   classes         QNameArray - {urn:auraUserData}QNameArray
@@ -155,10 +155,10 @@ puts obj.getClassRelatedClasses(v_class)
 #   answerCorrect(id)
 #
 # ARGS
-#   id              String - {http://www.w3.org/2001/XMLSchema}string
+#   id              C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 id = nil
 puts obj.answerCorrect(id)
@@ -192,7 +192,7 @@ puts obj.getValidPropertyValues(individual)
 #   shakenFaultExporter(sOAPServerPart)
 #
 # ARGS
-#   sOAPServerPart  Dummy - {urn:auraUserData}dummy
+#   sOAPServerPart  SOAPServerType - {urn:auraUserData}SOAPServerType
 #
 # RETURNS
 #   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
@@ -204,7 +204,7 @@ puts obj.shakenFaultExporter(sOAPServerPart)
 #   getDebugNames(dummy)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
 #   viewpoints      ArrayOfViewpoints - {urn:auraUserData}ArrayOfViewpoints
@@ -240,14 +240,26 @@ callName = nil
 puts obj.getAsynchronousCallStatus(callName)
 
 # SYNOPSIS
+#   getClassesUsedInLastQuestion(dummy)
+#
+# ARGS
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   classes         QNameArray - {urn:auraUserData}QNameArray
+#
+dummy = nil
+puts obj.getClassesUsedInLastQuestion(dummy)
+
+# SYNOPSIS
 #   drilldownExplanation(function, arguments)
 #
 # ARGS
-#   function        String - {http://www.w3.org/2001/XMLSchema}string
+#   function        C_String - {http://www.w3.org/2001/XMLSchema}string
 #   arguments       StringArray - {urn:auraUserData}StringArray
 #
 # RETURNS
-#   explanation     String - {http://www.w3.org/2001/XMLSchema}string
+#   explanation     C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 function = arguments = nil
 puts obj.drilldownExplanation(function, arguments)
@@ -280,10 +292,23 @@ puts obj.getRelationOptions(source, relation, target)
 #   conceptList     QNameArray - {urn:auraUserData}QNameArray
 #   cmapList        QNameArray - {urn:auraUserData}QNameArray
 #   conceptEditSummary ConceptMapEditSummary - {urn:auraUserData}ConceptMapEditSummary
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 rootIndividual = action = arguments = uiAttributes = nil
 puts obj.callLMapFunction(rootIndividual, action, arguments, uiAttributes)
+
+# SYNOPSIS
+#   getQuestions(inputText, section)
+#
+# ARGS
+#   inputText       C_String - {http://www.w3.org/2001/XMLSchema}string
+#   section         C_String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   questions       StringArray - {urn:auraUserData}StringArray
+#
+inputText = section = nil
+puts obj.getQuestions(inputText, section)
 
 # SYNOPSIS
 #   getWordSenses(instance)
@@ -301,10 +326,10 @@ puts obj.getWordSenses(instance)
 #   answerQuestion(questionID)
 #
 # ARGS
-#   questionID      String - {http://www.w3.org/2001/XMLSchema}string
+#   questionID      C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   answer          String - {http://www.w3.org/2001/XMLSchema}string
+#   answer          C_String - {http://www.w3.org/2001/XMLSchema}string
 #   canContinue     Boolean - {http://www.w3.org/2001/XMLSchema}boolean
 #
 questionID = nil
@@ -332,7 +357,7 @@ puts obj.initializeComplete(idRecovered, isSuccess)
 #
 # RETURNS
 #   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
-#   errors          String - {http://www.w3.org/2001/XMLSchema}string
+#   errors          C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 instance = sense = nil
 puts obj.changeWordSense(instance, sense)
@@ -345,7 +370,7 @@ puts obj.changeWordSense(instance, sense)
 #   target          QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   sOAPServerPart002 RelationsArray - {urn:auraUserData}relationsArray
+#   sOAPServerPart002 SOAPServerType002 - {urn:auraUserData}SOAPServerType002
 #
 source = target = nil
 puts obj.getValidRelations(source, target)
@@ -368,12 +393,12 @@ puts obj.findPartitionsForClass(v_class)
 #
 # ARGS
 #   selectionType   QName - {http://www.w3.org/2001/XMLSchema}QName
-#   selectionPath   String - {http://www.w3.org/2001/XMLSchema}string
+#   selectionPath   C_String - {http://www.w3.org/2001/XMLSchema}string
 #   selectionURI    AnyURI - {http://www.w3.org/2001/XMLSchema}anyURI
 #   selectionRangeStart Int - {http://www.w3.org/2001/XMLSchema}int
 #   selectionRangeEnd Int - {http://www.w3.org/2001/XMLSchema}int
 #   selectionName   QName - {http://www.w3.org/2001/XMLSchema}QName
-#   selectionSummary String - {http://www.w3.org/2001/XMLSchema}string
+#   selectionSummary C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
 #   driCreateSelectionDisposition QName - {http://www.w3.org/2001/XMLSchema}QName
@@ -385,10 +410,10 @@ puts obj.driCreateSelection(selectionType, selectionPath, selectionURI, selectio
 #   blockDirtParaphrase(dirtParaphrase)
 #
 # ARGS
-#   dirtParaphrase  String - {http://www.w3.org/2001/XMLSchema}string
+#   dirtParaphrase  C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 dirtParaphrase = nil
 puts obj.blockDirtParaphrase(dirtParaphrase)
@@ -397,7 +422,7 @@ puts obj.blockDirtParaphrase(dirtParaphrase)
 #   getDebugInfo(dummy)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
 #   viewpoints      ArrayOfViewpoints - {urn:auraUserData}ArrayOfViewpoints
@@ -409,10 +434,10 @@ puts obj.getDebugInfo(dummy)
 #   continueAnswerQuestion(dummy)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   answer          String - {http://www.w3.org/2001/XMLSchema}string
+#   answer          C_String - {http://www.w3.org/2001/XMLSchema}string
 #   canContinue     Boolean - {http://www.w3.org/2001/XMLSchema}boolean
 #
 dummy = nil
@@ -425,7 +450,7 @@ puts obj.continueAnswerQuestion(dummy)
 #   callName        QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 callName = nil
 puts obj.abortAsynchronousCall(callName)
@@ -437,7 +462,7 @@ puts obj.abortAsynchronousCall(callName)
 #   errorStatus     Int - {http://www.w3.org/2001/XMLSchema}int
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 errorStatus = nil
 puts obj.shutdown(errorStatus)
@@ -459,7 +484,7 @@ puts obj.getSmeDefinedConcepts(root)
 #   getExampleCPLSentences(dummy)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
 #   sentences       StringArray - {urn:auraUserData}StringArray
@@ -501,7 +526,7 @@ puts obj.getClassSynonyms(concept)
 #
 # RETURNS
 #   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
-#   errors          String - {http://www.w3.org/2001/XMLSchema}string
+#   errors          C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 instance1 = instance2 = nil
 puts obj.assertAsEqual(instance1, instance2)
@@ -510,10 +535,10 @@ puts obj.assertAsEqual(instance1, instance2)
 #   startQASession(dummy)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 dummy = nil
 puts obj.startQASession(dummy)
@@ -535,7 +560,7 @@ puts obj.getMostGeneralInstanceClasses(individual, classBeingEdited)
 #   auraFaultExporter(sOAPServerPart003)
 #
 # ARGS
-#   sOAPServerPart003 Dummy2 - {urn:auraUserData}dummy2
+#   sOAPServerPart003 SOAPServerType003 - {urn:auraUserData}SOAPServerType003
 #
 # RETURNS
 #   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
@@ -547,7 +572,7 @@ puts obj.auraFaultExporter(sOAPServerPart003)
 #   getVocabulary(pattern)
 #
 # ARGS
-#   pattern         String - {http://www.w3.org/2001/XMLSchema}string
+#   pattern         C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
 #   vocabulary      VocabularyArray - {urn:auraUserData}VocabularyArray
@@ -560,7 +585,7 @@ puts obj.getVocabulary(pattern)
 #
 # ARGS
 #   selectionURI    AnyURI - {http://www.w3.org/2001/XMLSchema}anyURI
-#   selectionPath   String - {http://www.w3.org/2001/XMLSchema}string
+#   selectionPath   C_String - {http://www.w3.org/2001/XMLSchema}string
 #   selectionRangeStart Int - {http://www.w3.org/2001/XMLSchema}int
 #   selectionRangeEnd Int - {http://www.w3.org/2001/XMLSchema}int
 #
@@ -574,10 +599,10 @@ puts obj.driGetSelection(selectionURI, selectionPath, selectionRangeStart, selec
 #   answerQuestionIpad(questionID)
 #
 # ARGS
-#   questionID      String - {http://www.w3.org/2001/XMLSchema}string
+#   questionID      C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   answer          String - {http://www.w3.org/2001/XMLSchema}string
+#   answer          C_String - {http://www.w3.org/2001/XMLSchema}string
 #   canContinue     Boolean - {http://www.w3.org/2001/XMLSchema}boolean
 #
 questionID = nil
@@ -614,10 +639,10 @@ puts obj.createChemicalReaction(reaction, className, balance)
 #   commitEdits(dummy)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 dummy = nil
 puts obj.commitEdits(dummy)
@@ -627,7 +652,7 @@ puts obj.commitEdits(dummy)
 #
 # ARGS
 #   selectionURI    AnyURI - {http://www.w3.org/2001/XMLSchema}anyURI
-#   selectionPath   String - {http://www.w3.org/2001/XMLSchema}string
+#   selectionPath   C_String - {http://www.w3.org/2001/XMLSchema}string
 #   selectionRangeStart Int - {http://www.w3.org/2001/XMLSchema}int
 #   selectionRangeEnd Int - {http://www.w3.org/2001/XMLSchema}int
 #
@@ -645,7 +670,7 @@ puts obj.driRemoveSelection(selectionURI, selectionPath, selectionRangeStart, se
 #   type            QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   documentation   String - {http://www.w3.org/2001/XMLSchema}string
+#   documentation   C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 concept = type = nil
 puts obj.getClassDocumentation(concept, type)
@@ -666,10 +691,10 @@ puts obj.prepareIndividual(concept)
 #   exportOWL(destination)
 #
 # ARGS
-#   destination     String - {http://www.w3.org/2001/XMLSchema}string
+#   destination     C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 destination = nil
 puts obj.exportOWL(destination)
@@ -678,10 +703,10 @@ puts obj.exportOWL(destination)
 #   unBlockDirtParaphrase(dirtParaphrase)
 #
 # ARGS
-#   dirtParaphrase  String - {http://www.w3.org/2001/XMLSchema}string
+#   dirtParaphrase  C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 dirtParaphrase = nil
 puts obj.unBlockDirtParaphrase(dirtParaphrase)
@@ -715,10 +740,10 @@ puts obj.getSmeConceptDependencies(concept)
 #   endQASession(dummy)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 dummy = nil
 puts obj.endQASession(dummy)
@@ -727,7 +752,7 @@ puts obj.endQASession(dummy)
 #   lastDirtParaphrasesUsed(dummy)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
 #   listOfDirtParaphrasesUsed ArrayOfDirtParaphrases - {urn:auraUserData}ArrayOfDirtParaphrases
@@ -739,10 +764,10 @@ puts obj.lastDirtParaphrasesUsed(dummy)
 #   resetQASession(dummy)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 dummy = nil
 puts obj.resetQASession(dummy)
@@ -751,7 +776,7 @@ puts obj.resetQASession(dummy)
 #   extractConceptsFromText(textbooktext)
 #
 # ARGS
-#   textbooktext    String - {http://www.w3.org/2001/XMLSchema}string
+#   textbooktext    C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
 #   vocabulary      VocabularyArray - {urn:auraUserData}VocabularyArray

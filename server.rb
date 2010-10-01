@@ -1,9 +1,10 @@
 #! /usr/bin/ruby
 require 'rubygems'
+gem 'soap4r'
 require 'sinatra'
 require 'models/aura'
 
-WAIT_TIME = 2
+WAIT_TIME = 0
 AURA_ENDPOINT = "http://localhost:8000/SOAP"
 
 aura = Aura.instance
@@ -25,7 +26,7 @@ post "/answers" do
 end
 
 post "/suggested_questions_lists" do
-  aura.suggested_questions_lists(params[:section], params[:text])
+  aura.suggest_questions(params[:text], params[:section])
 end
 
 get "*" do

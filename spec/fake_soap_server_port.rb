@@ -16,8 +16,9 @@ class FakeSoapServerPort
     [answer_response, true]
   end
 
-  def suggestedQuestions(section, text)
+  def getQuestions(text, section)
     suggested_questions_requests << {:section => section, :text => text}
+    ["What is the diameter of a head?", "What is your favorite color?", "Where is the beef?"]
   end
 
   def started?
@@ -27,7 +28,7 @@ class FakeSoapServerPort
   def asked_questions
     @asked_questions ||= []
   end
-  
+
   def suggested_questions_requests
     @suggested_questions_requests ||= []
   end

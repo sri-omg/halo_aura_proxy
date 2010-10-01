@@ -1,3 +1,5 @@
+require 'builder'
+
 project_dir = File.join(File.dirname(__FILE__), "..")
 
 if !defined?(test?)
@@ -54,14 +56,16 @@ html
     @question_response
   end
 
-  def suggested_questions_lists(section, text)
-    if test?
-      @connection.suggestedQuestions(section, text)
+  def suggest_questions(text, section)
+    questions = @connection.getQuestions(text, section)
+
+    xml = Builder::XmlMarkup.new
+    xml.instruct!
+    xml.questions do |questions_element|
+      questions.each do |question|
+        xml.question(question)
+      end
     end
-    "<questions>" +
-    "<question>What are the questions in #{section} for '#{text}'?</question>" +
-    "<question>What is another question for '#{text}' in #{section}?</question>" +
-    "</questions>"
   end
 
   private

@@ -1,3 +1,4 @@
+gem 'soap4r'
 require 'soap/defaultDriver'
 require 'models/aura'
 

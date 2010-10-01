@@ -1,18 +1,16 @@
 require 'xsd/qname'
 
 # {urn:auraUserData}TableCell
+#   m_class - SOAP::SOAPQName
+#   value - PropertyValue
 class TableCell
-  @@schema_type = "TableCell"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["v_class", ["SOAP::SOAPQName", XSD::QName.new(nil, "class")]], ["value", ["PropertyValue", XSD::QName.new(nil, "value")]]]
-
   attr_accessor :value
 
-  def class
+  def m_class
     @v_class
   end
 
-  def class=(value)
+  def m_class=(value)
     @v_class = value
   end
 
@@ -23,11 +21,11 @@ class TableCell
 end
 
 # {urn:auraUserData}Literal
+#   source - SOAP::SOAPQName
+#   targets - QNameArray
+#   relation - SOAP::SOAPQName
+#   isNegated - SOAP::SOAPBoolean
 class Literal
-  @@schema_type = "Literal"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["source", ["SOAP::SOAPQName", XSD::QName.new(nil, "source")]], ["targets", ["QNameArray", XSD::QName.new(nil, "targets")]], ["relation", ["SOAP::SOAPQName", XSD::QName.new(nil, "relation")]], ["isNegated", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNegated")]]]
-
   attr_accessor :source
   attr_accessor :targets
   attr_accessor :relation
@@ -42,11 +40,11 @@ class Literal
 end
 
 # {urn:auraUserData}NAryArgument
+#   var - SOAP::SOAPQName
+#   ival - SOAP::SOAPInt
+#   fval - SOAP::SOAPFloat
+#   subnode - NAryNode
 class NAryArgument
-  @@schema_type = "NAryArgument"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["var", ["SOAP::SOAPQName", XSD::QName.new(nil, "var")]], ["ival", ["SOAP::SOAPInt", XSD::QName.new(nil, "ival")]], ["fval", ["SOAP::SOAPFloat", XSD::QName.new(nil, "fval")]], ["subnode", ["NAryNode", XSD::QName.new(nil, "subnode")]]]
-
   attr_accessor :var
   attr_accessor :ival
   attr_accessor :fval
@@ -60,19 +58,10 @@ class NAryArgument
   end
 end
 
-# {urn:auraUserData}TableRow
-class TableRow < ::Array
-  @@schema_type = "TableCell"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["TableCell", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}TableColumn
+#   header - SOAP::SOAPQName
+#   order - SOAP::SOAPInt
 class TableColumn
-  @@schema_type = "TableColumn"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["header", ["SOAP::SOAPQName", XSD::QName.new(nil, "header")]], ["order", ["SOAP::SOAPInt", XSD::QName.new(nil, "order")]]]
-
   attr_accessor :header
   attr_accessor :order
 
@@ -83,37 +72,17 @@ class TableColumn
 end
 
 # {urn:auraUserData}clibClass
+#   value - SOAP::SOAPQName
+#   entity - EntityType
+#   event - EventType
+#   role - RoleType
+#   property_Value - PropertyValueType
 class ClibClass
-  @@schema_type = "clibClass"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["value", ["SOAP::SOAPQName", XSD::QName.new(nil, "value")]], ["entity", ["EntityType", XSD::QName.new(nil, "Entity")]], ["event", ["EventType", XSD::QName.new(nil, "Event")]], ["role", ["RoleType", XSD::QName.new(nil, "Role")]], ["property_Value", ["PropertyValueType", XSD::QName.new(nil, "Property-Value")]]]
-
   attr_accessor :value
+  attr_accessor :entity
+  attr_accessor :event
+  attr_accessor :role
   attr_accessor :property_Value
-
-  def Entity
-    @entity
-  end
-
-  def Entity=(value)
-    @entity = value
-  end
-
-  def Event
-    @event
-  end
-
-  def Event=(value)
-    @event = value
-  end
-
-  def Role
-    @role
-  end
-
-  def Role=(value)
-    @role = value
-  end
 
   def initialize(value = nil, entity = nil, event = nil, role = nil, property_Value = nil)
     @value = value
@@ -125,11 +94,9 @@ class ClibClass
 end
 
 # {urn:auraUserData}templateInstance
+#   instance - SOAP::SOAPQName
+#   description - SOAP::SOAPString
 class TemplateInstance
-  @@schema_type = "templateInstance"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["instance", ["SOAP::SOAPQName", XSD::QName.new(nil, "instance")]], ["description", ["SOAP::SOAPString", XSD::QName.new(nil, "description")]]]
-
   attr_accessor :instance
   attr_accessor :description
 
@@ -140,18 +107,16 @@ class TemplateInstance
 end
 
 # {urn:auraUserData}Entity-Type
+#   m_class - SOAP::SOAPQName
+#   templateInstance - TemplateInstance
 class EntityType
-  @@schema_type = "Entity-Type"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["v_class", ["SOAP::SOAPQName", XSD::QName.new(nil, "class")]], ["templateInstance", ["TemplateInstance", XSD::QName.new(nil, "templateInstance")]]]
-
   attr_accessor :templateInstance
 
-  def class
+  def m_class
     @v_class
   end
 
-  def class=(value)
+  def m_class=(value)
     @v_class = value
   end
 
@@ -162,18 +127,16 @@ class EntityType
 end
 
 # {urn:auraUserData}Event-Type
+#   m_class - SOAP::SOAPQName
+#   templateInstance - TemplateInstance
 class EventType
-  @@schema_type = "Event-Type"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["v_class", ["SOAP::SOAPQName", XSD::QName.new(nil, "class")]], ["templateInstance", ["TemplateInstance", XSD::QName.new(nil, "templateInstance")]]]
-
   attr_accessor :templateInstance
 
-  def class
+  def m_class
     @v_class
   end
 
-  def class=(value)
+  def m_class=(value)
     @v_class = value
   end
 
@@ -184,18 +147,16 @@ class EventType
 end
 
 # {urn:auraUserData}Role-Type
+#   m_class - SOAP::SOAPQName
+#   templateInstance - TemplateInstance
 class RoleType
-  @@schema_type = "Role-Type"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["v_class", ["SOAP::SOAPQName", XSD::QName.new(nil, "class")]], ["templateInstance", ["TemplateInstance", XSD::QName.new(nil, "templateInstance")]]]
-
   attr_accessor :templateInstance
 
-  def class
+  def m_class
     @v_class
   end
 
-  def class=(value)
+  def m_class=(value)
     @v_class = value
   end
 
@@ -206,18 +167,16 @@ class RoleType
 end
 
 # {urn:auraUserData}Property-Value-Type
+#   m_class - SOAP::SOAPQName
+#   templateInstance - TemplateInstance
 class PropertyValueType
-  @@schema_type = "Property-Value-Type"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["v_class", ["SOAP::SOAPQName", XSD::QName.new(nil, "class")]], ["templateInstance", ["TemplateInstance", XSD::QName.new(nil, "templateInstance")]]]
-
   attr_accessor :templateInstance
 
-  def class
+  def m_class
     @v_class
   end
 
-  def class=(value)
+  def m_class=(value)
     @v_class = value
   end
 
@@ -228,11 +187,10 @@ class PropertyValueType
 end
 
 # {urn:auraUserData}Slot-Type
+#   name - SOAP::SOAPQName
+#   domain - ClibClass
+#   range - ClibClass
 class SlotType
-  @@schema_type = "Slot-Type"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["name", ["SOAP::SOAPQName[]", XSD::QName.new(nil, "name")]], ["domain", ["ClibClass[]", XSD::QName.new(nil, "domain")]], ["range", ["ClibClass[]", XSD::QName.new(nil, "range")]]]
-
   attr_accessor :name
   attr_accessor :domain
   attr_accessor :range
@@ -245,11 +203,9 @@ class SlotType
 end
 
 # {urn:auraUserData}Atom
+#   elementType - SOAP::SOAPString
+#   count - SOAP::SOAPInt
 class Atom
-  @@schema_type = "Atom"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["elementType", ["SOAP::SOAPString", XSD::QName.new(nil, "elementType")]], ["count", ["SOAP::SOAPInt", XSD::QName.new(nil, "count")]]]
-
   attr_accessor :elementType
   attr_accessor :count
 
@@ -259,26 +215,10 @@ class Atom
   end
 end
 
-# {urn:auraUserData}ArrayOfTableColumns
-class ArrayOfTableColumns < ::Array
-  @@schema_type = "TableColumn"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["TableColumn", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}ArrayOfTableRows
-class ArrayOfTableRows < ::Array
-  @@schema_type = "TableRow"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["TableRow", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}QNameMap
+#   key - SOAP::SOAPQName
+#   value - SOAP::SOAPQName
 class QNameMap
-  @@schema_type = "QNameMap"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["key", ["SOAP::SOAPQName", XSD::QName.new(nil, "key")]], ["value", ["SOAP::SOAPQName", XSD::QName.new(nil, "value")]]]
-
   attr_accessor :key
   attr_accessor :value
 
@@ -288,27 +228,19 @@ class QNameMap
   end
 end
 
-# {urn:auraUserData}NAryArgumentArray
-class NAryArgumentArray < ::Array
-  @@schema_type = "NAryArgument"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["NAryArgument", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}CardinalityConstraintTerm
+#   operator - SOAP::SOAPQName
+#   count - SOAP::SOAPInt
+#   m_class - SOAP::SOAPQName
 class CardinalityConstraintTerm
-  @@schema_type = "CardinalityConstraintTerm"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["operator", ["SOAP::SOAPQName", XSD::QName.new(nil, "operator")]], ["count", ["SOAP::SOAPInt", XSD::QName.new(nil, "count")]], ["v_class", ["SOAP::SOAPQName", XSD::QName.new(nil, "class")]]]
-
   attr_accessor :operator
   attr_accessor :count
 
-  def class
+  def m_class
     @v_class
   end
 
-  def class=(value)
+  def m_class=(value)
     @v_class = value
   end
 
@@ -320,18 +252,16 @@ class CardinalityConstraintTerm
 end
 
 # {urn:auraUserData}TypeConstraintTerm
+#   operator - SOAP::SOAPQName
+#   m_class - SOAP::SOAPQName
 class TypeConstraintTerm
-  @@schema_type = "TypeConstraintTerm"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["operator", ["SOAP::SOAPQName", XSD::QName.new(nil, "operator")]], ["v_class", ["SOAP::SOAPQName", XSD::QName.new(nil, "class")]]]
-
   attr_accessor :operator
 
-  def class
+  def m_class
     @v_class
   end
 
-  def class=(value)
+  def m_class=(value)
     @v_class = value
   end
 
@@ -341,26 +271,10 @@ class TypeConstraintTerm
   end
 end
 
-# {urn:auraUserData}ArrayOfLiterals
-class ArrayOfLiterals < ::Array
-  @@schema_type = "Literal"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["Literal", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}ArrayOfLogicalFormulas
-class ArrayOfLogicalFormulas < ::Array
-  @@schema_type = "LogicalFormula"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["LogicalFormula", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}DocumentationElement
+#   string - SOAP::SOAPString
+#   reference - SOAP::SOAPQName
 class DocumentationElement
-  @@schema_type = "DocumentationElement"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["string", ["SOAP::SOAPString", XSD::QName.new(nil, "string")]], ["reference", ["SOAP::SOAPQName", XSD::QName.new(nil, "reference")]]]
-
   attr_accessor :string
   attr_accessor :reference
 
@@ -371,11 +285,8 @@ class DocumentationElement
 end
 
 # {urn:auraUserData}Molecule
+#   formula - Formula
 class Molecule
-  @@schema_type = "Molecule"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["formula", ["Formula", XSD::QName.new(nil, "formula")]]]
-
   attr_accessor :formula
 
   def initialize(formula = nil)
@@ -384,11 +295,25 @@ class Molecule
 end
 
 # {urn:auraUserData}BasicNode
+#   identifier - SOAP::SOAPQName
+#   label - SOAP::SOAPString
+#   documentation - Documentation
+#   position - Position
+#   isVisible - SOAP::SOAPBoolean
+#   isNeverVisible - SOAP::SOAPBoolean
+#   isViewed - SOAP::SOAPBoolean
+#   isDisplayed - SOAP::SOAPBoolean
+#   isEnclosed - SOAP::SOAPBoolean
+#   isNew - SOAP::SOAPBoolean
+#   userDefinedLabel - SOAP::SOAPString
+#   type - SOAP::SOAPQName
+#   comment - SOAP::SOAPString
+#   expansionState - SOAP::SOAPQName
+#   isRoot - SOAP::SOAPBoolean
+#   isQueryNode - SOAP::SOAPBoolean
+#   isNamedIndividual - SOAP::SOAPBoolean
+#   paraphrase - SOAP::SOAPInteger
 class BasicNode
-  @@schema_type = "BasicNode"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["identifier", ["SOAP::SOAPQName", XSD::QName.new(nil, "identifier")]], ["label", ["SOAP::SOAPString", XSD::QName.new(nil, "label")]], ["documentation", ["Documentation", XSD::QName.new(nil, "documentation")]], ["position", ["Position", XSD::QName.new(nil, "position")]], ["isVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isVisible")]], ["isNeverVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNeverVisible")]], ["isViewed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isViewed")]], ["isDisplayed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isDisplayed")]], ["isEnclosed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isEnclosed")]], ["isNew", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNew")]], ["userDefinedLabel", ["SOAP::SOAPString", XSD::QName.new(nil, "userDefinedLabel")]], ["type", ["SOAP::SOAPQName", XSD::QName.new(nil, "type")]], ["comment", ["SOAP::SOAPString", XSD::QName.new(nil, "comment")]], ["expansionState", ["SOAP::SOAPQName", XSD::QName.new(nil, "expansionState")]], ["isRoot", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isRoot")]], ["isQueryNode", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isQueryNode")]], ["isNamedIndividual", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNamedIndividual")]], ["paraphrase", ["SOAP::SOAPInteger", XSD::QName.new(nil, "paraphrase")]]]
-
   attr_accessor :identifier
   attr_accessor :label
   attr_accessor :documentation
@@ -431,11 +356,27 @@ class BasicNode
 end
 
 # {urn:auraUserData}BigNode
+#   identifier - SOAP::SOAPQName
+#   label - SOAP::SOAPString
+#   documentation - Documentation
+#   position - Position
+#   isVisible - SOAP::SOAPBoolean
+#   isNeverVisible - SOAP::SOAPBoolean
+#   isViewed - SOAP::SOAPBoolean
+#   isDisplayed - SOAP::SOAPBoolean
+#   isEnclosed - SOAP::SOAPBoolean
+#   isNew - SOAP::SOAPBoolean
+#   userDefinedLabel - SOAP::SOAPString
+#   type - SOAP::SOAPQName
+#   comment - SOAP::SOAPString
+#   expansionState - SOAP::SOAPQName
+#   isRoot - SOAP::SOAPBoolean
+#   isOpen - SOAP::SOAPBoolean
+#   canBeTrigger - SOAP::SOAPBoolean
+#   canBeNegation - SOAP::SOAPBoolean
+#   canBeSalient - SOAP::SOAPBoolean
+#   subGraph - QNameArray
 class BigNode
-  @@schema_type = "BigNode"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["identifier", ["SOAP::SOAPQName", XSD::QName.new(nil, "identifier")]], ["label", ["SOAP::SOAPString", XSD::QName.new(nil, "label")]], ["documentation", ["Documentation", XSD::QName.new(nil, "documentation")]], ["position", ["Position", XSD::QName.new(nil, "position")]], ["isVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isVisible")]], ["isNeverVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNeverVisible")]], ["isViewed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isViewed")]], ["isDisplayed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isDisplayed")]], ["isEnclosed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isEnclosed")]], ["isNew", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNew")]], ["userDefinedLabel", ["SOAP::SOAPString", XSD::QName.new(nil, "userDefinedLabel")]], ["type", ["SOAP::SOAPQName", XSD::QName.new(nil, "type")]], ["comment", ["SOAP::SOAPString", XSD::QName.new(nil, "comment")]], ["expansionState", ["SOAP::SOAPQName", XSD::QName.new(nil, "expansionState")]], ["isRoot", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isRoot")]], ["isOpen", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isOpen")]], ["canBeTrigger", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "canBeTrigger")]], ["canBeNegation", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "canBeNegation")]], ["canBeSalient", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "canBeSalient")]], ["subGraph", ["QNameArray", XSD::QName.new(nil, "subGraph")]]]
-
   attr_accessor :identifier
   attr_accessor :label
   attr_accessor :documentation
@@ -481,19 +422,10 @@ class BigNode
   end
 end
 
-# {urn:auraUserData}Documentation
-class Documentation < ::Array
-  @@schema_type = "DocumentationElement"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["DocumentationElement", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}Position
+#   x - SOAP::SOAPInt
+#   y - SOAP::SOAPInt
 class Position
-  @@schema_type = "Position"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["x", ["SOAP::SOAPInt", XSD::QName.new(nil, "x")]], ["y", ["SOAP::SOAPInt", XSD::QName.new(nil, "y")]]]
-
   attr_accessor :x
   attr_accessor :y
 
@@ -504,11 +436,10 @@ class Position
 end
 
 # {urn:auraUserData}LogicalFormula
+#   operator - SOAP::SOAPQName
+#   literals - ArrayOfLiterals
+#   formulas - ArrayOfLogicalFormulas
 class LogicalFormula
-  @@schema_type = "LogicalFormula"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["operator", ["SOAP::SOAPQName", XSD::QName.new(nil, "operator")]], ["literals", ["ArrayOfLiterals", XSD::QName.new(nil, "literals")]], ["formulas", ["ArrayOfLogicalFormulas", XSD::QName.new(nil, "formulas")]]]
-
   attr_accessor :operator
   attr_accessor :literals
   attr_accessor :formulas
@@ -521,11 +452,9 @@ class LogicalFormula
 end
 
 # {urn:auraUserData}ConstraintTermHolder
+#   cardinalityConstraint - CardinalityConstraintTerm
+#   typeConstraint - TypeConstraintTerm
 class ConstraintTermHolder
-  @@schema_type = "ConstraintTermHolder"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["cardinalityConstraint", ["CardinalityConstraintTerm", XSD::QName.new(nil, "cardinalityConstraint")]], ["typeConstraint", ["TypeConstraintTerm", XSD::QName.new(nil, "typeConstraint")]]]
-
   attr_accessor :cardinalityConstraint
   attr_accessor :typeConstraint
 
@@ -536,11 +465,17 @@ class ConstraintTermHolder
 end
 
 # {urn:auraUserData}ConstraintNodeAttributes
+#   identifier - SOAP::SOAPQName
+#   label - SOAP::SOAPString
+#   documentation - Documentation
+#   position - Position
+#   isVisible - SOAP::SOAPBoolean
+#   isNeverVisible - SOAP::SOAPBoolean
+#   isViewed - SOAP::SOAPBoolean
+#   isDisplayed - SOAP::SOAPBoolean
+#   isEnclosed - SOAP::SOAPBoolean
+#   isNew - SOAP::SOAPBoolean
 class ConstraintNodeAttributes
-  @@schema_type = "ConstraintNodeAttributes"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["identifier", ["SOAP::SOAPQName", XSD::QName.new(nil, "identifier")]], ["label", ["SOAP::SOAPString", XSD::QName.new(nil, "label")]], ["documentation", ["Documentation", XSD::QName.new(nil, "documentation")]], ["position", ["Position", XSD::QName.new(nil, "position")]], ["isVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isVisible")]], ["isNeverVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNeverVisible")]], ["isViewed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isViewed")]], ["isDisplayed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isDisplayed")]], ["isEnclosed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isEnclosed")]], ["isNew", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNew")]]]
-
   attr_accessor :identifier
   attr_accessor :label
   attr_accessor :documentation
@@ -567,11 +502,17 @@ class ConstraintNodeAttributes
 end
 
 # {urn:auraUserData}ConstraintEdgeAttributes
+#   identifier - SOAP::SOAPQName
+#   label - SOAP::SOAPString
+#   documentation - Documentation
+#   position - Position
+#   isVisible - SOAP::SOAPBoolean
+#   isNeverVisible - SOAP::SOAPBoolean
+#   isViewed - SOAP::SOAPBoolean
+#   isDisplayed - SOAP::SOAPBoolean
+#   isEnclosed - SOAP::SOAPBoolean
+#   isNew - SOAP::SOAPBoolean
 class ConstraintEdgeAttributes
-  @@schema_type = "ConstraintEdgeAttributes"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["identifier", ["SOAP::SOAPQName", XSD::QName.new(nil, "identifier")]], ["label", ["SOAP::SOAPString", XSD::QName.new(nil, "label")]], ["documentation", ["Documentation", XSD::QName.new(nil, "documentation")]], ["position", ["Position", XSD::QName.new(nil, "position")]], ["isVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isVisible")]], ["isNeverVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNeverVisible")]], ["isViewed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isViewed")]], ["isDisplayed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isDisplayed")]], ["isEnclosed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isEnclosed")]], ["isNew", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNew")]]]
-
   attr_accessor :identifier
   attr_accessor :label
   attr_accessor :documentation
@@ -598,11 +539,9 @@ class ConstraintEdgeAttributes
 end
 
 # {urn:auraUserData}NAryNode
+#   operator - SOAP::SOAPQName
+#   arguments - NAryArgumentArray
 class NAryNode
-  @@schema_type = "NAryNode"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["operator", ["SOAP::SOAPQName", XSD::QName.new(nil, "operator")]], ["arguments", ["NAryArgumentArray", XSD::QName.new(nil, "arguments")]]]
-
   attr_accessor :operator
   attr_accessor :arguments
 
@@ -612,19 +551,10 @@ class NAryNode
   end
 end
 
-# {urn:auraUserData}QNameTable
-class QNameTable < ::Array
-  @@schema_type = "QNameMap"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["QNameMap", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}Table
+#   columns - ArrayOfTableColumns
+#   rows - ArrayOfTableRows
 class Table
-  @@schema_type = "Table"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["columns", ["ArrayOfTableColumns", XSD::QName.new(nil, "columns")]], ["rows", ["ArrayOfTableRows", XSD::QName.new(nil, "rows")]]]
-
   attr_accessor :columns
   attr_accessor :rows
 
@@ -635,11 +565,10 @@ class Table
 end
 
 # {urn:auraUserData}UnificationDiff
+#   node1 - SOAP::SOAPQName
+#   node2 - SOAP::SOAPQName
+#   result - SOAP::SOAPQName
 class UnificationDiff
-  @@schema_type = "UnificationDiff"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["node1", ["SOAP::SOAPQName", XSD::QName.new(nil, "node1")]], ["node2", ["SOAP::SOAPQName", XSD::QName.new(nil, "node2")]], ["result", ["SOAP::SOAPQName", XSD::QName.new(nil, "result")]]]
-
   attr_accessor :node1
   attr_accessor :node2
   attr_accessor :result
@@ -651,61 +580,22 @@ class UnificationDiff
   end
 end
 
-# {urn:auraUserData}ArrayOfConstraintTerms
-class ArrayOfConstraintTerms < ::Array
-  @@schema_type = "ConstraintTermHolder"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["ConstraintTermHolder", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}AtomArray
-class AtomArray < ::Array
-  @@schema_type = "Atom"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["Atom", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}resultItem
+#   value - SOAP::SOAPQName
+#   entity - EntityType
+#   event - EventType
+#   role - RoleType
+#   property_Value - PropertyValueType
+#   slot - SlotType
+#   instance - SOAP::SOAPQName
 class ResultItem
-  @@schema_type = "resultItem"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["value", ["SOAP::SOAPQName", XSD::QName.new(nil, "value")]], ["entity", ["EntityType", XSD::QName.new(nil, "Entity")]], ["event", ["EventType", XSD::QName.new(nil, "Event")]], ["role", ["RoleType", XSD::QName.new(nil, "Role")]], ["property_Value", ["PropertyValueType", XSD::QName.new(nil, "Property-Value")]], ["slot", ["SlotType", XSD::QName.new(nil, "Slot")]], ["instance", ["SOAP::SOAPQName", XSD::QName.new(nil, "instance")]]]
-
   attr_accessor :value
+  attr_accessor :entity
+  attr_accessor :event
+  attr_accessor :role
   attr_accessor :property_Value
+  attr_accessor :slot
   attr_accessor :instance
-
-  def Entity
-    @entity
-  end
-
-  def Entity=(value)
-    @entity = value
-  end
-
-  def Event
-    @event
-  end
-
-  def Event=(value)
-    @event = value
-  end
-
-  def Role
-    @role
-  end
-
-  def Role=(value)
-    @role = value
-  end
-
-  def Slot
-    @slot
-  end
-
-  def Slot=(value)
-    @slot = value
-  end
 
   def initialize(value = nil, entity = nil, event = nil, role = nil, property_Value = nil, slot = nil, instance = nil)
     @value = value
@@ -719,11 +609,12 @@ class ResultItem
 end
 
 # {urn:auraUserData}Paraphrase
+#   sentence - SOAP::SOAPString
+#   node - SOAP::SOAPQName
+#   source - SOAP::SOAPQName
+#   relation - SOAP::SOAPQName
+#   target - SOAP::SOAPQName
 class Paraphrase
-  @@schema_type = "Paraphrase"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["sentence", ["SOAP::SOAPString", XSD::QName.new(nil, "sentence")]], ["node", ["SOAP::SOAPQName", XSD::QName.new(nil, "node")]], ["source", ["SOAP::SOAPQName", XSD::QName.new(nil, "source")]], ["relation", ["SOAP::SOAPQName", XSD::QName.new(nil, "relation")]], ["target", ["SOAP::SOAPQName", XSD::QName.new(nil, "target")]]]
-
   attr_accessor :sentence
   attr_accessor :node
   attr_accessor :source
@@ -739,19 +630,10 @@ class Paraphrase
   end
 end
 
-# {urn:auraUserData}ResultItemArray
-class ResultItemArray < ::Array
-  @@schema_type = "resultItem"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["ResultItem", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}FormulaComponent
+#   atomArray - AtomArray
+#   formula - Formula
 class FormulaComponent
-  @@schema_type = "FormulaComponent"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["atomArray", ["AtomArray", XSD::QName.new(nil, "atomArray")]], ["formula", ["Formula", XSD::QName.new(nil, "formula")]]]
-
   attr_accessor :atomArray
   attr_accessor :formula
 
@@ -762,11 +644,9 @@ class FormulaComponent
 end
 
 # {urn:auraUserData}CardinalValueScale
+#   name - SOAP::SOAPQName
+#   isSpecializable - SOAP::SOAPBoolean
 class CardinalValueScale
-  @@schema_type = "CardinalValueScale"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["name", ["SOAP::SOAPQName", XSD::QName.new(nil, "name")]], ["isSpecializable", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isSpecializable")]]]
-
   attr_accessor :name
   attr_accessor :isSpecializable
 
@@ -777,11 +657,8 @@ class CardinalValueScale
 end
 
 # {urn:auraUserData}CategoricalValueScale
+#   values - QNameArray
 class CategoricalValueScale
-  @@schema_type = "CategoricalValueScale"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["values", ["QNameArray", XSD::QName.new(nil, "values")]]]
-
   attr_accessor :values
 
   def initialize(values = nil)
@@ -790,11 +667,10 @@ class CategoricalValueScale
 end
 
 # {urn:auraUserData}ScalarValueScale
+#   name - SOAP::SOAPQName
+#   domains - QNameArray
+#   values - QNameArray
 class ScalarValueScale
-  @@schema_type = "ScalarValueScale"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["name", ["SOAP::SOAPQName", XSD::QName.new(nil, "name")]], ["domains", ["QNameArray", XSD::QName.new(nil, "domains")]], ["values", ["QNameArray", XSD::QName.new(nil, "values")]]]
-
   attr_accessor :name
   attr_accessor :domains
   attr_accessor :values
@@ -807,11 +683,11 @@ class ScalarValueScale
 end
 
 # {urn:auraUserData}UIAttributesForNode
+#   name - SOAP::SOAPQName
+#   position - Position
+#   isVisible - SOAP::SOAPBoolean
+#   isNeverVisible - SOAP::SOAPBoolean
 class UIAttributesForNode
-  @@schema_type = "UIAttributesForNode"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["name", ["SOAP::SOAPQName", XSD::QName.new(nil, "name")]], ["position", ["Position", XSD::QName.new(nil, "position")]], ["isVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isVisible")]], ["isNeverVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNeverVisible")]]]
-
   attr_accessor :name
   attr_accessor :position
   attr_accessor :isVisible
@@ -826,11 +702,13 @@ class UIAttributesForNode
 end
 
 # {urn:auraUserData}UIAttributesForEdge
+#   source - SOAP::SOAPQName
+#   relation - SOAP::SOAPQName
+#   targets - QNameArray
+#   position - Position
+#   isVisible - SOAP::SOAPBoolean
+#   isNeverVisible - SOAP::SOAPBoolean
 class UIAttributesForEdge
-  @@schema_type = "UIAttributesForEdge"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["source", ["SOAP::SOAPQName", XSD::QName.new(nil, "source")]], ["relation", ["SOAP::SOAPQName", XSD::QName.new(nil, "relation")]], ["targets", ["QNameArray", XSD::QName.new(nil, "targets")]], ["position", ["Position", XSD::QName.new(nil, "position")]], ["isVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isVisible")]], ["isNeverVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNeverVisible")]]]
-
   attr_accessor :source
   attr_accessor :relation
   attr_accessor :targets
@@ -849,11 +727,11 @@ class UIAttributesForEdge
 end
 
 # {urn:auraUserData}UIAttributesForTable
+#   name - SOAP::SOAPQName
+#   position - Position
+#   isVisible - SOAP::SOAPBoolean
+#   isNeverVisible - SOAP::SOAPBoolean
 class UIAttributesForTable
-  @@schema_type = "UIAttributesForTable"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["name", ["SOAP::SOAPQName", XSD::QName.new(nil, "name")]], ["position", ["Position", XSD::QName.new(nil, "position")]], ["isVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isVisible")]], ["isNeverVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNeverVisible")]]]
-
   attr_accessor :name
   attr_accessor :position
   attr_accessor :isVisible
@@ -868,11 +746,22 @@ class UIAttributesForTable
 end
 
 # {urn:auraUserData}LMapArgumentValue
+#   concept - SOAP::SOAPQName
+#   conceptList - QNameArray
+#   gaf - GAF
+#   gafList - ArrayOfGAFs
+#   stringValue - SOAP::SOAPString
+#   intValue - SOAP::SOAPInt
+#   boolValue - SOAP::SOAPBoolean
+#   operatorTree - NAryNode
+#   nameMap - QNameTable
+#   constraintTerms - ArrayOfConstraintTerms
+#   logicalFormula - LogicalFormula
+#   propertyValues - ArrayOfValues
+#   documentation - Documentation
+#   table - Table
+#   synonyms - VocabularyArray
 class LMapArgumentValue
-  @@schema_type = "LMapArgumentValue"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["concept", ["SOAP::SOAPQName", XSD::QName.new(nil, "concept")]], ["conceptList", ["QNameArray", XSD::QName.new(nil, "conceptList")]], ["gaf", ["GAF", XSD::QName.new(nil, "gaf")]], ["gafList", ["ArrayOfGAFs", XSD::QName.new(nil, "gafList")]], ["stringValue", ["SOAP::SOAPString", XSD::QName.new(nil, "stringValue")]], ["intValue", ["SOAP::SOAPInt", XSD::QName.new(nil, "intValue")]], ["boolValue", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "boolValue")]], ["operatorTree", ["NAryNode", XSD::QName.new(nil, "operatorTree")]], ["nameMap", ["QNameTable", XSD::QName.new(nil, "nameMap")]], ["constraintTerms", ["ArrayOfConstraintTerms", XSD::QName.new(nil, "constraintTerms")]], ["logicalFormula", ["LogicalFormula", XSD::QName.new(nil, "logicalFormula")]], ["propertyValues", ["ArrayOfValues", XSD::QName.new(nil, "propertyValues")]], ["documentation", ["Documentation", XSD::QName.new(nil, "documentation")]], ["table", ["Table", XSD::QName.new(nil, "table")]], ["synonyms", ["VocabularyArray", XSD::QName.new(nil, "synonyms")]]]
-
   attr_accessor :concept
   attr_accessor :conceptList
   attr_accessor :gaf
@@ -909,11 +798,12 @@ class LMapArgumentValue
 end
 
 # {urn:auraUserData}ConceptMapDiff
+#   unification - UnificationDiff
+#   addedFact - SOAP::SOAPQName
+#   addedIndividual - SOAP::SOAPQName
+#   deletedFact - SOAP::SOAPQName
+#   deletedIndividual - SOAP::SOAPQName
 class ConceptMapDiff
-  @@schema_type = "ConceptMapDiff"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["unification", ["UnificationDiff", XSD::QName.new(nil, "unification")]], ["addedFact", ["SOAP::SOAPQName", XSD::QName.new(nil, "addedFact")]], ["addedIndividual", ["SOAP::SOAPQName", XSD::QName.new(nil, "addedIndividual")]], ["deletedFact", ["SOAP::SOAPQName", XSD::QName.new(nil, "deletedFact")]], ["deletedIndividual", ["SOAP::SOAPQName", XSD::QName.new(nil, "deletedIndividual")]]]
-
   attr_accessor :unification
   attr_accessor :addedFact
   attr_accessor :addedIndividual
@@ -930,11 +820,20 @@ class ConceptMapDiff
 end
 
 # {urn:auraUserData}NodeTable
+#   identifier - SOAP::SOAPQName
+#   label - SOAP::SOAPString
+#   documentation - Documentation
+#   position - Position
+#   isVisible - SOAP::SOAPBoolean
+#   isNeverVisible - SOAP::SOAPBoolean
+#   isViewed - SOAP::SOAPBoolean
+#   isDisplayed - SOAP::SOAPBoolean
+#   isEnclosed - SOAP::SOAPBoolean
+#   isNew - SOAP::SOAPBoolean
+#   node - SOAP::SOAPQName
+#   identifier - SOAP::SOAPQName
+#   table - Table
 class NodeTable
-  @@schema_type = "NodeTable"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["identifier", ["SOAP::SOAPQName", XSD::QName.new(nil, "identifier")]], ["label", ["SOAP::SOAPString", XSD::QName.new(nil, "label")]], ["documentation", ["Documentation", XSD::QName.new(nil, "documentation")]], ["position", ["Position", XSD::QName.new(nil, "position")]], ["isVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isVisible")]], ["isNeverVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNeverVisible")]], ["isViewed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isViewed")]], ["isDisplayed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isDisplayed")]], ["isEnclosed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isEnclosed")]], ["isNew", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNew")]], ["node", ["SOAP::SOAPQName", XSD::QName.new(nil, "node")]], ["identifier", ["SOAP::SOAPQName", XSD::QName.new(nil, "identifier")]], ["table", ["Table", XSD::QName.new(nil, "table")]]]
-
   attr_accessor :identifier
   attr_accessor :label
   attr_accessor :documentation
@@ -967,11 +866,10 @@ class NodeTable
 end
 
 # {urn:auraUserData}Equation
+#   identifier - SOAP::SOAPQName
+#   equation - NAryNode
+#   bindings - QNameTable
 class Equation
-  @@schema_type = "Equation"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["identifier", ["SOAP::SOAPQName", XSD::QName.new(nil, "identifier")]], ["equation", ["NAryNode", XSD::QName.new(nil, "equation")]], ["bindings", ["QNameTable", XSD::QName.new(nil, "bindings")]]]
-
   attr_accessor :identifier
   attr_accessor :equation
   attr_accessor :bindings
@@ -984,11 +882,13 @@ class Equation
 end
 
 # {urn:auraUserData}Constraint
+#   constraintTerm - ConstraintTermHolder
+#   node - SOAP::SOAPQName
+#   slot - SOAP::SOAPQName
+#   constrainedNodes - QNameArray
+#   nodeAttributes - ConstraintNodeAttributes
+#   edgeAttributes - ConstraintEdgeAttributes
 class Constraint
-  @@schema_type = "Constraint"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["constraintTerm", ["ConstraintTermHolder", XSD::QName.new(nil, "constraintTerm")]], ["node", ["SOAP::SOAPQName", XSD::QName.new(nil, "node")]], ["slot", ["SOAP::SOAPQName", XSD::QName.new(nil, "slot")]], ["constrainedNodes", ["QNameArray", XSD::QName.new(nil, "constrainedNodes")]], ["nodeAttributes", ["ConstraintNodeAttributes", XSD::QName.new(nil, "nodeAttributes")]], ["edgeAttributes", ["ConstraintEdgeAttributes", XSD::QName.new(nil, "edgeAttributes")]]]
-
   attr_accessor :constraintTerm
   attr_accessor :node
   attr_accessor :slot
@@ -1007,11 +907,23 @@ class Constraint
 end
 
 # {urn:auraUserData}Edge
+#   identifier - SOAP::SOAPQName
+#   label - SOAP::SOAPString
+#   documentation - Documentation
+#   position - Position
+#   isVisible - SOAP::SOAPBoolean
+#   isNeverVisible - SOAP::SOAPBoolean
+#   isViewed - SOAP::SOAPBoolean
+#   isDisplayed - SOAP::SOAPBoolean
+#   isEnclosed - SOAP::SOAPBoolean
+#   isNew - SOAP::SOAPBoolean
+#   gaf - GAF
+#   condition - LogicalFormula
+#   isQuery - SOAP::SOAPBoolean
+#   paraphrase - SOAP::SOAPInteger
+#   supports - QNameArray
+#   isInterface - SOAP::SOAPBoolean
 class Edge
-  @@schema_type = "Edge"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["identifier", ["SOAP::SOAPQName", XSD::QName.new(nil, "identifier")]], ["label", ["SOAP::SOAPString", XSD::QName.new(nil, "label")]], ["documentation", ["Documentation", XSD::QName.new(nil, "documentation")]], ["position", ["Position", XSD::QName.new(nil, "position")]], ["isVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isVisible")]], ["isNeverVisible", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNeverVisible")]], ["isViewed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isViewed")]], ["isDisplayed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isDisplayed")]], ["isEnclosed", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isEnclosed")]], ["isNew", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isNew")]], ["gaf", ["GAF", XSD::QName.new(nil, "gaf")]], ["condition", ["LogicalFormula", XSD::QName.new(nil, "condition")]], ["isQuery", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isQuery")]], ["paraphrase", ["SOAP::SOAPInteger", XSD::QName.new(nil, "paraphrase")]], ["supports", ["QNameArray", XSD::QName.new(nil, "supports")]], ["isInterface", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isInterface")]]]
-
   attr_accessor :identifier
   attr_accessor :label
   attr_accessor :documentation
@@ -1050,11 +962,13 @@ class Edge
 end
 
 # {urn:auraUserData}PropertyValue
+#   identifier - SOAP::SOAPQName
+#   label - SOAP::SOAPString
+#   type - SOAP::SOAPQName
+#   unit - SOAP::SOAPQName
+#   magnitude - SOAP::SOAPFloat
+#   scale - SOAP::SOAPQName
 class PropertyValue
-  @@schema_type = "PropertyValue"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["identifier", ["SOAP::SOAPQName", XSD::QName.new(nil, "identifier")]], ["label", ["SOAP::SOAPString", XSD::QName.new(nil, "label")]], ["type", ["SOAP::SOAPQName", XSD::QName.new(nil, "type")]], ["unit", ["SOAP::SOAPQName", XSD::QName.new(nil, "unit")]], ["magnitude", ["SOAP::SOAPFloat", XSD::QName.new(nil, "magnitude")]], ["scale", ["SOAP::SOAPQName", XSD::QName.new(nil, "scale")]]]
-
   attr_accessor :identifier
   attr_accessor :label
   attr_accessor :type
@@ -1073,11 +987,9 @@ class PropertyValue
 end
 
 # {urn:auraUserData}GenericNode
+#   basicNode - BasicNode
+#   bigNode - BigNode
 class GenericNode
-  @@schema_type = "GenericNode"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["basicNode", ["BasicNode", XSD::QName.new(nil, "basicNode")]], ["bigNode", ["BigNode", XSD::QName.new(nil, "bigNode")]]]
-
   attr_accessor :basicNode
   attr_accessor :bigNode
 
@@ -1088,11 +1000,10 @@ class GenericNode
 end
 
 # {urn:auraUserData}ReactionParticipant
+#   count - SOAP::SOAPInt
+#   molecule - Molecule
+#   state - SOAP::SOAPQName
 class ReactionParticipant
-  @@schema_type = "ReactionParticipant"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["count", ["SOAP::SOAPInt", XSD::QName.new(nil, "count")]], ["molecule", ["Molecule", XSD::QName.new(nil, "molecule")]], ["state", ["SOAP::SOAPQName", XSD::QName.new(nil, "state")]]]
-
   attr_accessor :count
   attr_accessor :molecule
   attr_accessor :state
@@ -1105,11 +1016,10 @@ class ReactionParticipant
 end
 
 # {urn:auraUserData}DirtParaphrase
+#   paraphraseID - SOAP::SOAPString
+#   paraphraseString - SOAP::SOAPString
+#   blockedP - SOAP::SOAPQName
 class DirtParaphrase
-  @@schema_type = "DirtParaphrase"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["paraphraseID", ["SOAP::SOAPString", XSD::QName.new(nil, "paraphraseID")]], ["paraphraseString", ["SOAP::SOAPString", XSD::QName.new(nil, "paraphraseString")]], ["blockedP", ["SOAP::SOAPQName", XSD::QName.new(nil, "blockedP")]]]
-
   attr_accessor :paraphraseID
   attr_accessor :paraphraseString
   attr_accessor :blockedP
@@ -1121,19 +1031,15 @@ class DirtParaphrase
   end
 end
 
-# {urn:auraUserData}ReactionParticipantList
-class ReactionParticipantList < ::Array
-  @@schema_type = "ReactionParticipant"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["ReactionParticipant", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}documentSelection
+#   selectionName - SOAP::SOAPQName
+#   selectionType - SOAP::SOAPQName
+#   selectionURI - SOAP::SOAPAnyURI
+#   selectionPath - SOAP::SOAPString
+#   selectionStart - SOAP::SOAPInt
+#   selectionEnd - SOAP::SOAPInt
+#   selectionSummary - SOAP::SOAPString
 class DocumentSelection
-  @@schema_type = "documentSelection"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["selectionName", ["SOAP::SOAPQName", XSD::QName.new(nil, "selectionName")]], ["selectionType", ["SOAP::SOAPQName", XSD::QName.new(nil, "selectionType")]], ["selectionURI", ["SOAP::SOAPAnyURI", XSD::QName.new(nil, "selectionURI")]], ["selectionPath", ["SOAP::SOAPString", XSD::QName.new(nil, "selectionPath")]], ["selectionStart", ["SOAP::SOAPInt", XSD::QName.new(nil, "selectionStart")]], ["selectionEnd", ["SOAP::SOAPInt", XSD::QName.new(nil, "selectionEnd")]], ["selectionSummary", ["SOAP::SOAPString", XSD::QName.new(nil, "selectionSummary")]]]
-
   attr_accessor :selectionName
   attr_accessor :selectionType
   attr_accessor :selectionURI
@@ -1154,11 +1060,9 @@ class DocumentSelection
 end
 
 # {urn:auraUserData}QuestionUninterpretableType
+#   html - SOAP::SOAPString
+#   partialCmap - QuestionConceptMap
 class QuestionUninterpretableType
-  @@schema_type = "QuestionUninterpretableType"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["html", ["SOAP::SOAPString", XSD::QName.new(nil, "html")]], ["partialCmap", ["QuestionConceptMap", XSD::QName.new(nil, "partialCmap")]]]
-
   attr_accessor :html
   attr_accessor :partialCmap
 
@@ -1169,11 +1073,10 @@ class QuestionUninterpretableType
 end
 
 # {urn:auraUserData}WordConceptMap
+#   word - SOAP::SOAPString
+#   partOfSpeech - SOAP::SOAPQName
+#   concept - SOAP::SOAPQName
 class WordConceptMap
-  @@schema_type = "WordConceptMap"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["word", ["SOAP::SOAPString", XSD::QName.new(nil, "word")]], ["partOfSpeech", ["SOAP::SOAPQName", XSD::QName.new(nil, "partOfSpeech")]], ["concept", ["SOAP::SOAPQName", XSD::QName.new(nil, "concept")]]]
-
   attr_accessor :word
   attr_accessor :partOfSpeech
   attr_accessor :concept
@@ -1186,11 +1089,9 @@ class WordConceptMap
 end
 
 # {urn:auraUserData}PartitionData
+#   id - SOAP::SOAPQName
+#   members - QNameArray
 class PartitionData
-  @@schema_type = "PartitionData"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["id", ["SOAP::SOAPQName", XSD::QName.new(nil, "id")]], ["members", ["QNameArray", XSD::QName.new(nil, "members")]]]
-
   attr_accessor :id
   attr_accessor :members
 
@@ -1201,11 +1102,11 @@ class PartitionData
 end
 
 # {urn:auraUserData}PartitionEdit
+#   operation - SOAP::SOAPQName
+#   id - SOAP::SOAPQName
+#   concept - SOAP::SOAPQName
+#   members - QNameArray
 class PartitionEdit
-  @@schema_type = "PartitionEdit"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["operation", ["SOAP::SOAPQName", XSD::QName.new(nil, "operation")]], ["id", ["SOAP::SOAPQName", XSD::QName.new(nil, "id")]], ["concept", ["SOAP::SOAPQName", XSD::QName.new(nil, "concept")]], ["members", ["QNameArray", XSD::QName.new(nil, "members")]]]
-
   attr_accessor :operation
   attr_accessor :id
   attr_accessor :concept
@@ -1220,11 +1121,9 @@ class PartitionEdit
 end
 
 # {urn:auraUserData}RelationInformation
+#   relation - SOAP::SOAPQName
+#   arity - SOAP::SOAPInt
 class RelationInformation
-  @@schema_type = "RelationInformation"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["relation", ["SOAP::SOAPQName", XSD::QName.new(nil, "relation")]], ["arity", ["SOAP::SOAPInt", XSD::QName.new(nil, "arity")]]]
-
   attr_accessor :relation
   attr_accessor :arity
 
@@ -1235,11 +1134,9 @@ class RelationInformation
 end
 
 # {urn:auraUserData}WordSense
+#   concept - SOAP::SOAPQName
+#   definition - SOAP::SOAPString
 class WordSense
-  @@schema_type = "WordSense"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["concept", ["SOAP::SOAPQName", XSD::QName.new(nil, "concept")]], ["definition", ["SOAP::SOAPString", XSD::QName.new(nil, "definition")]]]
-
   attr_accessor :concept
   attr_accessor :definition
 
@@ -1249,61 +1146,10 @@ class WordSense
   end
 end
 
-# {urn:auraUserData}ArrayOfNodes
-class ArrayOfNodes < ::Array
-  @@schema_type = "GenericNode"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["GenericNode", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}ArrayOfValues
-class ArrayOfValues < ::Array
-  @@schema_type = "PropertyValue"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["PropertyValue", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}ArrayOfEdges
-class ArrayOfEdges < ::Array
-  @@schema_type = "Edge"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["Edge", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}ArrayOfConstraints
-class ArrayOfConstraints < ::Array
-  @@schema_type = "Constraint"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["Constraint", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}ArrayOfEquations
-class ArrayOfEquations < ::Array
-  @@schema_type = "Equation"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["Equation", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}ArrayOfTables
-class ArrayOfTables < ::Array
-  @@schema_type = "NodeTable"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["NodeTable", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}ConceptMapDiffsArray
-class ConceptMapDiffsArray < ::Array
-  @@schema_type = "ConceptMapDiff"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["ConceptMapDiff", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}LMapArgument
+#   name - SOAP::SOAPString
+#   value - LMapArgumentValue
 class LMapArgument
-  @@schema_type = "LMapArgument"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["name", ["SOAP::SOAPString", XSD::QName.new(nil, "name")]], ["value", ["LMapArgumentValue", XSD::QName.new(nil, "value")]]]
-
   attr_accessor :name
   attr_accessor :value
 
@@ -1314,11 +1160,10 @@ class LMapArgument
 end
 
 # {urn:auraUserData}UIAttributes
+#   node - UIAttributesForNode
+#   edge - UIAttributesForEdge
+#   table - UIAttributesForTable
 class UIAttributes
-  @@schema_type = "UIAttributes"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["node", ["UIAttributesForNode", XSD::QName.new(nil, "node")]], ["edge", ["UIAttributesForEdge", XSD::QName.new(nil, "edge")]], ["table", ["UIAttributesForTable", XSD::QName.new(nil, "table")]]]
-
   attr_accessor :node
   attr_accessor :edge
   attr_accessor :table
@@ -1331,11 +1176,9 @@ class UIAttributes
 end
 
 # {urn:auraUserData}RelationOption
+#   relation - SOAP::SOAPQName
+#   description - SOAP::SOAPString
 class RelationOption
-  @@schema_type = "RelationOption"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["relation", ["SOAP::SOAPQName", XSD::QName.new(nil, "relation")]], ["description", ["SOAP::SOAPString", XSD::QName.new(nil, "description")]]]
-
   attr_accessor :relation
   attr_accessor :description
 
@@ -1346,11 +1189,11 @@ class RelationOption
 end
 
 # {urn:auraUserData}ConnectRelationInvisibleType
+#   source - SOAP::SOAPQName
+#   relation - SOAP::SOAPQName
+#   target - SOAP::SOAPQName
+#   nodeToExpand - SOAP::SOAPQName
 class ConnectRelationInvisibleType
-  @@schema_type = "ConnectRelationInvisibleType"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["source", ["SOAP::SOAPQName", XSD::QName.new(nil, "source")]], ["relation", ["SOAP::SOAPQName", XSD::QName.new(nil, "relation")]], ["target", ["SOAP::SOAPQName", XSD::QName.new(nil, "target")]], ["nodeToExpand", ["SOAP::SOAPQName", XSD::QName.new(nil, "nodeToExpand")]]]
-
   attr_accessor :source
   attr_accessor :relation
   attr_accessor :target
@@ -1365,11 +1208,12 @@ class ConnectRelationInvisibleType
 end
 
 # {urn:auraUserData}InheritedContentModificationType
+#   operation - SOAP::SOAPString
+#   content - StringArray
+#   cause - SOAP::SOAPString
+#   sourceAxiomClasses - QNameArray
+#   sourcePrototypeClasses - QNameArray
 class InheritedContentModificationType
-  @@schema_type = "InheritedContentModificationType"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["operation", ["SOAP::SOAPString", XSD::QName.new(nil, "operation")]], ["content", ["StringArray", XSD::QName.new(nil, "content")]], ["cause", ["SOAP::SOAPString", XSD::QName.new(nil, "cause")]], ["sourceAxiomClasses", ["QNameArray", XSD::QName.new(nil, "sourceAxiomClasses")]], ["sourcePrototypeClasses", ["QNameArray", XSD::QName.new(nil, "sourcePrototypeClasses")]]]
-
   attr_accessor :operation
   attr_accessor :content
   attr_accessor :cause
@@ -1386,11 +1230,10 @@ class InheritedContentModificationType
 end
 
 # {urn:auraUserData}ValidValueScales
+#   cardinal - CardinalValueScale
+#   categorical - CategoricalValueScale
+#   scalar - ScalarValueScale
 class ValidValueScales
-  @@schema_type = "ValidValueScales"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["cardinal", ["CardinalValueScale", XSD::QName.new(nil, "cardinal")]], ["categorical", ["CategoricalValueScale", XSD::QName.new(nil, "categorical")]], ["scalar", ["ScalarValueScale", XSD::QName.new(nil, "scalar")]]]
-
   attr_accessor :cardinal
   attr_accessor :categorical
   attr_accessor :scalar
@@ -1402,19 +1245,12 @@ class ValidValueScales
   end
 end
 
-# {urn:auraUserData}FormulaComponentList
-class FormulaComponentList < ::Array
-  @@schema_type = "FormulaComponent"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["FormulaComponent", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}termResult
+#   term - SOAP::SOAPString
+#   exact - ResultItemArray
+#   partial - ResultItemArray
+#   semantic - ResultItemArray
 class TermResult
-  @@schema_type = "termResult"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["term", ["SOAP::SOAPString", XSD::QName.new(nil, "term")]], ["exact", ["ResultItemArray", XSD::QName.new(nil, "exact")]], ["partial", ["ResultItemArray", XSD::QName.new(nil, "partial")]], ["semantic", ["ResultItemArray", XSD::QName.new(nil, "semantic")]]]
-
   attr_accessor :term
   attr_accessor :exact
   attr_accessor :partial
@@ -1429,11 +1265,10 @@ class TermResult
 end
 
 # {urn:auraUserData}GAF
+#   source - SOAP::SOAPQName
+#   relation - SOAP::SOAPQName
+#   targets - QNameArray
 class GAF
-  @@schema_type = "GAF"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["source", ["SOAP::SOAPQName", XSD::QName.new(nil, "source")]], ["relation", ["SOAP::SOAPQName", XSD::QName.new(nil, "relation")]], ["targets", ["QNameArray", XSD::QName.new(nil, "targets")]]]
-
   attr_accessor :source
   attr_accessor :relation
   attr_accessor :targets
@@ -1445,26 +1280,11 @@ class GAF
   end
 end
 
-# {urn:auraUserData}ArrayOfParaphrases
-class ArrayOfParaphrases < ::Array
-  @@schema_type = "Paraphrase"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["Paraphrase", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}ArrayOfSentences
-class ArrayOfSentences < ::Array
-  @@schema_type = "string"
-  @@schema_ns = "http://www.w3.org/2001/XMLSchema"
-  @@schema_element = [["item", ["String", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}QuestionConceptMap
+#   conceptMap - ConceptMap
+#   paraphrases - ArrayOfParaphrases
+#   sources - ArrayOfSentences
 class QuestionConceptMap
-  @@schema_type = "QuestionConceptMap"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["conceptMap", ["ConceptMap", XSD::QName.new(nil, "conceptMap")]], ["paraphrases", ["ArrayOfParaphrases", XSD::QName.new(nil, "paraphrases")]], ["sources", ["ArrayOfSentences", XSD::QName.new(nil, "sources")]]]
-
   attr_accessor :conceptMap
   attr_accessor :paraphrases
   attr_accessor :sources
@@ -1476,19 +1296,19 @@ class QuestionConceptMap
   end
 end
 
-# {urn:auraUserData}QNameArray
-class QNameArray < ::Array
-  @@schema_type = "QName"
-  @@schema_ns = "http://www.w3.org/2001/XMLSchema"
-  @@schema_element = [["item", ["String", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}Viewpoint
+#   identifier - SOAP::SOAPQName
+#   conceptMap - ConceptMap
+#   concept - SOAP::SOAPQName
+#   setupEdges - QNameArray
+#   setupNodes - QNameArray
+#   queryEdges - QNameArray
+#   queryNodes - QNameArray
+#   conceptEdges - QNameArray
+#   conceptNodes - QNameArray
+#   otherEdges - QNameArray
+#   otherNodes - QNameArray
 class Viewpoint
-  @@schema_type = "Viewpoint"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["identifier", ["SOAP::SOAPQName", XSD::QName.new(nil, "identifier")]], ["conceptMap", ["ConceptMap", XSD::QName.new(nil, "conceptMap")]], ["concept", ["SOAP::SOAPQName", XSD::QName.new(nil, "concept")]], ["setupEdges", ["QNameArray", XSD::QName.new(nil, "setupEdges")]], ["setupNodes", ["QNameArray", XSD::QName.new(nil, "setupNodes")]], ["queryEdges", ["QNameArray", XSD::QName.new(nil, "queryEdges")]], ["queryNodes", ["QNameArray", XSD::QName.new(nil, "queryNodes")]], ["conceptEdges", ["QNameArray", XSD::QName.new(nil, "conceptEdges")]], ["conceptNodes", ["QNameArray", XSD::QName.new(nil, "conceptNodes")]], ["otherEdges", ["QNameArray", XSD::QName.new(nil, "otherEdges")]], ["otherNodes", ["QNameArray", XSD::QName.new(nil, "otherNodes")]]]
-
   attr_accessor :identifier
   attr_accessor :conceptMap
   attr_accessor :concept
@@ -1516,33 +1336,12 @@ class Viewpoint
   end
 end
 
-# {urn:auraUserData}ArrayOfGAFs
-class ArrayOfGAFs < ::Array
-  @@schema_type = "GAF"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["GAF", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}StringArray
-class StringArray < ::Array
-  @@schema_type = "string"
-  @@schema_ns = "http://www.w3.org/2001/XMLSchema"
-  @@schema_element = [["item", ["String", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}ArrayOfTermResult
-class ArrayOfTermResult < ::Array
-  @@schema_type = "termResult"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["TermResult", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}Formula
+#   title - SOAP::SOAPString
+#   formalCharge - SOAP::SOAPInt
+#   count - SOAP::SOAPInt
+#   formulaComponents - FormulaComponentList
 class Formula
-  @@schema_type = "Formula"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["title", ["SOAP::SOAPString", XSD::QName.new(nil, "title")]], ["formalCharge", ["SOAP::SOAPInt", XSD::QName.new(nil, "formalCharge")]], ["count", ["SOAP::SOAPInt", XSD::QName.new(nil, "count")]], ["formulaComponents", ["FormulaComponentList", XSD::QName.new(nil, "formulaComponents")]]]
-
   attr_accessor :title
   attr_accessor :formalCharge
   attr_accessor :count
@@ -1556,19 +1355,10 @@ class Formula
   end
 end
 
-# {urn:auraUserData}ValidValuesArray
-class ValidValuesArray < ::Array
-  @@schema_type = "ValidValueScales"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["ValidValueScales", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}SOAPServerType
+#   el0 - ConnectRelationInvisibleType
+#   el1 - InheritedContentModificationType
 class SOAPServerType
-  @@schema_type = "SOAPServerType"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["el0", ["ConnectRelationInvisibleType", XSD::QName.new(nil, "el0")]], ["el1", ["InheritedContentModificationType", XSD::QName.new(nil, "el1")]]]
-
   attr_accessor :el0
   attr_accessor :el1
 
@@ -1578,40 +1368,11 @@ class SOAPServerType
   end
 end
 
-# {urn:auraUserData}ArrayOfViewpoints
-class ArrayOfViewpoints < ::Array
-  @@schema_type = "Viewpoint"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["Viewpoint", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}ArrayOfRelationOptions
-class ArrayOfRelationOptions < ::Array
-  @@schema_type = "RelationOption"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["RelationOption", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}UIAttributeArray
-class UIAttributeArray < ::Array
-  @@schema_type = "UIAttributes"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["UIAttributes", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}LMapArgumentTable
-class LMapArgumentTable < ::Array
-  @@schema_type = "LMapArgument"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["LMapArgument", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}ConceptMapEditSummary
+#   initial - ConceptMap
+#   final - ConceptMap
+#   differences - ConceptMapDiffsArray
 class ConceptMapEditSummary
-  @@schema_type = "ConceptMapEditSummary"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["initial", ["ConceptMap", XSD::QName.new(nil, "initial")]], ["final", ["ConceptMap", XSD::QName.new(nil, "final")]], ["differences", ["ConceptMapDiffsArray", XSD::QName.new(nil, "differences")]]]
-
   attr_accessor :initial
   attr_accessor :final
   attr_accessor :differences
@@ -1624,11 +1385,17 @@ class ConceptMapEditSummary
 end
 
 # {urn:auraUserData}ConceptMap
+#   name - SOAP::SOAPQName
+#   isEditable - SOAP::SOAPBoolean
+#   isDisconnected - SOAP::SOAPBoolean
+#   nodes - ArrayOfNodes
+#   values - ArrayOfValues
+#   edges - ArrayOfEdges
+#   constraints - ArrayOfConstraints
+#   equations - ArrayOfEquations
+#   tables - ArrayOfTables
+#   knockonUnifications - QNameArray
 class ConceptMap
-  @@schema_type = "ConceptMap"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["name", ["SOAP::SOAPQName", XSD::QName.new(nil, "name")]], ["isEditable", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isEditable")]], ["isDisconnected", ["SOAP::SOAPBoolean", XSD::QName.new(nil, "isDisconnected")]], ["nodes", ["ArrayOfNodes", XSD::QName.new(nil, "nodes")]], ["values", ["ArrayOfValues", XSD::QName.new(nil, "values")]], ["edges", ["ArrayOfEdges", XSD::QName.new(nil, "edges")]], ["constraints", ["ArrayOfConstraints", XSD::QName.new(nil, "constraints")]], ["equations", ["ArrayOfEquations", XSD::QName.new(nil, "equations")]], ["tables", ["ArrayOfTables", XSD::QName.new(nil, "tables")]], ["knockonUnifications", ["QNameArray", XSD::QName.new(nil, "knockonUnifications")]]]
-
   attr_accessor :name
   attr_accessor :isEditable
   attr_accessor :isDisconnected
@@ -1654,47 +1421,9 @@ class ConceptMap
   end
 end
 
-# {urn:auraUserData}ArrayOfWordSenses
-class ArrayOfWordSenses < ::Array
-  @@schema_type = "WordSense"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["WordSense", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}SOAPServerType002
-class SOAPServerType002 < ::Array
-  @@schema_type = "RelationInformation"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["RelationInformation", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}PartitionEditsArray
-class PartitionEditsArray < ::Array
-  @@schema_type = "PartitionEdit"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["PartitionEdit", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}PartitionsArray
-class PartitionsArray < ::Array
-  @@schema_type = "PartitionData"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["PartitionData", XSD::QName.new(nil, "item")]]]
-end
-
-# {urn:auraUserData}VocabularyArray
-class VocabularyArray < ::Array
-  @@schema_type = "WordConceptMap"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["WordConceptMap", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}SOAPServerType003
+#   el0 - QuestionUninterpretableType
 class SOAPServerType003
-  @@schema_type = "SOAPServerType003"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["el0", ["QuestionUninterpretableType", XSD::QName.new(nil, "el0")]]]
-
   attr_accessor :el0
 
   def initialize(el0 = nil)
@@ -1702,19 +1431,11 @@ class SOAPServerType003
   end
 end
 
-# {urn:auraUserData}DocumentSelectionArray
-class DocumentSelectionArray < ::Array
-  @@schema_type = "documentSelection"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["DocumentSelection", XSD::QName.new(nil, "item")]]]
-end
-
 # {urn:auraUserData}Reaction
+#   reactantList - ReactionParticipantList
+#   productList - ReactionParticipantList
+#   direction - SOAP::SOAPQName
 class Reaction
-  @@schema_type = "Reaction"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["reactantList", ["ReactionParticipantList", XSD::QName.new(nil, "reactantList")]], ["productList", ["ReactionParticipantList", XSD::QName.new(nil, "productList")]], ["direction", ["SOAP::SOAPQName", XSD::QName.new(nil, "direction")]]]
-
   attr_accessor :reactantList
   attr_accessor :productList
   attr_accessor :direction
@@ -1726,9 +1447,154 @@ class Reaction
   end
 end
 
+# {urn:auraUserData}TableRow
+class TableRow < ::Array
+end
+
+# {urn:auraUserData}ArrayOfTableColumns
+class ArrayOfTableColumns < ::Array
+end
+
+# {urn:auraUserData}ArrayOfTableRows
+class ArrayOfTableRows < ::Array
+end
+
+# {urn:auraUserData}NAryArgumentArray
+class NAryArgumentArray < ::Array
+end
+
+# {urn:auraUserData}ArrayOfLiterals
+class ArrayOfLiterals < ::Array
+end
+
+# {urn:auraUserData}ArrayOfLogicalFormulas
+class ArrayOfLogicalFormulas < ::Array
+end
+
+# {urn:auraUserData}Documentation
+class Documentation < ::Array
+end
+
+# {urn:auraUserData}QNameTable
+class QNameTable < ::Array
+end
+
+# {urn:auraUserData}ArrayOfConstraintTerms
+class ArrayOfConstraintTerms < ::Array
+end
+
+# {urn:auraUserData}AtomArray
+class AtomArray < ::Array
+end
+
+# {urn:auraUserData}ResultItemArray
+class ResultItemArray < ::Array
+end
+
+# {urn:auraUserData}ReactionParticipantList
+class ReactionParticipantList < ::Array
+end
+
+# {urn:auraUserData}ArrayOfNodes
+class ArrayOfNodes < ::Array
+end
+
+# {urn:auraUserData}ArrayOfValues
+class ArrayOfValues < ::Array
+end
+
+# {urn:auraUserData}ArrayOfEdges
+class ArrayOfEdges < ::Array
+end
+
+# {urn:auraUserData}ArrayOfConstraints
+class ArrayOfConstraints < ::Array
+end
+
+# {urn:auraUserData}ArrayOfEquations
+class ArrayOfEquations < ::Array
+end
+
+# {urn:auraUserData}ArrayOfTables
+class ArrayOfTables < ::Array
+end
+
+# {urn:auraUserData}ConceptMapDiffsArray
+class ConceptMapDiffsArray < ::Array
+end
+
+# {urn:auraUserData}FormulaComponentList
+class FormulaComponentList < ::Array
+end
+
+# {urn:auraUserData}ArrayOfParaphrases
+class ArrayOfParaphrases < ::Array
+end
+
+# {urn:auraUserData}ArrayOfSentences
+class ArrayOfSentences < ::Array
+end
+
+# {urn:auraUserData}QNameArray
+class QNameArray < ::Array
+end
+
+# {urn:auraUserData}ArrayOfGAFs
+class ArrayOfGAFs < ::Array
+end
+
+# {urn:auraUserData}StringArray
+class StringArray < ::Array
+end
+
+# {urn:auraUserData}ArrayOfTermResult
+class ArrayOfTermResult < ::Array
+end
+
+# {urn:auraUserData}ValidValuesArray
+class ValidValuesArray < ::Array
+end
+
+# {urn:auraUserData}ArrayOfViewpoints
+class ArrayOfViewpoints < ::Array
+end
+
+# {urn:auraUserData}ArrayOfRelationOptions
+class ArrayOfRelationOptions < ::Array
+end
+
+# {urn:auraUserData}UIAttributeArray
+class UIAttributeArray < ::Array
+end
+
+# {urn:auraUserData}LMapArgumentTable
+class LMapArgumentTable < ::Array
+end
+
+# {urn:auraUserData}ArrayOfWordSenses
+class ArrayOfWordSenses < ::Array
+end
+
+# {urn:auraUserData}SOAPServerType002
+class SOAPServerType002 < ::Array
+end
+
+# {urn:auraUserData}PartitionEditsArray
+class PartitionEditsArray < ::Array
+end
+
+# {urn:auraUserData}PartitionsArray
+class PartitionsArray < ::Array
+end
+
+# {urn:auraUserData}VocabularyArray
+class VocabularyArray < ::Array
+end
+
+# {urn:auraUserData}DocumentSelectionArray
+class DocumentSelectionArray < ::Array
+end
+
 # {urn:auraUserData}ArrayOfDirtParaphrases
 class ArrayOfDirtParaphrases < ::Array
-  @@schema_type = "DirtParaphrase"
-  @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["item", ["DirtParaphrase", XSD::QName.new(nil, "item")]]]
 end

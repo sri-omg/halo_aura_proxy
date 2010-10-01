@@ -1744,6 +1744,12 @@
     <wsdl:part name="positionInStage" type="xsd:int" />
     <wsdl:part name="maxInStage" type="xsd:int" />
   </wsdl:message>
+  <wsdl:message name="getClassesUsedInLastQuestion">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getClassesUsedInLastQuestionResponse">
+    <wsdl:part name="classes" type="AURA:QNameArray" />
+  </wsdl:message>
   <wsdl:message name="drilldownExplanation">
     <wsdl:part name="function" type="xsd:string" />
     <wsdl:part name="arguments" type="AURA:StringArray" />
@@ -1771,6 +1777,13 @@
     <wsdl:part name="cmapList" type="AURA:QNameArray" />
     <wsdl:part name="conceptEditSummary" type="AURA:ConceptMapEditSummary" />
     <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getQuestions">
+    <wsdl:part name="inputText" type="xsd:string" />
+    <wsdl:part name="section" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getQuestionsResponse">
+    <wsdl:part name="questions" type="AURA:StringArray" />
   </wsdl:message>
   <wsdl:message name="getWordSenses">
     <wsdl:part name="instance" type="xsd:QName" />
@@ -2097,6 +2110,10 @@
       <wsdl:input message="AURA:getAsynchronousCallStatus" />
       <wsdl:output message="AURA:getAsynchronousCallStatusResponse" />
     </wsdl:operation>
+    <wsdl:operation name="getClassesUsedInLastQuestion">
+      <wsdl:input message="AURA:getClassesUsedInLastQuestion" />
+      <wsdl:output message="AURA:getClassesUsedInLastQuestionResponse" />
+    </wsdl:operation>
     <wsdl:operation name="drilldownExplanation">
       <wsdl:input message="AURA:drilldownExplanation" />
       <wsdl:output message="AURA:drilldownExplanationResponse" />
@@ -2108,6 +2125,10 @@
     <wsdl:operation name="callLMapFunction">
       <wsdl:input message="AURA:callLMapFunction" />
       <wsdl:output message="AURA:callLMapFunctionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getQuestions">
+      <wsdl:input message="AURA:getQuestions" />
+      <wsdl:output message="AURA:getQuestionsResponse" />
     </wsdl:operation>
     <wsdl:operation name="getWordSenses">
       <wsdl:input message="AURA:getWordSenses" />
@@ -2530,6 +2551,21 @@
              encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getClassesUsedInLastQuestion">
+      <soap:operation soapAction="getClassesUsedInLastQuestion" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="drilldownExplanation">
       <soap:operation soapAction="drilldownExplanation" />
       <wsdl:input>
@@ -2562,6 +2598,21 @@
     </wsdl:operation>
     <wsdl:operation name="callLMapFunction">
       <soap:operation soapAction="callLMapFunction" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getQuestions">
+      <soap:operation soapAction="getQuestions" />
       <wsdl:input>
         <soap:body
              use="encoded"

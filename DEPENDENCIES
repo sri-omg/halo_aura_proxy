@@ -2,9 +2,9 @@ Gems:
 - sinatra v1.0 (MIT License)
 - rack v1.2.1 (MIT License)
 - builder v2.1.2 (MIT License)
+- soap4r v1.5.8 (Ruby license)
 
 # Test only
 - rack-test v0.5.4 (MIT License)
 - rspec v1.3.0 (MIT License)
 - nokogiri v1.4.3.1 (MIT License)
-

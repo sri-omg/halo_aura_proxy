@@ -26,7 +26,7 @@ post "/answers" do
 end
 
 post "/suggested_questions_lists" do
-  aura.suggest_questions(params[:text], params[:section])
+  aura.suggest_questions(params)
 end
 
 get "*" do

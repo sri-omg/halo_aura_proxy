@@ -21,6 +21,11 @@ class FakeSoapServerPort
     ["What is the diameter of a head?", "What is your favorite color?", "Where is the beef?"]
   end
 
+  def getQuestionsForConcept(concept)
+    suggested_questions_requests << {:concept => concept}
+    ["What do you get when you multiply 6 by 9?", "How strong is a chain?", "What is your favorite color?", "Where is the beef?", "Are we there yet?"]
+  end
+
   def started?
     @started
   end

@@ -56,11 +56,20 @@ html
     @question_response
   end
 
-  def suggest_questions(text, section)
-    questions = @connection.getQuestions(text, section)
+  def suggest_questions(params)
+    text = params[:text]
+    section = params[:section]
+    concept = params[:concept]
 
     xml = Builder::XmlMarkup.new
     xml.instruct!
+
+    if (!concept.nil?)
+      questions = @connection.getQuestionsForConcept(concept)
+    else
+      questions = @connection.getQuestions(text, section)
+    end
+
     xml.questions do |questions_element|
       questions.each do |question|
         xml.question(question)
@@ -73,5 +82,12 @@ html
   def initialize(endpoint)
     @connection = test? ? FakeSoapServerPort.new : SOAPServerPort.new(endpoint)
     @connection.startQASession(nil);
+  end
+end
+
+# TODO: REMOVE THIS when the connection actually supports this method (or one like it)
+def SOAPServerPort
+  def getQuestionsForConcept(concept)
+    ["What is the sound of one hand clapping?", "How strong is a chain?", "What is your favorite color?", "Where is the beef?", "Dónde está el baño?"]
   end
 end

@@ -64,10 +64,12 @@ html
     xml = Builder::XmlMarkup.new
     xml.instruct!
 
-    if (!concept.nil?)
-      questions = @connection.getQuestionsForConcept(concept)
+    questions = if (!concept.nil?)
+      question_xml = @connection.getStructuredQuestions("", concept)
+      doc = Nokogiri::XML::Document.parse(question_xml)
+      doc.search("Question").collect(&:text)
     else
-      questions = @connection.getQuestions(text, section)
+      @connection.getQuestions(text, section)
     end
 
     xml.questions do |questions_element|
@@ -82,12 +84,5 @@ html
   def initialize(endpoint)
     @connection = test? ? FakeSoapServerPort.new : SOAPServerPort.new(endpoint)
     @connection.startQASession(nil);
-  end
-end
-
-# TODO: REMOVE THIS when the connection actually supports this method (or one like it)
-def SOAPServerPort
-  def getQuestionsForConcept(concept)
-    ["What is the sound of one hand clapping?", "How strong is a chain?", "What is your favorite color?", "Where is the beef?", "Dónde está el baño?"]
   end
 end

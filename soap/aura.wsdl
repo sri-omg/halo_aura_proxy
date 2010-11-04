@@ -1820,12 +1820,12 @@
   <wsdl:message name="getValidRelationsResponse">
     <wsdl:part name="SOAPServerPart002" element="AURA:relationsArray" />
   </wsdl:message>
-  <wsdl:message name="findPartitionsForClass">
-    <wsdl:part name="class" type="xsd:QName" />
+  <wsdl:message name="getStructuredQuestions">
+    <wsdl:part name="inputText" type="xsd:string" />
+    <wsdl:part name="section" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="findPartitionsForClassResponse">
-    <wsdl:part name="partitions" type="AURA:PartitionsArray" />
-    <wsdl:part name="edits" type="AURA:PartitionEditsArray" />
+  <wsdl:message name="getStructuredQuestionsResponse">
+    <wsdl:part name="structuredQuestions" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="driCreateSelection">
     <wsdl:part name="selectionType" type="xsd:QName" />
@@ -1838,6 +1838,13 @@
   </wsdl:message>
   <wsdl:message name="driCreateSelectionResponse">
     <wsdl:part name="driCreateSelectionDisposition" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="findPartitionsForClass">
+    <wsdl:part name="class" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="findPartitionsForClassResponse">
+    <wsdl:part name="partitions" type="AURA:PartitionsArray" />
+    <wsdl:part name="edits" type="AURA:PartitionEditsArray" />
   </wsdl:message>
   <wsdl:message name="blockDirtParaphrase">
     <wsdl:part name="dirtParaphrase" type="xsd:string" />
@@ -2150,13 +2157,17 @@
       <wsdl:input message="AURA:getValidRelations" />
       <wsdl:output message="AURA:getValidRelationsResponse" />
     </wsdl:operation>
-    <wsdl:operation name="findPartitionsForClass">
-      <wsdl:input message="AURA:findPartitionsForClass" />
-      <wsdl:output message="AURA:findPartitionsForClassResponse" />
+    <wsdl:operation name="getStructuredQuestions">
+      <wsdl:input message="AURA:getStructuredQuestions" />
+      <wsdl:output message="AURA:getStructuredQuestionsResponse" />
     </wsdl:operation>
     <wsdl:operation name="driCreateSelection">
       <wsdl:input message="AURA:driCreateSelection" />
       <wsdl:output message="AURA:driCreateSelectionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="findPartitionsForClass">
+      <wsdl:input message="AURA:findPartitionsForClass" />
+      <wsdl:output message="AURA:findPartitionsForClassResponse" />
     </wsdl:operation>
     <wsdl:operation name="blockDirtParaphrase">
       <wsdl:input message="AURA:blockDirtParaphrase" />
@@ -2701,8 +2712,8 @@
              encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="findPartitionsForClass">
-      <soap:operation soapAction="findPartitionsForClass" />
+    <wsdl:operation name="getStructuredQuestions">
+      <soap:operation soapAction="getStructuredQuestions" />
       <wsdl:input>
         <soap:body
              use="encoded"
@@ -2718,6 +2729,21 @@
     </wsdl:operation>
     <wsdl:operation name="driCreateSelection">
       <soap:operation soapAction="driCreateSelection" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findPartitionsForClass">
+      <soap:operation soapAction="findPartitionsForClass" />
       <wsdl:input>
         <soap:body
              use="encoded"

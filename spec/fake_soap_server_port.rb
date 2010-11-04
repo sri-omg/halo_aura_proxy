@@ -21,9 +21,20 @@ class FakeSoapServerPort
     ["What is the diameter of a head?", "What is your favorite color?", "Where is the beef?"]
   end
 
-  def getQuestionsForConcept(concept)
-    suggested_questions_requests << {:concept => concept}
-    ["What do you get when you multiply 6 by 9?", "How strong is a chain?", "What is your favorite color?", "Where is the beef?", "Are we there yet?"]
+  def getStructuredQuestions(text, section)
+    suggested_questions_requests << {:concept => section}
+
+    <<-xml
+<Questions>
+  <Question QuestionType="HOW_MANY">A Eukaryotic cell has how many chromosomes?</Question>
+  <Question QuestionType="FIND_VALUE">What are the objects of a Prometaphase?</Question>
+  <Question QuestionType="IDENTIFY">A fusion produces a zygote. What is the fusion?</Question>
+  <Question QuestionType="DEFINITION">What is a eukaryotic-cell?</Question>
+  <Question QuestionType="RELATION">What is the relation between Move and Prophase-I?</Question>
+  <Question QuestionType="SIMM_DIFF">Nucleus and lysosome are part of eukaryotic-cell. What are the similarities and differences between Lysosome and Nucleus?</Question>
+  <Question QuestionType="YES_NO">Is it true that gtp is used in translation initiation?</Question>
+</Questions>
+    xml
   end
 
   def started?

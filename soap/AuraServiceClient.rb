@@ -376,17 +376,17 @@ source = target = nil
 puts obj.getValidRelations(source, target)
 
 # SYNOPSIS
-#   findPartitionsForClass(v_class)
+#   getStructuredQuestions(inputText, section)
 #
 # ARGS
-#   v_class         QName - {http://www.w3.org/2001/XMLSchema}QName
+#   inputText       C_String - {http://www.w3.org/2001/XMLSchema}string
+#   section         C_String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   partitions      PartitionsArray - {urn:auraUserData}PartitionsArray
-#   edits           PartitionEditsArray - {urn:auraUserData}PartitionEditsArray
+#   structuredQuestions C_String - {http://www.w3.org/2001/XMLSchema}string
 #
-v_class = nil
-puts obj.findPartitionsForClass(v_class)
+inputText = section = nil
+puts obj.getStructuredQuestions(inputText, section)
 
 # SYNOPSIS
 #   driCreateSelection(selectionType, selectionPath, selectionURI, selectionRangeStart, selectionRangeEnd, selectionName, selectionSummary)
@@ -405,6 +405,19 @@ puts obj.findPartitionsForClass(v_class)
 #
 selectionType = selectionPath = selectionURI = selectionRangeStart = selectionRangeEnd = selectionName = selectionSummary = nil
 puts obj.driCreateSelection(selectionType, selectionPath, selectionURI, selectionRangeStart, selectionRangeEnd, selectionName, selectionSummary)
+
+# SYNOPSIS
+#   findPartitionsForClass(v_class)
+#
+# ARGS
+#   v_class         QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+# RETURNS
+#   partitions      PartitionsArray - {urn:auraUserData}PartitionsArray
+#   edits           PartitionEditsArray - {urn:auraUserData}PartitionEditsArray
+#
+v_class = nil
+puts obj.findPartitionsForClass(v_class)
 
 # SYNOPSIS
 #   blockDirtParaphrase(dirtParaphrase)

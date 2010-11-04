@@ -1,4 +1,5 @@
 require 'builder'
+require 'nokogiri'
 
 project_dir = File.join(File.dirname(__FILE__), "..")
 

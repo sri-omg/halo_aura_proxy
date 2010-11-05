@@ -23,6 +23,10 @@ class Aura
     @connection.suggested_questions_requests
   end
 
+  def get_structured_questions_requests
+    @connection.get_structured_questions_requests
+  end
+
   def valid_question!(options)
     reset_question!
     if (!options[:return_nil])

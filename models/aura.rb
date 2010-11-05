@@ -60,18 +60,28 @@ html
   def suggest_questions(params)
     text = params[:text]
     section = params[:section]
+
+    xml = Builder::XmlMarkup.new
+    xml.instruct!
+
+    questions = @connection.getQuestions(text, section)
+
+    xml.questions do |questions_element|
+      questions.each do |question|
+        xml.question(question)
+      end
+    end
+  end
+
+  def get_structured_questions(params)
     concept = params[:concept]
 
     xml = Builder::XmlMarkup.new
     xml.instruct!
 
-    questions = if (!concept.nil?)
-      question_xml = @connection.getStructuredQuestions("", concept)
-      doc = Nokogiri::XML::Document.parse(question_xml)
-      doc.search("Question").collect(&:text)
-    else
-      @connection.getQuestions(text, section)
-    end
+    question_xml = @connection.getStructuredQuestions("", concept)
+    doc = Nokogiri::XML::Document.parse(question_xml)
+    questions = doc.search("Question").collect(&:text)
 
     xml.questions do |questions_element|
       questions.each do |question|

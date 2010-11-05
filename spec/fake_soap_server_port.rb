@@ -22,7 +22,7 @@ class FakeSoapServerPort
   end
 
   def getStructuredQuestions(text, section)
-    suggested_questions_requests << {:concept => section}
+    get_structured_questions_requests << {:concept => section}
 
     <<-xml
 <Questions>
@@ -47,6 +47,10 @@ class FakeSoapServerPort
 
   def suggested_questions_requests
     @suggested_questions_requests ||= []
+  end
+
+  def get_structured_questions_requests
+    @get_structured_questions_requests ||= []
   end
 
   attr_accessor :ask_response

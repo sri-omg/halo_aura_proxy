@@ -55,7 +55,7 @@ describe "/answers" do
       end
 
       it "should return the answer returned by AURA for the question" do
-        pending "check equality when we're not longer returning fake links"
+        pending "check equality when we're no longer returning fake links"
         response.body.should == @answer
       end
 
@@ -94,7 +94,7 @@ describe "/answers" do
       end
 
       it "should return the answer returned by AURA for the question" do
-        pending "check equality when we're not longer returning fake links"
+        pending "check equality when we're no longer returning fake links"
         response.body.should == @answer
       end
 

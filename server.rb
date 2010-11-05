@@ -29,6 +29,10 @@ post "/suggested_questions_lists" do
   aura.suggest_questions(params)
 end
 
+post "/structured_questions_lists" do
+  aura.get_structured_questions(params)
+end
+
 get "*" do
   puts "#{params[:splat]} 404 not found"
   pass

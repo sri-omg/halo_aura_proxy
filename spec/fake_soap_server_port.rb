@@ -21,8 +21,8 @@ class FakeSoapServerPort
     ["What is the diameter of a head?", "What is your favorite color?", "Where is the beef?"]
   end
 
-  def getStructuredQuestions(text, section)
-    get_structured_questions_requests << {:concept => section}
+  def getStructuredQuestions(question, section)
+    structured_questions_requests << {:question => question, :concept => section}
 
     <<-xml
 <Questions>
@@ -49,8 +49,8 @@ class FakeSoapServerPort
     @suggested_questions_requests ||= []
   end
 
-  def get_structured_questions_requests
-    @get_structured_questions_requests ||= []
+  def structured_questions_requests
+    @structured_questions_requests ||= []
   end
 
   attr_accessor :ask_response

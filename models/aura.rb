@@ -58,13 +58,10 @@ html
   end
 
   def suggest_questions(params)
-    text = params[:text]
-    section = params[:section]
-
     xml = Builder::XmlMarkup.new
     xml.instruct!
 
-    questions = @connection.getQuestions(text, section)
+    questions = @connection.getQuestions(params[:text], params[:section])
 
     xml.questions do |questions_element|
       questions.each do |question|
@@ -74,12 +71,10 @@ html
   end
 
   def get_structured_questions(params)
-    concept = params[:concept]
-
     xml = Builder::XmlMarkup.new
     xml.instruct!
 
-    question_xml = @connection.getStructuredQuestions("", concept)
+    question_xml = @connection.getStructuredQuestions(params[:question], params[:concept])
     doc = Nokogiri::XML::Document.parse(question_xml)
     questions = doc.search("Question").collect(&:text)
 

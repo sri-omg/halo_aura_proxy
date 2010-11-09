@@ -35,31 +35,63 @@ describe "Aura" do
   end
 
   describe "#get_structured_questions" do
+
+    shared_examples_for "an action that sends a getStructuredQuestions request" do
+      it "should make a getStructuredQuestions request to the AURA server" do
+        @aura.structured_questions_requests.should_not be_empty
+        @aura.structured_questions_requests.first[:concept].should == @concept
+      end
+
+      it "should return an XML document" do
+        @doc.should be_kind_of(Nokogiri::XML::Document)
+      end
+
+      it "should return <questions> as the root node" do
+        @doc.root.name.should == "questions"
+      end
+
+      it "should return each returned question as the content of a question element" do
+        @doc.search("question").detect do |question_element|
+          question_element.text == "A Eukaryotic cell has how many chromosomes?"
+        end.should_not be_nil
+      end
+    end
+
     before(:each) do
+      @aura.structured_questions_requests.clear
+
       @concept = "Things that make you go hmmmmmm..."
-      params = { :concept => @concept }
-
-      @response = @aura.get_structured_questions(params)
-      @doc = Nokogiri::XML::Document.parse(@response)
+      @params = { :concept => @concept }
     end
 
-    it "should make a getStructuredQuestions request to the AURA server" do
-      @aura.get_structured_questions_requests.should_not be_empty
-      @aura.get_structured_questions_requests.first[:concept].should == @concept
+    describe "with no question" do
+
+      before(:each) do
+        @response = @aura.get_structured_questions(@params)
+        @doc = Nokogiri::XML::Document.parse(@response)
+      end
+
+      it_should_behave_like "an action that sends a getStructuredQuestions request"
+
+      it "should not include a question in the getStructuredQuestions request to the AURA server" do
+        @aura.structured_questions_requests.first[:question].should be_nil
+      end
     end
 
-    it "should return an XML document" do
-      @doc.should be_kind_of(Nokogiri::XML::Document)
-    end
+    describe "with a question" do
+      before(:each) do
+        @question = "This is not a valid question and the server did not like it!"
+        @params[:question] = @question
 
-    it "should return <questions> as the root node" do
-      @doc.root.name.should == "questions"
-    end
+        @response = @aura.get_structured_questions(@params)
+        @doc = Nokogiri::XML::Document.parse(@response)
+      end
 
-    it "should return each returned question as the content of a question element" do
-      @doc.search("question").detect do |question_element|
-        question_element.text == "A Eukaryotic cell has how many chromosomes?"
-      end.should_not be_nil
+      it_should_behave_like "an action that sends a getStructuredQuestions request"
+
+      it "should include the question in the getStructuredQuestions request to the AURA server" do
+        @aura.structured_questions_requests.first[:question].should == @question
+      end
     end
   end
 end

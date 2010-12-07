@@ -1793,6 +1793,7 @@
   </wsdl:message>
   <wsdl:message name="answerQuestion">
     <wsdl:part name="questionID" type="xsd:string" />
+    <wsdl:part name="figuresDirectory" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="answerQuestionResponse">
     <wsdl:part name="answer" type="xsd:string" />
@@ -1947,6 +1948,7 @@
   </wsdl:message>
   <wsdl:message name="answerQuestionIpad">
     <wsdl:part name="questionID" type="xsd:string" />
+    <wsdl:part name="figuresDirectory" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="answerQuestionIpadResponse">
     <wsdl:part name="answer" type="xsd:string" />

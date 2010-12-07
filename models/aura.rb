@@ -43,7 +43,7 @@ class Aura
 
   def answer_question
     <<-html
-#{@connection.answerQuestionIpad(nil).first}
+#{@connection.answerQuestionIpad(nil, '../book/figures/').first}
 <p><a href="chap17-2.htm#para05" class="text-ref">Test link to Chapter 17-2 #para05</a></p>
 <p><a class="keywords" href="../concepts/rna.html">Test keyword link: RNA</a></p>
 html

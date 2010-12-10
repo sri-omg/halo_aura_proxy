@@ -10,13 +10,13 @@ AURA_ENDPOINT = "http://localhost:8000/SOAP"
 aura = Aura.instance
 
 post "/answers" do
-  aura.new_question
-
-  wait
-
-  content_type 'application/html', :charset => 'utf-8'
-
   begin
+    aura.new_question
+
+    wait
+
+    content_type 'application/html', :charset => 'utf-8'
+
     aura.ask_question(params[:question])
     if aura.valid_question?
       status 200

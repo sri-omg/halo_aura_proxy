@@ -50,7 +50,7 @@ html
   end
 
   def valid_question?
-    @question_response.nil? || @question_response.is_a?(QuestionConceptMap)
+    @question_response.nil? || @question_response.is_a?(Array) || @question_response.is_a?(QuestionConceptMap)
   end
 
   def question_errors

@@ -8,6 +8,8 @@ WAIT_TIME = 0
 AURA_ENDPOINT = "http://localhost:8000/SOAP"
 
 aura = Aura.instance
+# If the client says the connection was closed then there was probably an exception suppressed by this mechanism.
+set :show_exceptions => false
 
 post "/answers" do
   begin

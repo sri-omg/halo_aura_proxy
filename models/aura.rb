@@ -70,6 +70,20 @@ html
     end
   end
 
+
+  def suggest_formatted_questions(params)
+    xml = Builder::XmlMarkup.new
+    xml.instruct!
+
+    questions = @connection.getFormattedQuestions(params[:text], params[:section])
+
+    xml.questions do |questions_element|
+      questions.each do |question|
+        xml.question(question)
+      end
+    end
+  end
+  
   def get_structured_questions(params)
     xml = Builder::XmlMarkup.new
     xml.instruct!
@@ -85,6 +99,21 @@ html
     end
   end
 
+  def get_formatted_structured_questions(params)
+    xml = Builder::XmlMarkup.new
+    xml.instruct!
+
+    question_xml = @connection.getFormattedStructuredQuestions(params[:question], params[:concept])
+    doc = Nokogiri::XML::Document.parse(question_xml)
+    questions = doc.search("Question").collect(&:text)
+
+    xml.questions do |questions_element|
+      questions.each do |question|
+        xml.question(question)
+      end
+    end
+  end
+  
   private
 
   def initialize(endpoint)

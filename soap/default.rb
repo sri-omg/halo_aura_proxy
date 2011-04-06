@@ -86,9 +86,10 @@ end
 class ClibClass
   @@schema_type = "clibClass"
   @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["value", ["SOAP::SOAPQName", XSD::QName.new(nil, "value")]], ["entity", ["EntityType", XSD::QName.new(nil, "Entity")]], ["event", ["EventType", XSD::QName.new(nil, "Event")]], ["role", ["RoleType", XSD::QName.new(nil, "Role")]], ["property_Value", ["PropertyValueType", XSD::QName.new(nil, "Property-Value")]]]
+  @@schema_element = [["value", ["SOAP::SOAPQName", XSD::QName.new(nil, "value")]], ["entity", ["EntityType", XSD::QName.new(nil, "Entity")]], ["temporal_Entity", ["TemporalEntityType", XSD::QName.new(nil, "Temporal-Entity")]], ["event", ["EventType", XSD::QName.new(nil, "Event")]], ["role", ["RoleType", XSD::QName.new(nil, "Role")]], ["property_Value", ["PropertyValueType", XSD::QName.new(nil, "Property-Value")]]]
 
   attr_accessor :value
+  attr_accessor :temporal_Entity
   attr_accessor :property_Value
 
   def Entity
@@ -115,9 +116,10 @@ class ClibClass
     @role = value
   end
 
-  def initialize(value = nil, entity = nil, event = nil, role = nil, property_Value = nil)
+  def initialize(value = nil, entity = nil, temporal_Entity = nil, event = nil, role = nil, property_Value = nil)
     @value = value
     @entity = entity
+    @temporal_Entity = temporal_Entity
     @event = event
     @role = role
     @property_Value = property_Value
@@ -142,6 +144,28 @@ end
 # {urn:auraUserData}Entity-Type
 class EntityType
   @@schema_type = "Entity-Type"
+  @@schema_ns = "urn:auraUserData"
+  @@schema_element = [["v_class", ["SOAP::SOAPQName", XSD::QName.new(nil, "class")]], ["templateInstance", ["TemplateInstance", XSD::QName.new(nil, "templateInstance")]]]
+
+  attr_accessor :templateInstance
+
+  def class
+    @v_class
+  end
+
+  def class=(value)
+    @v_class = value
+  end
+
+  def initialize(v_class = nil, templateInstance = nil)
+    @v_class = v_class
+    @templateInstance = templateInstance
+  end
+end
+
+# {urn:auraUserData}Temporal-Entity-Type
+class TemporalEntityType
+  @@schema_type = "Temporal-Entity-Type"
   @@schema_ns = "urn:auraUserData"
   @@schema_element = [["v_class", ["SOAP::SOAPQName", XSD::QName.new(nil, "class")]], ["templateInstance", ["TemplateInstance", XSD::QName.new(nil, "templateInstance")]]]
 
@@ -669,9 +693,10 @@ end
 class ResultItem
   @@schema_type = "resultItem"
   @@schema_ns = "urn:auraUserData"
-  @@schema_element = [["value", ["SOAP::SOAPQName", XSD::QName.new(nil, "value")]], ["entity", ["EntityType", XSD::QName.new(nil, "Entity")]], ["event", ["EventType", XSD::QName.new(nil, "Event")]], ["role", ["RoleType", XSD::QName.new(nil, "Role")]], ["property_Value", ["PropertyValueType", XSD::QName.new(nil, "Property-Value")]], ["slot", ["SlotType", XSD::QName.new(nil, "Slot")]], ["instance", ["SOAP::SOAPQName", XSD::QName.new(nil, "instance")]]]
+  @@schema_element = [["value", ["SOAP::SOAPQName", XSD::QName.new(nil, "value")]], ["entity", ["EntityType", XSD::QName.new(nil, "Entity")]], ["temporal_Entity", ["TemporalEntityType", XSD::QName.new(nil, "Temporal-Entity")]], ["event", ["EventType", XSD::QName.new(nil, "Event")]], ["role", ["RoleType", XSD::QName.new(nil, "Role")]], ["property_Value", ["PropertyValueType", XSD::QName.new(nil, "Property-Value")]], ["slot", ["SlotType", XSD::QName.new(nil, "Slot")]], ["instance", ["SOAP::SOAPQName", XSD::QName.new(nil, "instance")]]]
 
   attr_accessor :value
+  attr_accessor :temporal_Entity
   attr_accessor :property_Value
   attr_accessor :instance
 
@@ -707,9 +732,10 @@ class ResultItem
     @slot = value
   end
 
-  def initialize(value = nil, entity = nil, event = nil, role = nil, property_Value = nil, slot = nil, instance = nil)
+  def initialize(value = nil, entity = nil, temporal_Entity = nil, event = nil, role = nil, property_Value = nil, slot = nil, instance = nil)
     @value = value
     @entity = entity
+    @temporal_Entity = temporal_Entity
     @event = event
     @role = role
     @property_Value = property_Value

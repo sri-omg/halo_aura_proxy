@@ -265,6 +265,20 @@ function = arguments = nil
 puts obj.drilldownExplanation(function, arguments)
 
 # SYNOPSIS
+#   getFormattedQuestions(inputText, section)
+#
+# ARGS
+#   inputText       String - {http://www.w3.org/2001/XMLSchema}string
+#   section         String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   questions       StringArray - {urn:auraUserData}StringArray
+#   formattedQuestions StringArray - {urn:auraUserData}StringArray
+#
+inputText = section = nil
+puts obj.getFormattedQuestions(inputText, section)
+
+# SYNOPSIS
 #   getRelationOptions(source, relation, target)
 #
 # ARGS
@@ -419,6 +433,18 @@ puts obj.driCreateSelection(selectionType, selectionPath, selectionURI, selectio
 #
 v_class = nil
 puts obj.findPartitionsForClass(v_class)
+
+# SYNOPSIS
+#   allowParaphrasing(isAllowed)
+#
+# ARGS
+#   isAllowed       Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#
+# RETURNS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+isAllowed = nil
+puts obj.allowParaphrasing(isAllowed)
 
 # SYNOPSIS
 #   blockDirtParaphrase(dirtParaphrase)
@@ -678,6 +704,20 @@ selectionURI = selectionPath = selectionRangeStart = selectionRangeEnd = nil
 puts obj.driRemoveSelection(selectionURI, selectionPath, selectionRangeStart, selectionRangeEnd)
 
 # SYNOPSIS
+#   getFormattedStructuredQuestions(inputText, section)
+#
+# ARGS
+#   inputText       String - {http://www.w3.org/2001/XMLSchema}string
+#   section         String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   structuredQuestions String - {http://www.w3.org/2001/XMLSchema}string
+#   formattedStructuredQuestions String - {http://www.w3.org/2001/XMLSchema}string
+#
+inputText = section = nil
+puts obj.getFormattedStructuredQuestions(inputText, section)
+
+# SYNOPSIS
 #   getClassDocumentation(concept, type)
 #
 # ARGS
@@ -727,6 +767,18 @@ dirtParaphrase = nil
 puts obj.unBlockDirtParaphrase(dirtParaphrase)
 
 # SYNOPSIS
+#   allowUnderspecification(isAllowed)
+#
+# ARGS
+#   isAllowed       Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#
+# RETURNS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+isAllowed = nil
+puts obj.allowUnderspecification(isAllowed)
+
+# SYNOPSIS
 #   getCheckpointedGraph(rootIndividual)
 #
 # ARGS
@@ -737,19 +789,6 @@ puts obj.unBlockDirtParaphrase(dirtParaphrase)
 #
 rootIndividual = nil
 puts obj.getCheckpointedGraph(rootIndividual)
-
-# SYNOPSIS
-#   getSmeConceptDependencies(concept)
-#
-# ARGS
-#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-# RETURNS
-#   subclasses      QNameArray - {urn:auraUserData}QNameArray
-#   referrers       QNameArray - {urn:auraUserData}QNameArray
-#
-concept = nil
-puts obj.getSmeConceptDependencies(concept)
 
 # SYNOPSIS
 #   endQASession(dummy)
@@ -774,6 +813,19 @@ puts obj.endQASession(dummy)
 #
 dummy = nil
 puts obj.lastDirtParaphrasesUsed(dummy)
+
+# SYNOPSIS
+#   getSmeConceptDependencies(concept)
+#
+# ARGS
+#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+# RETURNS
+#   subclasses      QNameArray - {urn:auraUserData}QNameArray
+#   referrers       QNameArray - {urn:auraUserData}QNameArray
+#
+concept = nil
+puts obj.getSmeConceptDependencies(concept)
 
 # SYNOPSIS
 #   resetQASession(dummy)

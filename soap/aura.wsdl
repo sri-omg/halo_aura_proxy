@@ -94,6 +94,10 @@
                type="AURA:Entity-Type"
                minOccurs="0" />
           <xsd:element
+               name="Temporal-Entity"
+               type="AURA:Temporal-Entity-Type"
+               minOccurs="0" />
+          <xsd:element
                name="Event"
                type="AURA:Event-Type"
                minOccurs="0" />
@@ -120,6 +124,18 @@
         </xsd:sequence>
       </xsd:complexType>
       <xsd:complexType name="Entity-Type">
+        <xsd:all>
+          <xsd:element
+               name="class"
+               type="xsd:QName"
+               minOccurs="0" />
+          <xsd:element
+               name="templateInstance"
+               type="AURA:templateInstance"
+               minOccurs="0" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Temporal-Entity-Type">
         <xsd:all>
           <xsd:element
                name="class"
@@ -592,6 +608,10 @@
           <xsd:element
                name="Entity"
                type="AURA:Entity-Type"
+               minOccurs="0" />
+          <xsd:element
+               name="Temporal-Entity"
+               type="AURA:Temporal-Entity-Type"
                minOccurs="0" />
           <xsd:element
                name="Event"
@@ -1757,6 +1777,14 @@
   <wsdl:message name="drilldownExplanationResponse">
     <wsdl:part name="explanation" type="xsd:string" />
   </wsdl:message>
+  <wsdl:message name="getFormattedQuestions">
+    <wsdl:part name="inputText" type="xsd:string" />
+    <wsdl:part name="section" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getFormattedQuestionsResponse">
+    <wsdl:part name="questions" type="AURA:StringArray" />
+    <wsdl:part name="formattedQuestions" type="AURA:StringArray" />
+  </wsdl:message>
   <wsdl:message name="getRelationOptions">
     <wsdl:part name="source" type="xsd:QName" />
     <wsdl:part name="relation" type="xsd:QName" />
@@ -1846,6 +1874,12 @@
   <wsdl:message name="findPartitionsForClassResponse">
     <wsdl:part name="partitions" type="AURA:PartitionsArray" />
     <wsdl:part name="edits" type="AURA:PartitionEditsArray" />
+  </wsdl:message>
+  <wsdl:message name="allowParaphrasing">
+    <wsdl:part name="isAllowed" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="allowParaphrasingResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="blockDirtParaphrase">
     <wsdl:part name="dirtParaphrase" type="xsd:string" />
@@ -1984,6 +2018,14 @@
   <wsdl:message name="driRemoveSelectionResponse">
     <wsdl:part name="driRemoveSelectionDisposition" type="AURA:DocumentSelectionArray" />
   </wsdl:message>
+  <wsdl:message name="getFormattedStructuredQuestions">
+    <wsdl:part name="inputText" type="xsd:string" />
+    <wsdl:part name="section" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getFormattedStructuredQuestionsResponse">
+    <wsdl:part name="structuredQuestions" type="xsd:string" />
+    <wsdl:part name="formattedStructuredQuestions" type="xsd:string" />
+  </wsdl:message>
   <wsdl:message name="getClassDocumentation">
     <wsdl:part name="concept" type="xsd:QName" />
     <wsdl:part name="type" type="xsd:QName" />
@@ -2009,18 +2051,17 @@
   <wsdl:message name="unBlockDirtParaphraseResponse">
     <wsdl:part name="dummy" type="xsd:string" />
   </wsdl:message>
+  <wsdl:message name="allowUnderspecification">
+    <wsdl:part name="isAllowed" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="allowUnderspecificationResponse">
+    <wsdl:part name="dummy" type="xsd:string" />
+  </wsdl:message>
   <wsdl:message name="getCheckpointedGraph">
     <wsdl:part name="rootIndividual" type="xsd:QName" />
   </wsdl:message>
   <wsdl:message name="getCheckpointedGraphResponse">
     <wsdl:part name="conceptMap" type="AURA:ConceptMap" />
-  </wsdl:message>
-  <wsdl:message name="getSmeConceptDependencies">
-    <wsdl:part name="concept" type="xsd:QName" />
-  </wsdl:message>
-  <wsdl:message name="getSmeConceptDependenciesResponse">
-    <wsdl:part name="subclasses" type="AURA:QNameArray" />
-    <wsdl:part name="referrers" type="AURA:QNameArray" />
   </wsdl:message>
   <wsdl:message name="endQASession">
     <wsdl:part name="dummy" type="xsd:string" />
@@ -2033,6 +2074,13 @@
   </wsdl:message>
   <wsdl:message name="lastDirtParaphrasesUsedResponse">
     <wsdl:part name="listOfDirtParaphrasesUsed" type="AURA:ArrayOfDirtParaphrases" />
+  </wsdl:message>
+  <wsdl:message name="getSmeConceptDependencies">
+    <wsdl:part name="concept" type="xsd:QName" />
+  </wsdl:message>
+  <wsdl:message name="getSmeConceptDependenciesResponse">
+    <wsdl:part name="subclasses" type="AURA:QNameArray" />
+    <wsdl:part name="referrers" type="AURA:QNameArray" />
   </wsdl:message>
   <wsdl:message name="resetQASession">
     <wsdl:part name="dummy" type="xsd:string" />
@@ -2127,6 +2175,10 @@
       <wsdl:input message="AURA:drilldownExplanation" />
       <wsdl:output message="AURA:drilldownExplanationResponse" />
     </wsdl:operation>
+    <wsdl:operation name="getFormattedQuestions">
+      <wsdl:input message="AURA:getFormattedQuestions" />
+      <wsdl:output message="AURA:getFormattedQuestionsResponse" />
+    </wsdl:operation>
     <wsdl:operation name="getRelationOptions">
       <wsdl:input message="AURA:getRelationOptions" />
       <wsdl:output message="AURA:getRelationOptionsResponse" />
@@ -2170,6 +2222,10 @@
     <wsdl:operation name="findPartitionsForClass">
       <wsdl:input message="AURA:findPartitionsForClass" />
       <wsdl:output message="AURA:findPartitionsForClassResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="allowParaphrasing">
+      <wsdl:input message="AURA:allowParaphrasing" />
+      <wsdl:output message="AURA:allowParaphrasingResponse" />
     </wsdl:operation>
     <wsdl:operation name="blockDirtParaphrase">
       <wsdl:input message="AURA:blockDirtParaphrase" />
@@ -2251,6 +2307,10 @@
       <wsdl:input message="AURA:driRemoveSelection" />
       <wsdl:output message="AURA:driRemoveSelectionResponse" />
     </wsdl:operation>
+    <wsdl:operation name="getFormattedStructuredQuestions">
+      <wsdl:input message="AURA:getFormattedStructuredQuestions" />
+      <wsdl:output message="AURA:getFormattedStructuredQuestionsResponse" />
+    </wsdl:operation>
     <wsdl:operation name="getClassDocumentation">
       <wsdl:input message="AURA:getClassDocumentation" />
       <wsdl:output message="AURA:getClassDocumentationResponse" />
@@ -2267,13 +2327,13 @@
       <wsdl:input message="AURA:unBlockDirtParaphrase" />
       <wsdl:output message="AURA:unBlockDirtParaphraseResponse" />
     </wsdl:operation>
+    <wsdl:operation name="allowUnderspecification">
+      <wsdl:input message="AURA:allowUnderspecification" />
+      <wsdl:output message="AURA:allowUnderspecificationResponse" />
+    </wsdl:operation>
     <wsdl:operation name="getCheckpointedGraph">
       <wsdl:input message="AURA:getCheckpointedGraph" />
       <wsdl:output message="AURA:getCheckpointedGraphResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="getSmeConceptDependencies">
-      <wsdl:input message="AURA:getSmeConceptDependencies" />
-      <wsdl:output message="AURA:getSmeConceptDependenciesResponse" />
     </wsdl:operation>
     <wsdl:operation name="endQASession">
       <wsdl:input message="AURA:endQASession" />
@@ -2282,6 +2342,10 @@
     <wsdl:operation name="lastDirtParaphrasesUsed">
       <wsdl:input message="AURA:lastDirtParaphrasesUsed" />
       <wsdl:output message="AURA:lastDirtParaphrasesUsedResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSmeConceptDependencies">
+      <wsdl:input message="AURA:getSmeConceptDependencies" />
+      <wsdl:output message="AURA:getSmeConceptDependenciesResponse" />
     </wsdl:operation>
     <wsdl:operation name="resetQASession">
       <wsdl:input message="AURA:resetQASession" />
@@ -2594,6 +2658,21 @@
              encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getFormattedQuestions">
+      <soap:operation soapAction="getFormattedQuestions" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getRelationOptions">
       <soap:operation soapAction="getWordSenses" />
       <wsdl:input>
@@ -2746,6 +2825,21 @@
     </wsdl:operation>
     <wsdl:operation name="findPartitionsForClass">
       <soap:operation soapAction="findPartitionsForClass" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="allowParaphrasing">
+      <soap:operation soapAction="allowParaphrasing" />
       <wsdl:input>
         <soap:body
              use="encoded"
@@ -3059,6 +3153,21 @@
              encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getFormattedStructuredQuestions">
+      <soap:operation soapAction="getFormattedStructuredQuestions" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getClassDocumentation">
       <soap:operation soapAction="getClassDocumentation" />
       <wsdl:input>
@@ -3119,8 +3228,8 @@
              encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getCheckpointedGraph">
-      <soap:operation soapAction="getCheckpointedGraph" />
+    <wsdl:operation name="allowUnderspecification">
+      <soap:operation soapAction="allowUnderspecification" />
       <wsdl:input>
         <soap:body
              use="encoded"
@@ -3134,8 +3243,8 @@
              encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getSmeConceptDependencies">
-      <soap:operation soapAction="getSmeConceptDependencies" />
+    <wsdl:operation name="getCheckpointedGraph">
+      <soap:operation soapAction="getCheckpointedGraph" />
       <wsdl:input>
         <soap:body
              use="encoded"
@@ -3166,6 +3275,21 @@
     </wsdl:operation>
     <wsdl:operation name="lastDirtParaphrasesUsed">
       <soap:operation soapAction="lastDirtParaphrasesUsed" />
+      <wsdl:input>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body
+             use="encoded"
+             namespace="urn:auraUserData"
+             encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSmeConceptDependencies">
+      <soap:operation soapAction="getSmeConceptDependencies" />
       <wsdl:input>
         <soap:body
              use="encoded"

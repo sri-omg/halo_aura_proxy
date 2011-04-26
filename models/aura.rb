@@ -104,8 +104,9 @@ html
     xml.instruct!
 
     question_xml = @connection.getFormattedStructuredQuestions(params[:question], params[:concept])
-    doc = Nokogiri::XML::Document.parse(question_xml)
-    questions = doc.search("Question").collect(&:text)
+    doc = Nokogiri::XML::Document.parse(question_xml[1])
+	
+    questions = doc.search("Question").collect(&:inner_html)
 
     xml.questions do |questions_element|
       questions.each do |question|

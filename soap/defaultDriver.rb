@@ -8,6 +8,48 @@ class SOAPServerPort < ::SOAP::RPC::Driver
   MappingRegistry = ::SOAP::Mapping::Registry.new
 
   MappingRegistry.set(
+    QNameArray,
+    ::SOAP::SOAPArray,
+    ::SOAP::Mapping::Registry::TypedArrayFactory,
+    { :type => XSD::QName.new("http://www.w3.org/2001/XMLSchema", "QName") }
+  )
+  MappingRegistry.set(
+    DocumentSelectionArray,
+    ::SOAP::SOAPArray,
+    ::SOAP::Mapping::Registry::TypedArrayFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "documentSelection") }
+  )
+  MappingRegistry.set(
+    Reaction,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "Reaction") }
+  )
+  MappingRegistry.set(
+    ReactionParticipantList,
+    ::SOAP::SOAPArray,
+    ::SOAP::Mapping::Registry::TypedArrayFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "ReactionParticipant") }
+  )
+  MappingRegistry.set(
+    StringArray,
+    ::SOAP::SOAPArray,
+    ::SOAP::Mapping::Registry::TypedArrayFactory,
+    { :type => XSD::QName.new("http://www.w3.org/2001/XMLSchema", "string") }
+  )
+  MappingRegistry.set(
+    ArrayOfTermResult,
+    ::SOAP::SOAPArray,
+    ::SOAP::Mapping::Registry::TypedArrayFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "termResult") }
+  )
+  MappingRegistry.set(
+    ArrayOfGAFs,
+    ::SOAP::SOAPArray,
+    ::SOAP::Mapping::Registry::TypedArrayFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "GAF") }
+  )
+  MappingRegistry.set(
     QuestionConceptMap,
     ::SOAP::SOAPStruct,
     ::SOAP::Mapping::Registry::TypedStructFactory,
@@ -56,10 +98,10 @@ class SOAPServerPort < ::SOAP::RPC::Driver
     { :type => XSD::QName.new("urn:auraUserData", "NodeTable") }
   )
   MappingRegistry.set(
-    QNameArray,
+    TextbookLinkArray,
     ::SOAP::SOAPArray,
     ::SOAP::Mapping::Registry::TypedArrayFactory,
-    { :type => XSD::QName.new("http://www.w3.org/2001/XMLSchema", "QName") }
+    { :type => XSD::QName.new("urn:auraUserData", "TextbookLink") }
   )
   MappingRegistry.set(
     ArrayOfParaphrases,
@@ -74,58 +116,10 @@ class SOAPServerPort < ::SOAP::RPC::Driver
     { :type => XSD::QName.new("http://www.w3.org/2001/XMLSchema", "string") }
   )
   MappingRegistry.set(
-    Viewpoint,
-    ::SOAP::SOAPStruct,
-    ::SOAP::Mapping::Registry::TypedStructFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "Viewpoint") }
-  )
-  MappingRegistry.set(
-    ArrayOfGAFs,
-    ::SOAP::SOAPArray,
-    ::SOAP::Mapping::Registry::TypedArrayFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "GAF") }
-  )
-  MappingRegistry.set(
-    StringArray,
-    ::SOAP::SOAPArray,
-    ::SOAP::Mapping::Registry::TypedArrayFactory,
-    { :type => XSD::QName.new("http://www.w3.org/2001/XMLSchema", "string") }
-  )
-  MappingRegistry.set(
-    ArrayOfTermResult,
-    ::SOAP::SOAPArray,
-    ::SOAP::Mapping::Registry::TypedArrayFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "termResult") }
-  )
-  MappingRegistry.set(
-    Formula,
-    ::SOAP::SOAPStruct,
-    ::SOAP::Mapping::Registry::TypedStructFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "Formula") }
-  )
-  MappingRegistry.set(
-    FormulaComponentList,
-    ::SOAP::SOAPArray,
-    ::SOAP::Mapping::Registry::TypedArrayFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "FormulaComponent") }
-  )
-  MappingRegistry.set(
-    ValidValuesArray,
-    ::SOAP::SOAPArray,
-    ::SOAP::Mapping::Registry::TypedArrayFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "ValidValueScales") }
-  )
-  MappingRegistry.set(
     ArrayOfViewpoints,
     ::SOAP::SOAPArray,
     ::SOAP::Mapping::Registry::TypedArrayFactory,
     { :type => XSD::QName.new("urn:auraUserData", "Viewpoint") }
-  )
-  MappingRegistry.set(
-    ArrayOfRelationOptions,
-    ::SOAP::SOAPArray,
-    ::SOAP::Mapping::Registry::TypedArrayFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "RelationOption") }
   )
   MappingRegistry.set(
     LMapArgumentTable,
@@ -152,10 +146,10 @@ class SOAPServerPort < ::SOAP::RPC::Driver
     { :type => XSD::QName.new("urn:auraUserData", "ConceptMapDiff") }
   )
   MappingRegistry.set(
-    ArrayOfWordSenses,
-    ::SOAP::SOAPArray,
-    ::SOAP::Mapping::Registry::TypedArrayFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "WordSense") }
+    Viewpoint,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "Viewpoint") }
   )
   MappingRegistry.set(
     PartitionsArray,
@@ -170,34 +164,76 @@ class SOAPServerPort < ::SOAP::RPC::Driver
     { :type => XSD::QName.new("urn:auraUserData", "PartitionEdit") }
   )
   MappingRegistry.set(
+    ValidValuesArray,
+    ::SOAP::SOAPArray,
+    ::SOAP::Mapping::Registry::TypedArrayFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "ValidValueScales") }
+  )
+  MappingRegistry.set(
+    ArrayOfRelationOptions,
+    ::SOAP::SOAPArray,
+    ::SOAP::Mapping::Registry::TypedArrayFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "RelationOption") }
+  )
+  MappingRegistry.set(
+    SentenceIdentifier,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "SentenceIdentifier") }
+  )
+  MappingRegistry.set(
     VocabularyArray,
     ::SOAP::SOAPArray,
     ::SOAP::Mapping::Registry::TypedArrayFactory,
     { :type => XSD::QName.new("urn:auraUserData", "WordConceptMap") }
   )
   MappingRegistry.set(
-    DocumentSelectionArray,
+    ArrayOfWordSenses,
     ::SOAP::SOAPArray,
     ::SOAP::Mapping::Registry::TypedArrayFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "documentSelection") }
-  )
-  MappingRegistry.set(
-    Reaction,
-    ::SOAP::SOAPStruct,
-    ::SOAP::Mapping::Registry::TypedStructFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "Reaction") }
-  )
-  MappingRegistry.set(
-    ReactionParticipantList,
-    ::SOAP::SOAPArray,
-    ::SOAP::Mapping::Registry::TypedArrayFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "ReactionParticipant") }
+    { :type => XSD::QName.new("urn:auraUserData", "WordSense") }
   )
   MappingRegistry.set(
     ArrayOfDirtParaphrases,
     ::SOAP::SOAPArray,
     ::SOAP::Mapping::Registry::TypedArrayFactory,
     { :type => XSD::QName.new("urn:auraUserData", "DirtParaphrase") }
+  )
+  MappingRegistry.set(
+    Formula,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "Formula") }
+  )
+  MappingRegistry.set(
+    FormulaComponentList,
+    ::SOAP::SOAPArray,
+    ::SOAP::Mapping::Registry::TypedArrayFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "FormulaComponent") }
+  )
+  MappingRegistry.set(
+    DocumentSelection,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "documentSelection") }
+  )
+  MappingRegistry.set(
+    ReactionParticipant,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "ReactionParticipant") }
+  )
+  MappingRegistry.set(
+    TermResult,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "termResult") }
+  )
+  MappingRegistry.set(
+    GAF,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "GAF") }
   )
   MappingRegistry.set(
     GenericNode,
@@ -236,40 +272,16 @@ class SOAPServerPort < ::SOAP::RPC::Driver
     { :type => XSD::QName.new("urn:auraUserData", "NodeTable") }
   )
   MappingRegistry.set(
+    TextbookLink,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "TextbookLink") }
+  )
+  MappingRegistry.set(
     Paraphrase,
     ::SOAP::SOAPStruct,
     ::SOAP::Mapping::Registry::TypedStructFactory,
     { :type => XSD::QName.new("urn:auraUserData", "Paraphrase") }
-  )
-  MappingRegistry.set(
-    GAF,
-    ::SOAP::SOAPStruct,
-    ::SOAP::Mapping::Registry::TypedStructFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "GAF") }
-  )
-  MappingRegistry.set(
-    TermResult,
-    ::SOAP::SOAPStruct,
-    ::SOAP::Mapping::Registry::TypedStructFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "termResult") }
-  )
-  MappingRegistry.set(
-    FormulaComponent,
-    ::SOAP::SOAPStruct,
-    ::SOAP::Mapping::Registry::TypedStructFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "FormulaComponent") }
-  )
-  MappingRegistry.set(
-    ValidValueScales,
-    ::SOAP::SOAPStruct,
-    ::SOAP::Mapping::Registry::TypedStructFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "ValidValueScales") }
-  )
-  MappingRegistry.set(
-    RelationOption,
-    ::SOAP::SOAPStruct,
-    ::SOAP::Mapping::Registry::TypedStructFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "RelationOption") }
   )
   MappingRegistry.set(
     LMapArgument,
@@ -290,12 +302,6 @@ class SOAPServerPort < ::SOAP::RPC::Driver
     { :type => XSD::QName.new("urn:auraUserData", "ConceptMapDiff") }
   )
   MappingRegistry.set(
-    WordSense,
-    ::SOAP::SOAPStruct,
-    ::SOAP::Mapping::Registry::TypedStructFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "WordSense") }
-  )
-  MappingRegistry.set(
     PartitionData,
     ::SOAP::SOAPStruct,
     ::SOAP::Mapping::Registry::TypedStructFactory,
@@ -308,22 +314,28 @@ class SOAPServerPort < ::SOAP::RPC::Driver
     { :type => XSD::QName.new("urn:auraUserData", "PartitionEdit") }
   )
   MappingRegistry.set(
+    ValidValueScales,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "ValidValueScales") }
+  )
+  MappingRegistry.set(
+    RelationOption,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "RelationOption") }
+  )
+  MappingRegistry.set(
     WordConceptMap,
     ::SOAP::SOAPStruct,
     ::SOAP::Mapping::Registry::TypedStructFactory,
     { :type => XSD::QName.new("urn:auraUserData", "WordConceptMap") }
   )
   MappingRegistry.set(
-    DocumentSelection,
+    WordSense,
     ::SOAP::SOAPStruct,
     ::SOAP::Mapping::Registry::TypedStructFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "documentSelection") }
-  )
-  MappingRegistry.set(
-    ReactionParticipant,
-    ::SOAP::SOAPStruct,
-    ::SOAP::Mapping::Registry::TypedStructFactory,
-    { :type => XSD::QName.new("urn:auraUserData", "ReactionParticipant") }
+    { :type => XSD::QName.new("urn:auraUserData", "WordSense") }
   )
   MappingRegistry.set(
     DirtParaphrase,
@@ -331,29 +343,78 @@ class SOAPServerPort < ::SOAP::RPC::Driver
     ::SOAP::Mapping::Registry::TypedStructFactory,
     { :type => XSD::QName.new("urn:auraUserData", "DirtParaphrase") }
   )
+  MappingRegistry.set(
+    FormulaComponent,
+    ::SOAP::SOAPStruct,
+    ::SOAP::Mapping::Registry::TypedStructFactory,
+    { :type => XSD::QName.new("urn:auraUserData", "FormulaComponent") }
+  )
 
   Methods = [
-    [ XSD::QName.new("urn:auraUserData", "askQuestion"),
-      "askQuestion",
-      "askQuestion",
-      [ ["in", "question", ["::SOAP::SOAPString"]],
-        ["in", "forceWord", ["::SOAP::SOAPString"]],
-        ["in", "pos", ["::SOAP::SOAPQName"]],
-        ["in", "uofm", ["::SOAP::SOAPBoolean"]],
-        ["retval", "conceptMap", ["QuestionConceptMap", "urn:auraUserData", "QuestionConceptMap"]],
-        ["out", "errors", ["::SOAP::SOAPString"]] ],
+    [ XSD::QName.new("urn:auraUserData", "getMostGeneralInstanceClasses"),
+      "getMostGeneralInstanceClasses",
+      "getMostGeneralInstanceClasses",
+      [ ["in", "individual", ["::SOAP::SOAPQName"]],
+        ["in", "classBeingEdited", ["::SOAP::SOAPQName"]],
+        ["retval", "classes", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "whyNot"),
-      "whyNot",
-      "whyNot",
+    [ XSD::QName.new("urn:auraUserData", "driRemoveSelection"),
+      "driRemoveSelection",
+      "driRemoveSelection",
+      [ ["in", "selectionURI", ["::SOAP::SOAPAnyURI"]],
+        ["in", "selectionPath", ["::SOAP::SOAPString"]],
+        ["in", "selectionRangeStart", ["::SOAP::SOAPInt"]],
+        ["in", "selectionRangeEnd", ["::SOAP::SOAPInt"]],
+        ["retval", "driRemoveSelectionDisposition", ["DocumentSelection[]", "urn:auraUserData", "documentSelection"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "continueAnswerQuestion"),
+      "continueAnswerQuestion",
+      "continueAnswerQuestion",
+      [ ["in", "dummy", ["::SOAP::SOAPString"]],
+        ["retval", "answer", ["::SOAP::SOAPString"]],
+        ["out", "canContinue", ["::SOAP::SOAPBoolean"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "createChemicalReaction"),
+      "createChemicalReaction",
+      "createChemicalReaction",
+      [ ["in", "reaction", ["Reaction", "urn:auraUserData", "Reaction"]],
+        ["in", "className", ["::SOAP::SOAPQName"]],
+        ["in", "balance", ["::SOAP::SOAPBoolean"]],
+        ["retval", "reactionClass", ["::SOAP::SOAPQName"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getSmeConceptDependencies"),
+      "getSmeConceptDependencies",
+      "getSmeConceptDependencies",
       [ ["in", "concept", ["::SOAP::SOAPQName"]],
-        ["retval", "viewpoint", ["Viewpoint", "urn:auraUserData", "Viewpoint"]],
-        ["out", "setupMatched", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
-        ["out", "setupNotMatched", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
-        ["out", "conceptMatched", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
-        ["out", "conceptNotMatched", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
+        ["retval", "subclasses", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
+        ["out", "referrers", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getQuestions"),
+      "getQuestions",
+      "getQuestions",
+      [ ["in", "inputText", ["::SOAP::SOAPString"]],
+        ["in", "section", ["::SOAP::SOAPString"]],
+        ["retval", "questions", ["String[]", "http://www.w3.org/2001/XMLSchema", "string"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "answerQuestion"),
+      "answerQuestion",
+      "answerQuestion",
+      [ ["in", "questionID", ["::SOAP::SOAPString"]],
+        ["in", "figuresDirectory", ["::SOAP::SOAPString"]],
+        ["retval", "answer", ["::SOAP::SOAPString"]],
+        ["out", "canContinue", ["::SOAP::SOAPBoolean"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
@@ -365,120 +426,28 @@ class SOAPServerPort < ::SOAP::RPC::Driver
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "changeRelation"),
-      "changeRelation",
-      "changeRelation",
-      [ ["in", "rootIndividual", ["::SOAP::SOAPQName"]],
-        ["in", "edges", ["GAF[]", "urn:auraUserData", "GAF"]],
-        ["in", "relation", ["::SOAP::SOAPQName"]],
-        ["retval", "conceptMap", ["QuestionConceptMap", "urn:auraUserData", "QuestionConceptMap"]],
-        ["out", "errors", ["::SOAP::SOAPString"]] ],
+    [ XSD::QName.new("urn:auraUserData", "blockDirtParaphrase"),
+      "blockDirtParaphrase",
+      "blockDirtParaphrase",
+      [ ["in", "dirtParaphrase", ["::SOAP::SOAPString"]],
+        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "getNonVisibleClasses"),
-      "getNonVisibleClasses",
-      "getNonVisibleClasses",
-      [ ["in", "dummy", ["::SOAP::SOAPString"]],
-        ["retval", "classes", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "deleteSmeConcept"),
-      "deleteSmeConcept",
-      "deleteSmeConcept",
+    [ XSD::QName.new("urn:auraUserData", "getClassDocumentation"),
+      "getClassDocumentation",
+      "getClassDocumentation",
       [ ["in", "concept", ["::SOAP::SOAPQName"]],
-        ["retval", "reviewList", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
+        ["in", "type", ["::SOAP::SOAPQName"]],
+        ["retval", "documentation", ["::SOAP::SOAPString"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "stemString"),
-      "stemString",
-      "stemString",
-      [ ["in", "inputString", ["::SOAP::SOAPString"]],
-        ["retval", "outputString", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "checkpointSuccess"),
-      "checkpointSuccess",
-      "checkpointSuccess",
-      [ ["in", "idCreated", ["::SOAP::SOAPInt"]],
+    [ XSD::QName.new("urn:auraUserData", "unBlockDirtParaphrase"),
+      "unBlockDirtParaphrase",
+      "unBlockDirtParaphrase",
+      [ ["in", "dirtParaphrase", ["::SOAP::SOAPString"]],
         ["retval", "dummy", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "genericSearch"),
-      "genericSearch",
-      "genericSearch",
-      [ ["in", "inputs", ["String[]", "http://www.w3.org/2001/XMLSchema", "string"]],
-        ["retval", "termResultList", ["TermResult[]", "urn:auraUserData", "termResult"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "createCompound"),
-      "createCompound",
-      "createCompound",
-      [ ["in", "compound", ["Formula", "urn:auraUserData", "Formula"]],
-        ["in", "className", ["::SOAP::SOAPQName"]],
-        ["retval", "compoundClass", ["::SOAP::SOAPQName"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "getClassRelatedClasses"),
-      "getClassRelatedClasses",
-      "getClassRelatedClasses",
-      [ ["in", "class", ["::SOAP::SOAPString"]],
-        ["retval", "classes", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "answerCorrect"),
-      "answerCorrect",
-      "answerCorrect",
-      [ ["in", "id", ["::SOAP::SOAPString"]],
-        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "initialize"),
-      "initialize",
-      "initialize",
-      [ ["in", "pingInterval", ["::SOAP::SOAPInt"]],
-        ["in", "checkpointInterval", ["::SOAP::SOAPInt"]],
-        ["retval", "idToRecover", ["::SOAP::SOAPInt"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "getValidPropertyValues"),
-      "getValidPropertyValues",
-      "getValidPropertyValues",
-      [ ["in", "individual", ["::SOAP::SOAPQName"]],
-        ["retval", "relationsArray", ["ValidValueScales[]", "urn:auraUserData", "ValidValueScales"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "shakenFaultExporter"),
-      "shakenFaultExporter",
-      "shakenFaultExporter",
-      [ ["in", "SOAPServerPart", ["nil", "urn:auraUserData", "dummy"]],
-        ["retval", "concept", ["::SOAP::SOAPQName"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "getDebugNames"),
-      "getDebugNames",
-      "getDebugNames",
-      [ ["in", "dummy", ["::SOAP::SOAPString"]],
-        ["retval", "viewpoints", ["Viewpoint[]", "urn:auraUserData", "Viewpoint"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "getViewpointInfo"),
-      "getViewpointInfo",
-      "getViewpointInfo",
-      [ ["in", "viewpoint", ["::SOAP::SOAPQName"]],
-        ["retval", "viewpoint", ["Viewpoint", "urn:auraUserData", "Viewpoint"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
@@ -493,11 +462,29 @@ class SOAPServerPort < ::SOAP::RPC::Driver
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "getClassesUsedInLastQuestion"),
-      "getClassesUsedInLastQuestion",
-      "getClassesUsedInLastQuestion",
-      [ ["in", "dummy", ["::SOAP::SOAPString"]],
-        ["retval", "classes", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
+    [ XSD::QName.new("urn:auraUserData", "genericSearch"),
+      "genericSearch",
+      "genericSearch",
+      [ ["in", "inputs", ["String[]", "http://www.w3.org/2001/XMLSchema", "string"]],
+        ["retval", "termResultList", ["TermResult[]", "urn:auraUserData", "termResult"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "shutdown"),
+      "shutdown",
+      "shutdown",
+      [ ["in", "errorStatus", ["::SOAP::SOAPInt"]],
+        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "answerQuestionIpad"),
+      "answerQuestionIpad",
+      "answerQuestionIpad",
+      [ ["in", "questionID", ["::SOAP::SOAPString"]],
+        ["in", "figuresDirectory", ["::SOAP::SOAPString"]],
+        ["retval", "answer", ["::SOAP::SOAPString"]],
+        ["out", "canContinue", ["::SOAP::SOAPBoolean"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
@@ -510,23 +497,124 @@ class SOAPServerPort < ::SOAP::RPC::Driver
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "getFormattedQuestions"),
-      "getFormattedQuestions",
-      "getFormattedQuestions",
-      [ ["in", "inputText", ["::SOAP::SOAPString"]],
-        ["in", "section", ["::SOAP::SOAPString"]],
-        ["retval", "questions", ["String[]", "http://www.w3.org/2001/XMLSchema", "string"]],
-        ["out", "formattedQuestions", ["String[]", "http://www.w3.org/2001/XMLSchema", "string"]] ],
+    [ XSD::QName.new("urn:auraUserData", "changeRelation"),
+      "changeRelation",
+      "changeRelation",
+      [ ["in", "rootIndividual", ["::SOAP::SOAPQName"]],
+        ["in", "edges", ["GAF[]", "urn:auraUserData", "GAF"]],
+        ["in", "relation", ["::SOAP::SOAPQName"]],
+        ["retval", "conceptMap", ["QuestionConceptMap", "urn:auraUserData", "QuestionConceptMap"]],
+        ["out", "errors", ["::SOAP::SOAPString"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "getRelationOptions"),
-      "getWordSenses",
-      "getRelationOptions",
-      [ ["in", "source", ["::SOAP::SOAPQName"]],
-        ["in", "relation", ["::SOAP::SOAPQName"]],
-        ["in", "target", ["::SOAP::SOAPQName"]],
-        ["retval", "options", ["RelationOption[]", "urn:auraUserData", "RelationOption"]] ],
+    [ XSD::QName.new("urn:auraUserData", "getSmeDefinedConcepts"),
+      "getSmeDefinedConcepts",
+      "getSmeDefinedConcepts",
+      [ ["in", "root", ["::SOAP::SOAPQName"]],
+        ["retval", "clibConcepts", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
+        ["out", "newConcepts", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "answerCorrect"),
+      "answerCorrect",
+      "answerCorrect",
+      [ ["in", "id", ["::SOAP::SOAPString"]],
+        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getDebugNames"),
+      "getDebugNames",
+      "getDebugNames",
+      [ ["in", "dummy", ["::SOAP::SOAPString"]],
+        ["retval", "viewpoints", ["Viewpoint[]", "urn:auraUserData", "Viewpoint"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getExampleCPLSentences"),
+      "getExampleCPLSentences",
+      "getExampleCPLSentences",
+      [ ["in", "dummy", ["::SOAP::SOAPString"]],
+        ["retval", "sentences", ["String[]", "http://www.w3.org/2001/XMLSchema", "string"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "askQuestion"),
+      "askQuestion",
+      "askQuestion",
+      [ ["in", "question", ["::SOAP::SOAPString"]],
+        ["in", "forceWord", ["::SOAP::SOAPString"]],
+        ["in", "pos", ["::SOAP::SOAPQName"]],
+        ["in", "uofm", ["::SOAP::SOAPBoolean"]],
+        ["retval", "conceptMap", ["QuestionConceptMap", "urn:auraUserData", "QuestionConceptMap"]],
+        ["out", "errors", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "driCreateSelection"),
+      "driCreateSelection",
+      "driCreateSelection",
+      [ ["in", "selectionType", ["::SOAP::SOAPQName"]],
+        ["in", "selectionPath", ["::SOAP::SOAPString"]],
+        ["in", "selectionURI", ["::SOAP::SOAPAnyURI"]],
+        ["in", "selectionRangeStart", ["::SOAP::SOAPInt"]],
+        ["in", "selectionRangeEnd", ["::SOAP::SOAPInt"]],
+        ["in", "selectionName", ["::SOAP::SOAPQName"]],
+        ["in", "selectionSummary", ["::SOAP::SOAPString"]],
+        ["retval", "driCreateSelectionDisposition", ["::SOAP::SOAPQName"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "resetQASession"),
+      "resetQASession",
+      "resetQASession",
+      [ ["in", "dummy", ["::SOAP::SOAPString"]],
+        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "removeLink"),
+      "removeLink",
+      "removeLink",
+      [ ["in", "linkID", ["::SOAP::SOAPString"]],
+        ["retval", "removed", ["::SOAP::SOAPBoolean"]],
+        ["out", "conceptMap", ["ConceptMap", "urn:auraUserData", "ConceptMap"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "checkpointSuccess"),
+      "checkpointSuccess",
+      "checkpointSuccess",
+      [ ["in", "idCreated", ["::SOAP::SOAPInt"]],
+        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getFormattedStructuredQuestions"),
+      "getFormattedStructuredQuestions",
+      "getFormattedStructuredQuestions",
+      [ ["in", "inputText", ["::SOAP::SOAPString"]],
+        ["in", "section", ["::SOAP::SOAPString"]],
+        ["retval", "structuredQuestions", ["::SOAP::SOAPString"]],
+        ["out", "formattedStructuredQuestions", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "startQASession"),
+      "startQASession",
+      "startQASession",
+      [ ["in", "dummy", ["::SOAP::SOAPString"]],
+        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "abortAsynchronousCall"),
+      "abortAsynchronousCall",
+      "abortAsynchronousCall",
+      [ ["in", "callName", ["::SOAP::SOAPQName"]],
+        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
@@ -545,81 +633,31 @@ class SOAPServerPort < ::SOAP::RPC::Driver
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "getQuestions"),
-      "getQuestions",
-      "getQuestions",
-      [ ["in", "inputText", ["::SOAP::SOAPString"]],
-        ["in", "section", ["::SOAP::SOAPString"]],
-        ["retval", "questions", ["String[]", "http://www.w3.org/2001/XMLSchema", "string"]] ],
+    [ XSD::QName.new("urn:auraUserData", "whyNot"),
+      "whyNot",
+      "whyNot",
+      [ ["in", "concept", ["::SOAP::SOAPQName"]],
+        ["retval", "viewpoint", ["Viewpoint", "urn:auraUserData", "Viewpoint"]],
+        ["out", "setupMatched", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
+        ["out", "setupNotMatched", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
+        ["out", "conceptMatched", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
+        ["out", "conceptNotMatched", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "getWordSenses"),
-      "getWordSenses",
-      "getWordSenses",
-      [ ["in", "instance", ["::SOAP::SOAPQName"]],
-        ["retval", "senses", ["WordSense[]", "urn:auraUserData", "WordSense"]] ],
+    [ XSD::QName.new("urn:auraUserData", "getViewpointInfo"),
+      "getViewpointInfo",
+      "getViewpointInfo",
+      [ ["in", "viewpoint", ["::SOAP::SOAPQName"]],
+        ["retval", "viewpoint", ["Viewpoint", "urn:auraUserData", "Viewpoint"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "answerQuestion"),
-      "answerQuestion",
-      "answerQuestion",
-      [ ["in", "questionID", ["::SOAP::SOAPString"]],
-        ["in", "figuresDirectory", ["::SOAP::SOAPString"]],
-        ["retval", "answer", ["::SOAP::SOAPString"]],
-        ["out", "canContinue", ["::SOAP::SOAPBoolean"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "initializeComplete"),
-      "initializeComplete",
-      "initializeComplete",
-      [ ["in", "idRecovered", ["::SOAP::SOAPInt"]],
-        ["in", "isSuccess", ["::SOAP::SOAPBoolean"]],
-        ["retval", "idToRecover", ["::SOAP::SOAPInt"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "changeWordSense"),
-      "changeWordSense",
-      "changeWordSense",
-      [ ["in", "instance", ["::SOAP::SOAPQName"]],
-        ["in", "sense", ["::SOAP::SOAPQName"]],
-        ["retval", "conceptMap", ["QuestionConceptMap", "urn:auraUserData", "QuestionConceptMap"]],
-        ["out", "errors", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "getValidRelations"),
-      "getValidRelations",
-      "getValidRelations",
-      [ ["in", "source", ["::SOAP::SOAPQName"]],
-        ["in", "target", ["::SOAP::SOAPQName"]],
-        ["retval", "SOAPServerPart002", ["nil", "urn:auraUserData", "relationsArray"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "getStructuredQuestions"),
-      "getStructuredQuestions",
-      "getStructuredQuestions",
-      [ ["in", "inputText", ["::SOAP::SOAPString"]],
-        ["in", "section", ["::SOAP::SOAPString"]],
-        ["retval", "structuredQuestions", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "driCreateSelection"),
-      "driCreateSelection",
-      "driCreateSelection",
-      [ ["in", "selectionType", ["::SOAP::SOAPQName"]],
-        ["in", "selectionPath", ["::SOAP::SOAPString"]],
-        ["in", "selectionURI", ["::SOAP::SOAPAnyURI"]],
-        ["in", "selectionRangeStart", ["::SOAP::SOAPInt"]],
-        ["in", "selectionRangeEnd", ["::SOAP::SOAPInt"]],
-        ["in", "selectionName", ["::SOAP::SOAPQName"]],
-        ["in", "selectionSummary", ["::SOAP::SOAPString"]],
-        ["retval", "driCreateSelectionDisposition", ["::SOAP::SOAPQName"]] ],
+    [ XSD::QName.new("urn:auraUserData", "getNonVisibleClasses"),
+      "getNonVisibleClasses",
+      "getNonVisibleClasses",
+      [ ["in", "dummy", ["::SOAP::SOAPString"]],
+        ["retval", "classes", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
@@ -632,129 +670,55 @@ class SOAPServerPort < ::SOAP::RPC::Driver
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "allowParaphrasing"),
-      "allowParaphrasing",
-      "allowParaphrasing",
-      [ ["in", "isAllowed", ["::SOAP::SOAPBoolean"]],
-        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "blockDirtParaphrase"),
-      "blockDirtParaphrase",
-      "blockDirtParaphrase",
-      [ ["in", "dirtParaphrase", ["::SOAP::SOAPString"]],
-        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "getDebugInfo"),
-      "getDebugInfo",
-      "getDebugInfo",
-      [ ["in", "dummy", ["::SOAP::SOAPString"]],
-        ["retval", "viewpoints", ["Viewpoint[]", "urn:auraUserData", "Viewpoint"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "continueAnswerQuestion"),
-      "continueAnswerQuestion",
-      "continueAnswerQuestion",
-      [ ["in", "dummy", ["::SOAP::SOAPString"]],
-        ["retval", "answer", ["::SOAP::SOAPString"]],
-        ["out", "canContinue", ["::SOAP::SOAPBoolean"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "abortAsynchronousCall"),
-      "abortAsynchronousCall",
-      "abortAsynchronousCall",
-      [ ["in", "callName", ["::SOAP::SOAPQName"]],
-        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "shutdown"),
-      "shutdown",
-      "shutdown",
-      [ ["in", "errorStatus", ["::SOAP::SOAPInt"]],
-        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "getSmeDefinedConcepts"),
-      "getSmeDefinedConcepts",
-      "getSmeDefinedConcepts",
-      [ ["in", "root", ["::SOAP::SOAPQName"]],
-        ["retval", "clibConcepts", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
-        ["out", "newConcepts", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "getExampleCPLSentences"),
-      "getExampleCPLSentences",
-      "getExampleCPLSentences",
-      [ ["in", "dummy", ["::SOAP::SOAPString"]],
-        ["retval", "sentences", ["String[]", "http://www.w3.org/2001/XMLSchema", "string"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "createNewClass"),
-      "createNewClass",
-      "createNewClass",
-      [ ["in", "concept", ["::SOAP::SOAPQName"]],
-        ["in", "conceptList", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
-        ["retval", "concept", ["::SOAP::SOAPQName"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "getClassSynonyms"),
-      "getClassSynonyms",
-      "getClassSynonyms",
-      [ ["in", "concept", ["::SOAP::SOAPQName"]],
-        ["retval", "vocabulary", ["WordConceptMap[]", "urn:auraUserData", "WordConceptMap"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "assertAsEqual"),
-      "assertAsEqual",
-      "assertAsEqual",
-      [ ["in", "instance1", ["::SOAP::SOAPQName"]],
-        ["in", "instance2", ["::SOAP::SOAPQName"]],
-        ["retval", "conceptMap", ["QuestionConceptMap", "urn:auraUserData", "QuestionConceptMap"]],
-        ["out", "errors", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "startQASession"),
-      "startQASession",
-      "startQASession",
+    [ XSD::QName.new("urn:auraUserData", "commitEdits"),
+      "commitEdits",
+      "commitEdits",
       [ ["in", "dummy", ["::SOAP::SOAPString"]],
         ["retval", "dummy", ["::SOAP::SOAPString"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "getMostGeneralInstanceClasses"),
-      "getMostGeneralInstanceClasses",
-      "getMostGeneralInstanceClasses",
-      [ ["in", "individual", ["::SOAP::SOAPQName"]],
-        ["in", "classBeingEdited", ["::SOAP::SOAPQName"]],
+    [ XSD::QName.new("urn:auraUserData", "initializeComplete"),
+      "initializeComplete",
+      "initializeComplete",
+      [ ["in", "idRecovered", ["::SOAP::SOAPInt"]],
+        ["in", "isSuccess", ["::SOAP::SOAPBoolean"]],
+        ["retval", "idToRecover", ["::SOAP::SOAPInt"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getLinksForSectionAndConcept"),
+      "getLinksForSectionAndConcept",
+      "getLinksForSectionAndConcept",
+      [ ["in", "htmlFile", ["::SOAP::SOAPString"]],
+        ["in", "concept", ["::SOAP::SOAPString"]],
+        ["retval", "links", ["TextbookLink[]", "urn:auraUserData", "TextbookLink"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getClassesUsedInLastQuestion"),
+      "getClassesUsedInLastQuestion",
+      "getClassesUsedInLastQuestion",
+      [ ["in", "dummy", ["::SOAP::SOAPString"]],
         ["retval", "classes", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "auraFaultExporter"),
-      "auraFaultExporter",
-      "auraFaultExporter",
-      [ ["in", "SOAPServerPart003", ["nil", "urn:auraUserData", "dummy2"]],
-        ["retval", "concept", ["::SOAP::SOAPQName"]] ],
+    [ XSD::QName.new("urn:auraUserData", "getFormattedQuestions"),
+      "getFormattedQuestions",
+      "getFormattedQuestions",
+      [ ["in", "inputText", ["::SOAP::SOAPString"]],
+        ["in", "section", ["::SOAP::SOAPString"]],
+        ["retval", "questions", ["String[]", "http://www.w3.org/2001/XMLSchema", "string"]],
+        ["out", "formattedQuestions", ["String[]", "http://www.w3.org/2001/XMLSchema", "string"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "getVocabulary"),
-      "getVocabulary",
-      "getVocabulary",
-      [ ["in", "pattern", ["::SOAP::SOAPString"]],
-        ["retval", "vocabulary", ["WordConceptMap[]", "urn:auraUserData", "WordConceptMap"]] ],
+    [ XSD::QName.new("urn:auraUserData", "getValidPropertyValues"),
+      "getValidPropertyValues",
+      "getValidPropertyValues",
+      [ ["in", "individual", ["::SOAP::SOAPQName"]],
+        ["retval", "relationsArray", ["ValidValueScales[]", "urn:auraUserData", "ValidValueScales"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
@@ -769,13 +733,109 @@ class SOAPServerPort < ::SOAP::RPC::Driver
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "answerQuestionIpad"),
-      "answerQuestionIpad",
-      "answerQuestionIpad",
-      [ ["in", "questionID", ["::SOAP::SOAPString"]],
-        ["in", "figuresDirectory", ["::SOAP::SOAPString"]],
-        ["retval", "answer", ["::SOAP::SOAPString"]],
-        ["out", "canContinue", ["::SOAP::SOAPBoolean"]] ],
+    [ XSD::QName.new("urn:auraUserData", "getRelationOptions"),
+      "getWordSenses",
+      "getRelationOptions",
+      [ ["in", "source", ["::SOAP::SOAPQName"]],
+        ["in", "relation", ["::SOAP::SOAPQName"]],
+        ["in", "target", ["::SOAP::SOAPQName"]],
+        ["retval", "options", ["RelationOption[]", "urn:auraUserData", "RelationOption"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "exportOWL"),
+      "exportOWL",
+      "exportOWL",
+      [ ["in", "destination", ["::SOAP::SOAPString"]],
+        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "stemString"),
+      "stemString",
+      "stemString",
+      [ ["in", "inputString", ["::SOAP::SOAPString"]],
+        ["retval", "outputString", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "shakenFaultExporter"),
+      "shakenFaultExporter",
+      "shakenFaultExporter",
+      [ ["in", "SOAPServerPart", ["nil", "urn:auraUserData", "dummy"]],
+        ["retval", "concept", ["::SOAP::SOAPQName"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "createNewClass"),
+      "createNewClass",
+      "createNewClass",
+      [ ["in", "concept", ["::SOAP::SOAPQName"]],
+        ["in", "conceptList", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
+        ["retval", "concept", ["::SOAP::SOAPQName"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "renameConcept"),
+      "renameConcept",
+      "renameConcept",
+      [ ["in", "oldConceptName", ["::SOAP::SOAPString"]],
+        ["in", "newConceptName", ["::SOAP::SOAPString"]],
+        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "changeWordSense"),
+      "changeWordSense",
+      "changeWordSense",
+      [ ["in", "instance", ["::SOAP::SOAPQName"]],
+        ["in", "sense", ["::SOAP::SOAPQName"]],
+        ["retval", "conceptMap", ["QuestionConceptMap", "urn:auraUserData", "QuestionConceptMap"]],
+        ["out", "errors", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "addLink"),
+      "addLink",
+      "addLink",
+      [ ["in", "htmlFile", ["::SOAP::SOAPString"]],
+        ["in", "sentenceID", ["SentenceIdentifier", "urn:auraUserData", "SentenceIdentifier"]],
+        ["in", "concept", ["::SOAP::SOAPString"]],
+        ["in", "triple", ["String[]", "http://www.w3.org/2001/XMLSchema", "string"]],
+        ["retval", "conceptMap", ["ConceptMap", "urn:auraUserData", "ConceptMap"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getValidRelations"),
+      "getValidRelations",
+      "getValidRelations",
+      [ ["in", "source", ["::SOAP::SOAPQName"]],
+        ["in", "target", ["::SOAP::SOAPQName"]],
+        ["retval", "SOAPServerPart002", ["nil", "urn:auraUserData", "relationsArray"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getVocabulary"),
+      "getVocabulary",
+      "getVocabulary",
+      [ ["in", "pattern", ["::SOAP::SOAPString"]],
+        ["retval", "vocabulary", ["WordConceptMap[]", "urn:auraUserData", "WordConceptMap"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "extractConceptsFromText"),
+      "extractConceptsFromText",
+      "extractConceptsFromText",
+      [ ["in", "textbooktext", ["::SOAP::SOAPString"]],
+        ["retval", "vocabulary", ["WordConceptMap[]", "urn:auraUserData", "WordConceptMap"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "deleteSmeConcept"),
+      "deleteSmeConcept",
+      "deleteSmeConcept",
+      [ ["in", "concept", ["::SOAP::SOAPQName"]],
+        ["retval", "reviewList", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
@@ -788,38 +848,43 @@ class SOAPServerPort < ::SOAP::RPC::Driver
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "createChemicalReaction"),
-      "createChemicalReaction",
-      "createChemicalReaction",
-      [ ["in", "reaction", ["Reaction", "urn:auraUserData", "Reaction"]],
-        ["in", "className", ["::SOAP::SOAPQName"]],
-        ["in", "balance", ["::SOAP::SOAPBoolean"]],
-        ["retval", "reactionClass", ["::SOAP::SOAPQName"]] ],
+    [ XSD::QName.new("urn:auraUserData", "getClassRelatedClasses"),
+      "getClassRelatedClasses",
+      "getClassRelatedClasses",
+      [ ["in", "class", ["::SOAP::SOAPString"]],
+        ["retval", "classes", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "commitEdits"),
-      "commitEdits",
-      "commitEdits",
-      [ ["in", "dummy", ["::SOAP::SOAPString"]],
-        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
+    [ XSD::QName.new("urn:auraUserData", "auraFaultExporter"),
+      "auraFaultExporter",
+      "auraFaultExporter",
+      [ ["in", "SOAPServerPart003", ["nil", "urn:auraUserData", "dummy2"]],
+        ["retval", "concept", ["::SOAP::SOAPQName"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "driRemoveSelection"),
-      "driRemoveSelection",
-      "driRemoveSelection",
-      [ ["in", "selectionURI", ["::SOAP::SOAPAnyURI"]],
-        ["in", "selectionPath", ["::SOAP::SOAPString"]],
-        ["in", "selectionRangeStart", ["::SOAP::SOAPInt"]],
-        ["in", "selectionRangeEnd", ["::SOAP::SOAPInt"]],
-        ["retval", "driRemoveSelectionDisposition", ["DocumentSelection[]", "urn:auraUserData", "documentSelection"]] ],
+    [ XSD::QName.new("urn:auraUserData", "assertAsEqual"),
+      "assertAsEqual",
+      "assertAsEqual",
+      [ ["in", "instance1", ["::SOAP::SOAPQName"]],
+        ["in", "instance2", ["::SOAP::SOAPQName"]],
+        ["retval", "conceptMap", ["QuestionConceptMap", "urn:auraUserData", "QuestionConceptMap"]],
+        ["out", "errors", ["::SOAP::SOAPString"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "getFormattedStructuredQuestions"),
-      "getFormattedStructuredQuestions",
-      "getFormattedStructuredQuestions",
+    [ XSD::QName.new("urn:auraUserData", "getWordSenses"),
+      "getWordSenses",
+      "getWordSenses",
+      [ ["in", "instance", ["::SOAP::SOAPQName"]],
+        ["retval", "senses", ["WordSense[]", "urn:auraUserData", "WordSense"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getQuestionsForGlossary"),
+      "getQuestionsForGlossary",
+      "getQuestionsForGlossary",
       [ ["in", "inputText", ["::SOAP::SOAPString"]],
         ["in", "section", ["::SOAP::SOAPString"]],
         ["retval", "structuredQuestions", ["::SOAP::SOAPString"]],
@@ -827,36 +892,27 @@ class SOAPServerPort < ::SOAP::RPC::Driver
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "getClassDocumentation"),
-      "getClassDocumentation",
-      "getClassDocumentation",
+    [ XSD::QName.new("urn:auraUserData", "getDebugInfo"),
+      "getDebugInfo",
+      "getDebugInfo",
+      [ ["in", "dummy", ["::SOAP::SOAPString"]],
+        ["retval", "viewpoints", ["Viewpoint[]", "urn:auraUserData", "Viewpoint"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getClassSynonyms"),
+      "getClassSynonyms",
+      "getClassSynonyms",
       [ ["in", "concept", ["::SOAP::SOAPQName"]],
-        ["in", "type", ["::SOAP::SOAPQName"]],
-        ["retval", "documentation", ["::SOAP::SOAPString"]] ],
+        ["retval", "vocabulary", ["WordConceptMap[]", "urn:auraUserData", "WordConceptMap"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "prepareIndividual"),
-      "prepareIndividual",
-      "prepareIndividual",
-      [ ["in", "concept", ["::SOAP::SOAPQName"]],
-        ["retval", "concept", ["::SOAP::SOAPQName"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "exportOWL"),
-      "exportOWL",
-      "exportOWL",
-      [ ["in", "destination", ["::SOAP::SOAPString"]],
-        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
-    [ XSD::QName.new("urn:auraUserData", "unBlockDirtParaphrase"),
-      "unBlockDirtParaphrase",
-      "unBlockDirtParaphrase",
-      [ ["in", "dirtParaphrase", ["::SOAP::SOAPString"]],
-        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
+    [ XSD::QName.new("urn:auraUserData", "getLinksForSection"),
+      "getLinksForSection",
+      "getLinksForSection",
+      [ ["in", "htmlFile", ["::SOAP::SOAPString"]],
+        ["retval", "links", ["TextbookLink[]", "urn:auraUserData", "TextbookLink"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
@@ -876,14 +932,6 @@ class SOAPServerPort < ::SOAP::RPC::Driver
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "endQASession"),
-      "endQASession",
-      "endQASession",
-      [ ["in", "dummy", ["::SOAP::SOAPString"]],
-        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
-      { :request_style =>  :rpc, :request_use =>  :encoded,
-        :response_style => :rpc, :response_use => :encoded }
-    ],
     [ XSD::QName.new("urn:auraUserData", "lastDirtParaphrasesUsed"),
       "lastDirtParaphrasesUsed",
       "lastDirtParaphrasesUsed",
@@ -892,28 +940,54 @@ class SOAPServerPort < ::SOAP::RPC::Driver
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "getSmeConceptDependencies"),
-      "getSmeConceptDependencies",
-      "getSmeConceptDependencies",
-      [ ["in", "concept", ["::SOAP::SOAPQName"]],
-        ["retval", "subclasses", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]],
-        ["out", "referrers", ["String[]", "http://www.w3.org/2001/XMLSchema", "QName"]] ],
+    [ XSD::QName.new("urn:auraUserData", "initialize"),
+      "initialize",
+      "initialize",
+      [ ["in", "pingInterval", ["::SOAP::SOAPInt"]],
+        ["in", "checkpointInterval", ["::SOAP::SOAPInt"]],
+        ["retval", "idToRecover", ["::SOAP::SOAPInt"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "resetQASession"),
-      "resetQASession",
-      "resetQASession",
+    [ XSD::QName.new("urn:auraUserData", "endQASession"),
+      "endQASession",
+      "endQASession",
       [ ["in", "dummy", ["::SOAP::SOAPString"]],
         ["retval", "dummy", ["::SOAP::SOAPString"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ],
-    [ XSD::QName.new("urn:auraUserData", "extractConceptsFromText"),
-      "extractConceptsFromText",
-      "extractConceptsFromText",
-      [ ["in", "textbooktext", ["::SOAP::SOAPString"]],
-        ["retval", "vocabulary", ["WordConceptMap[]", "urn:auraUserData", "WordConceptMap"]] ],
+    [ XSD::QName.new("urn:auraUserData", "prepareIndividual"),
+      "prepareIndividual",
+      "prepareIndividual",
+      [ ["in", "concept", ["::SOAP::SOAPQName"]],
+        ["retval", "concept", ["::SOAP::SOAPQName"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "createCompound"),
+      "createCompound",
+      "createCompound",
+      [ ["in", "compound", ["Formula", "urn:auraUserData", "Formula"]],
+        ["in", "className", ["::SOAP::SOAPQName"]],
+        ["retval", "compoundClass", ["::SOAP::SOAPQName"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "getStructuredQuestions"),
+      "getStructuredQuestions",
+      "getStructuredQuestions",
+      [ ["in", "inputText", ["::SOAP::SOAPString"]],
+        ["in", "section", ["::SOAP::SOAPString"]],
+        ["retval", "structuredQuestions", ["::SOAP::SOAPString"]] ],
+      { :request_style =>  :rpc, :request_use =>  :encoded,
+        :response_style => :rpc, :response_use => :encoded }
+    ],
+    [ XSD::QName.new("urn:auraUserData", "allowParaphrasing"),
+      "allowParaphrasing",
+      "allowParaphrasing",
+      [ ["in", "isAllowed", ["::SOAP::SOAPBoolean"]],
+        ["retval", "dummy", ["::SOAP::SOAPString"]] ],
       { :request_style =>  :rpc, :request_use =>  :encoded,
         :response_style => :rpc, :response_use => :encoded }
     ]

@@ -8,36 +8,99 @@ obj = SOAPServerPort.new(endpoint_url)
 obj.wiredump_dev = STDERR if $DEBUG
 
 # SYNOPSIS
-#   askQuestion(question, forceWord, pos, uofm)
+#   getMostGeneralInstanceClasses(individual, classBeingEdited)
 #
 # ARGS
-#   question        String - {http://www.w3.org/2001/XMLSchema}string
-#   forceWord       String - {http://www.w3.org/2001/XMLSchema}string
-#   pos             QName - {http://www.w3.org/2001/XMLSchema}QName
-#   uofm            Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#   individual      QName - {http://www.w3.org/2001/XMLSchema}QName
+#   classBeingEdited QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
-#   errors          String - {http://www.w3.org/2001/XMLSchema}string
+#   classes         QNameArray - {urn:auraUserData}QNameArray
 #
-question = forceWord = pos = uofm = nil
-puts obj.askQuestion(question, forceWord, pos, uofm)
+individual = classBeingEdited = nil
+puts obj.getMostGeneralInstanceClasses(individual, classBeingEdited)
 
 # SYNOPSIS
-#   whyNot(concept)
+#   driRemoveSelection(selectionURI, selectionPath, selectionRangeStart, selectionRangeEnd)
+#
+# ARGS
+#   selectionURI    AnyURI - {http://www.w3.org/2001/XMLSchema}anyURI
+#   selectionPath   String - {http://www.w3.org/2001/XMLSchema}string
+#   selectionRangeStart Int - {http://www.w3.org/2001/XMLSchema}int
+#   selectionRangeEnd Int - {http://www.w3.org/2001/XMLSchema}int
+#
+# RETURNS
+#   driRemoveSelectionDisposition DocumentSelectionArray - {urn:auraUserData}DocumentSelectionArray
+#
+selectionURI = selectionPath = selectionRangeStart = selectionRangeEnd = nil
+puts obj.driRemoveSelection(selectionURI, selectionPath, selectionRangeStart, selectionRangeEnd)
+
+# SYNOPSIS
+#   continueAnswerQuestion(dummy)
+#
+# ARGS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   answer          String - {http://www.w3.org/2001/XMLSchema}string
+#   canContinue     Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#
+dummy = nil
+puts obj.continueAnswerQuestion(dummy)
+
+# SYNOPSIS
+#   createChemicalReaction(reaction, className, balance)
+#
+# ARGS
+#   reaction        Reaction - {urn:auraUserData}Reaction
+#   className       QName - {http://www.w3.org/2001/XMLSchema}QName
+#   balance         Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#
+# RETURNS
+#   reactionClass   QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+reaction = className = balance = nil
+puts obj.createChemicalReaction(reaction, className, balance)
+
+# SYNOPSIS
+#   getSmeConceptDependencies(concept)
 #
 # ARGS
 #   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   viewpoint       Viewpoint - {urn:auraUserData}Viewpoint
-#   setupMatched    QNameArray - {urn:auraUserData}QNameArray
-#   setupNotMatched QNameArray - {urn:auraUserData}QNameArray
-#   conceptMatched  QNameArray - {urn:auraUserData}QNameArray
-#   conceptNotMatched QNameArray - {urn:auraUserData}QNameArray
+#   subclasses      QNameArray - {urn:auraUserData}QNameArray
+#   referrers       QNameArray - {urn:auraUserData}QNameArray
 #
 concept = nil
-puts obj.whyNot(concept)
+puts obj.getSmeConceptDependencies(concept)
+
+# SYNOPSIS
+#   getQuestions(inputText, section)
+#
+# ARGS
+#   inputText       String - {http://www.w3.org/2001/XMLSchema}string
+#   section         String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   questions       StringArray - {urn:auraUserData}StringArray
+#
+inputText = section = nil
+puts obj.getQuestions(inputText, section)
+
+# SYNOPSIS
+#   answerQuestion(questionID, figuresDirectory)
+#
+# ARGS
+#   questionID      String - {http://www.w3.org/2001/XMLSchema}string
+#   figuresDirectory String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   answer          String - {http://www.w3.org/2001/XMLSchema}string
+#   canContinue     Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#
+questionID = figuresDirectory = nil
+puts obj.answerQuestion(questionID, figuresDirectory)
 
 # SYNOPSIS
 #   pingServer(dummy)
@@ -52,177 +115,41 @@ dummy = nil
 puts obj.pingServer(dummy)
 
 # SYNOPSIS
-#   changeRelation(rootIndividual, edges, relation)
+#   blockDirtParaphrase(dirtParaphrase)
 #
 # ARGS
-#   rootIndividual  QName - {http://www.w3.org/2001/XMLSchema}QName
-#   edges           ArrayOfGAFs - {urn:auraUserData}ArrayOfGAFs
-#   relation        QName - {http://www.w3.org/2001/XMLSchema}QName
+#   dirtParaphrase  String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
-#   errors          String - {http://www.w3.org/2001/XMLSchema}string
-#
-rootIndividual = edges = relation = nil
-puts obj.changeRelation(rootIndividual, edges, relation)
-
-# SYNOPSIS
-#   getNonVisibleClasses(dummy)
-#
-# ARGS
 #   dummy           String - {http://www.w3.org/2001/XMLSchema}string
 #
-# RETURNS
-#   classes         QNameArray - {urn:auraUserData}QNameArray
-#
-dummy = nil
-puts obj.getNonVisibleClasses(dummy)
+dirtParaphrase = nil
+puts obj.blockDirtParaphrase(dirtParaphrase)
 
 # SYNOPSIS
-#   deleteSmeConcept(concept)
+#   getClassDocumentation(concept, type)
 #
 # ARGS
 #   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
+#   type            QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   reviewList      QNameArray - {urn:auraUserData}QNameArray
+#   documentation   String - {http://www.w3.org/2001/XMLSchema}string
 #
-concept = nil
-puts obj.deleteSmeConcept(concept)
+concept = type = nil
+puts obj.getClassDocumentation(concept, type)
 
 # SYNOPSIS
-#   stemString(inputString)
+#   unBlockDirtParaphrase(dirtParaphrase)
 #
 # ARGS
-#   inputString     String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   outputString    String - {http://www.w3.org/2001/XMLSchema}string
-#
-inputString = nil
-puts obj.stemString(inputString)
-
-# SYNOPSIS
-#   checkpointSuccess(idCreated)
-#
-# ARGS
-#   idCreated       Int - {http://www.w3.org/2001/XMLSchema}int
+#   dirtParaphrase  String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
 #   dummy           String - {http://www.w3.org/2001/XMLSchema}string
 #
-idCreated = nil
-puts obj.checkpointSuccess(idCreated)
-
-# SYNOPSIS
-#   genericSearch(inputs)
-#
-# ARGS
-#   inputs          StringArray - {urn:auraUserData}StringArray
-#
-# RETURNS
-#   termResultList  ArrayOfTermResult - {urn:auraUserData}ArrayOfTermResult
-#
-inputs = nil
-puts obj.genericSearch(inputs)
-
-# SYNOPSIS
-#   createCompound(compound, className)
-#
-# ARGS
-#   compound        Formula - {urn:auraUserData}Formula
-#   className       QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-# RETURNS
-#   compoundClass   QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-compound = className = nil
-puts obj.createCompound(compound, className)
-
-# SYNOPSIS
-#   getClassRelatedClasses(v_class)
-#
-# ARGS
-#   v_class         String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   classes         QNameArray - {urn:auraUserData}QNameArray
-#
-v_class = nil
-puts obj.getClassRelatedClasses(v_class)
-
-# SYNOPSIS
-#   answerCorrect(id)
-#
-# ARGS
-#   id              String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-id = nil
-puts obj.answerCorrect(id)
-
-# SYNOPSIS
-#   initialize(pingInterval, checkpointInterval)
-#
-# ARGS
-#   pingInterval    Int - {http://www.w3.org/2001/XMLSchema}int
-#   checkpointInterval Int - {http://www.w3.org/2001/XMLSchema}int
-#
-# RETURNS
-#   idToRecover     Int - {http://www.w3.org/2001/XMLSchema}int
-#
-pingInterval = checkpointInterval = nil
-puts obj.initialize(pingInterval, checkpointInterval)
-
-# SYNOPSIS
-#   getValidPropertyValues(individual)
-#
-# ARGS
-#   individual      QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-# RETURNS
-#   relationsArray  ValidValuesArray - {urn:auraUserData}ValidValuesArray
-#
-individual = nil
-puts obj.getValidPropertyValues(individual)
-
-# SYNOPSIS
-#   shakenFaultExporter(sOAPServerPart)
-#
-# ARGS
-#   sOAPServerPart  Dummy - {urn:auraUserData}dummy
-#
-# RETURNS
-#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-sOAPServerPart = nil
-puts obj.shakenFaultExporter(sOAPServerPart)
-
-# SYNOPSIS
-#   getDebugNames(dummy)
-#
-# ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   viewpoints      ArrayOfViewpoints - {urn:auraUserData}ArrayOfViewpoints
-#
-dummy = nil
-puts obj.getDebugNames(dummy)
-
-# SYNOPSIS
-#   getViewpointInfo(viewpoint)
-#
-# ARGS
-#   viewpoint       QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-# RETURNS
-#   viewpoint       Viewpoint - {urn:auraUserData}Viewpoint
-#
-viewpoint = nil
-puts obj.getViewpointInfo(viewpoint)
+dirtParaphrase = nil
+puts obj.unBlockDirtParaphrase(dirtParaphrase)
 
 # SYNOPSIS
 #   getAsynchronousCallStatus(callName)
@@ -240,16 +167,42 @@ callName = nil
 puts obj.getAsynchronousCallStatus(callName)
 
 # SYNOPSIS
-#   getClassesUsedInLastQuestion(dummy)
+#   genericSearch(inputs)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   inputs          StringArray - {urn:auraUserData}StringArray
 #
 # RETURNS
-#   classes         QNameArray - {urn:auraUserData}QNameArray
+#   termResultList  ArrayOfTermResult - {urn:auraUserData}ArrayOfTermResult
 #
-dummy = nil
-puts obj.getClassesUsedInLastQuestion(dummy)
+inputs = nil
+puts obj.genericSearch(inputs)
+
+# SYNOPSIS
+#   shutdown(errorStatus)
+#
+# ARGS
+#   errorStatus     Int - {http://www.w3.org/2001/XMLSchema}int
+#
+# RETURNS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+errorStatus = nil
+puts obj.shutdown(errorStatus)
+
+# SYNOPSIS
+#   answerQuestionIpad(questionID, figuresDirectory)
+#
+# ARGS
+#   questionID      String - {http://www.w3.org/2001/XMLSchema}string
+#   figuresDirectory String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   answer          String - {http://www.w3.org/2001/XMLSchema}string
+#   canContinue     Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#
+questionID = figuresDirectory = nil
+puts obj.answerQuestionIpad(questionID, figuresDirectory)
 
 # SYNOPSIS
 #   drilldownExplanation(function, arguments)
@@ -265,32 +218,177 @@ function = arguments = nil
 puts obj.drilldownExplanation(function, arguments)
 
 # SYNOPSIS
-#   getFormattedQuestions(inputText, section)
+#   changeRelation(rootIndividual, edges, relation)
+#
+# ARGS
+#   rootIndividual  QName - {http://www.w3.org/2001/XMLSchema}QName
+#   edges           ArrayOfGAFs - {urn:auraUserData}ArrayOfGAFs
+#   relation        QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+# RETURNS
+#   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
+#   errors          String - {http://www.w3.org/2001/XMLSchema}string
+#
+rootIndividual = edges = relation = nil
+puts obj.changeRelation(rootIndividual, edges, relation)
+
+# SYNOPSIS
+#   getSmeDefinedConcepts(root)
+#
+# ARGS
+#   root            QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+# RETURNS
+#   clibConcepts    QNameArray - {urn:auraUserData}QNameArray
+#   newConcepts     QNameArray - {urn:auraUserData}QNameArray
+#
+root = nil
+puts obj.getSmeDefinedConcepts(root)
+
+# SYNOPSIS
+#   answerCorrect(id)
+#
+# ARGS
+#   id              String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+id = nil
+puts obj.answerCorrect(id)
+
+# SYNOPSIS
+#   getDebugNames(dummy)
+#
+# ARGS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   viewpoints      ArrayOfViewpoints - {urn:auraUserData}ArrayOfViewpoints
+#
+dummy = nil
+puts obj.getDebugNames(dummy)
+
+# SYNOPSIS
+#   getExampleCPLSentences(dummy)
+#
+# ARGS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   sentences       StringArray - {urn:auraUserData}StringArray
+#
+dummy = nil
+puts obj.getExampleCPLSentences(dummy)
+
+# SYNOPSIS
+#   askQuestion(question, forceWord, pos, uofm)
+#
+# ARGS
+#   question        String - {http://www.w3.org/2001/XMLSchema}string
+#   forceWord       String - {http://www.w3.org/2001/XMLSchema}string
+#   pos             QName - {http://www.w3.org/2001/XMLSchema}QName
+#   uofm            Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#
+# RETURNS
+#   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
+#   errors          String - {http://www.w3.org/2001/XMLSchema}string
+#
+question = forceWord = pos = uofm = nil
+puts obj.askQuestion(question, forceWord, pos, uofm)
+
+# SYNOPSIS
+#   driCreateSelection(selectionType, selectionPath, selectionURI, selectionRangeStart, selectionRangeEnd, selectionName, selectionSummary)
+#
+# ARGS
+#   selectionType   QName - {http://www.w3.org/2001/XMLSchema}QName
+#   selectionPath   String - {http://www.w3.org/2001/XMLSchema}string
+#   selectionURI    AnyURI - {http://www.w3.org/2001/XMLSchema}anyURI
+#   selectionRangeStart Int - {http://www.w3.org/2001/XMLSchema}int
+#   selectionRangeEnd Int - {http://www.w3.org/2001/XMLSchema}int
+#   selectionName   QName - {http://www.w3.org/2001/XMLSchema}QName
+#   selectionSummary String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   driCreateSelectionDisposition QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+selectionType = selectionPath = selectionURI = selectionRangeStart = selectionRangeEnd = selectionName = selectionSummary = nil
+puts obj.driCreateSelection(selectionType, selectionPath, selectionURI, selectionRangeStart, selectionRangeEnd, selectionName, selectionSummary)
+
+# SYNOPSIS
+#   resetQASession(dummy)
+#
+# ARGS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+dummy = nil
+puts obj.resetQASession(dummy)
+
+# SYNOPSIS
+#   removeLink(linkID)
+#
+# ARGS
+#   linkID          String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   removed         Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#   conceptMap      ConceptMap - {urn:auraUserData}ConceptMap
+#
+linkID = nil
+puts obj.removeLink(linkID)
+
+# SYNOPSIS
+#   checkpointSuccess(idCreated)
+#
+# ARGS
+#   idCreated       Int - {http://www.w3.org/2001/XMLSchema}int
+#
+# RETURNS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+idCreated = nil
+puts obj.checkpointSuccess(idCreated)
+
+# SYNOPSIS
+#   getFormattedStructuredQuestions(inputText, section)
 #
 # ARGS
 #   inputText       String - {http://www.w3.org/2001/XMLSchema}string
 #   section         String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   questions       StringArray - {urn:auraUserData}StringArray
-#   formattedQuestions StringArray - {urn:auraUserData}StringArray
+#   structuredQuestions String - {http://www.w3.org/2001/XMLSchema}string
+#   formattedStructuredQuestions String - {http://www.w3.org/2001/XMLSchema}string
 #
 inputText = section = nil
-puts obj.getFormattedQuestions(inputText, section)
+puts obj.getFormattedStructuredQuestions(inputText, section)
 
 # SYNOPSIS
-#   getRelationOptions(source, relation, target)
+#   startQASession(dummy)
 #
 # ARGS
-#   source          QName - {http://www.w3.org/2001/XMLSchema}QName
-#   relation        QName - {http://www.w3.org/2001/XMLSchema}QName
-#   target          QName - {http://www.w3.org/2001/XMLSchema}QName
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   options         ArrayOfRelationOptions - {urn:auraUserData}ArrayOfRelationOptions
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
 #
-source = relation = target = nil
-puts obj.getRelationOptions(source, relation, target)
+dummy = nil
+puts obj.startQASession(dummy)
+
+# SYNOPSIS
+#   abortAsynchronousCall(callName)
+#
+# ARGS
+#   callName        QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+# RETURNS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+callName = nil
+puts obj.abortAsynchronousCall(callName)
 
 # SYNOPSIS
 #   callLMapFunction(rootIndividual, action, arguments, uiAttributes)
@@ -312,114 +410,44 @@ rootIndividual = action = arguments = uiAttributes = nil
 puts obj.callLMapFunction(rootIndividual, action, arguments, uiAttributes)
 
 # SYNOPSIS
-#   getQuestions(inputText, section)
+#   whyNot(concept)
 #
 # ARGS
-#   inputText       String - {http://www.w3.org/2001/XMLSchema}string
-#   section         String - {http://www.w3.org/2001/XMLSchema}string
+#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   questions       StringArray - {urn:auraUserData}StringArray
+#   viewpoint       Viewpoint - {urn:auraUserData}Viewpoint
+#   setupMatched    QNameArray - {urn:auraUserData}QNameArray
+#   setupNotMatched QNameArray - {urn:auraUserData}QNameArray
+#   conceptMatched  QNameArray - {urn:auraUserData}QNameArray
+#   conceptNotMatched QNameArray - {urn:auraUserData}QNameArray
 #
-inputText = section = nil
-puts obj.getQuestions(inputText, section)
+concept = nil
+puts obj.whyNot(concept)
 
 # SYNOPSIS
-#   getWordSenses(instance)
+#   getViewpointInfo(viewpoint)
 #
 # ARGS
-#   instance        QName - {http://www.w3.org/2001/XMLSchema}QName
+#   viewpoint       QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   senses          ArrayOfWordSenses - {urn:auraUserData}ArrayOfWordSenses
+#   viewpoint       Viewpoint - {urn:auraUserData}Viewpoint
 #
-instance = nil
-puts obj.getWordSenses(instance)
+viewpoint = nil
+puts obj.getViewpointInfo(viewpoint)
 
 # SYNOPSIS
-#   answerQuestion(questionID, figuresDirectory)
+#   getNonVisibleClasses(dummy)
 #
 # ARGS
-#   questionID      String - {http://www.w3.org/2001/XMLSchema}string
-#   figuresDirectory String - {http://www.w3.org/2001/XMLSchema}string
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   answer          String - {http://www.w3.org/2001/XMLSchema}string
-#   canContinue     Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#   classes         QNameArray - {urn:auraUserData}QNameArray
 #
-questionID = figuresDirectory = nil
-puts obj.answerQuestion(questionID, figuresDirectory)
-
-# SYNOPSIS
-#   initializeComplete(idRecovered, isSuccess)
-#
-# ARGS
-#   idRecovered     Int - {http://www.w3.org/2001/XMLSchema}int
-#   isSuccess       Boolean - {http://www.w3.org/2001/XMLSchema}boolean
-#
-# RETURNS
-#   idToRecover     Int - {http://www.w3.org/2001/XMLSchema}int
-#
-idRecovered = isSuccess = nil
-puts obj.initializeComplete(idRecovered, isSuccess)
-
-# SYNOPSIS
-#   changeWordSense(instance, sense)
-#
-# ARGS
-#   instance        QName - {http://www.w3.org/2001/XMLSchema}QName
-#   sense           QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-# RETURNS
-#   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
-#   errors          String - {http://www.w3.org/2001/XMLSchema}string
-#
-instance = sense = nil
-puts obj.changeWordSense(instance, sense)
-
-# SYNOPSIS
-#   getValidRelations(source, target)
-#
-# ARGS
-#   source          QName - {http://www.w3.org/2001/XMLSchema}QName
-#   target          QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-# RETURNS
-#   sOAPServerPart002 RelationsArray - {urn:auraUserData}relationsArray
-#
-source = target = nil
-puts obj.getValidRelations(source, target)
-
-# SYNOPSIS
-#   getStructuredQuestions(inputText, section)
-#
-# ARGS
-#   inputText       String - {http://www.w3.org/2001/XMLSchema}string
-#   section         String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   structuredQuestions String - {http://www.w3.org/2001/XMLSchema}string
-#
-inputText = section = nil
-puts obj.getStructuredQuestions(inputText, section)
-
-# SYNOPSIS
-#   driCreateSelection(selectionType, selectionPath, selectionURI, selectionRangeStart, selectionRangeEnd, selectionName, selectionSummary)
-#
-# ARGS
-#   selectionType   QName - {http://www.w3.org/2001/XMLSchema}QName
-#   selectionPath   String - {http://www.w3.org/2001/XMLSchema}string
-#   selectionURI    AnyURI - {http://www.w3.org/2001/XMLSchema}anyURI
-#   selectionRangeStart Int - {http://www.w3.org/2001/XMLSchema}int
-#   selectionRangeEnd Int - {http://www.w3.org/2001/XMLSchema}int
-#   selectionName   QName - {http://www.w3.org/2001/XMLSchema}QName
-#   selectionSummary String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   driCreateSelectionDisposition QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-selectionType = selectionPath = selectionURI = selectionRangeStart = selectionRangeEnd = selectionName = selectionSummary = nil
-puts obj.driCreateSelection(selectionType, selectionPath, selectionURI, selectionRangeStart, selectionRangeEnd, selectionName, selectionSummary)
+dummy = nil
+puts obj.getNonVisibleClasses(dummy)
 
 # SYNOPSIS
 #   findPartitionsForClass(v_class)
@@ -435,144 +463,7 @@ v_class = nil
 puts obj.findPartitionsForClass(v_class)
 
 # SYNOPSIS
-#   allowParaphrasing(isAllowed)
-#
-# ARGS
-#   isAllowed       Boolean - {http://www.w3.org/2001/XMLSchema}boolean
-#
-# RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-isAllowed = nil
-puts obj.allowParaphrasing(isAllowed)
-
-# SYNOPSIS
-#   blockDirtParaphrase(dirtParaphrase)
-#
-# ARGS
-#   dirtParaphrase  String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-dirtParaphrase = nil
-puts obj.blockDirtParaphrase(dirtParaphrase)
-
-# SYNOPSIS
-#   getDebugInfo(dummy)
-#
-# ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   viewpoints      ArrayOfViewpoints - {urn:auraUserData}ArrayOfViewpoints
-#
-dummy = nil
-puts obj.getDebugInfo(dummy)
-
-# SYNOPSIS
-#   continueAnswerQuestion(dummy)
-#
-# ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   answer          String - {http://www.w3.org/2001/XMLSchema}string
-#   canContinue     Boolean - {http://www.w3.org/2001/XMLSchema}boolean
-#
-dummy = nil
-puts obj.continueAnswerQuestion(dummy)
-
-# SYNOPSIS
-#   abortAsynchronousCall(callName)
-#
-# ARGS
-#   callName        QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-# RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-callName = nil
-puts obj.abortAsynchronousCall(callName)
-
-# SYNOPSIS
-#   shutdown(errorStatus)
-#
-# ARGS
-#   errorStatus     Int - {http://www.w3.org/2001/XMLSchema}int
-#
-# RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-errorStatus = nil
-puts obj.shutdown(errorStatus)
-
-# SYNOPSIS
-#   getSmeDefinedConcepts(root)
-#
-# ARGS
-#   root            QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-# RETURNS
-#   clibConcepts    QNameArray - {urn:auraUserData}QNameArray
-#   newConcepts     QNameArray - {urn:auraUserData}QNameArray
-#
-root = nil
-puts obj.getSmeDefinedConcepts(root)
-
-# SYNOPSIS
-#   getExampleCPLSentences(dummy)
-#
-# ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   sentences       StringArray - {urn:auraUserData}StringArray
-#
-dummy = nil
-puts obj.getExampleCPLSentences(dummy)
-
-# SYNOPSIS
-#   createNewClass(concept, conceptList)
-#
-# ARGS
-#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
-#   conceptList     QNameArray - {urn:auraUserData}QNameArray
-#
-# RETURNS
-#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-concept = conceptList = nil
-puts obj.createNewClass(concept, conceptList)
-
-# SYNOPSIS
-#   getClassSynonyms(concept)
-#
-# ARGS
-#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-# RETURNS
-#   vocabulary      VocabularyArray - {urn:auraUserData}VocabularyArray
-#
-concept = nil
-puts obj.getClassSynonyms(concept)
-
-# SYNOPSIS
-#   assertAsEqual(instance1, instance2)
-#
-# ARGS
-#   instance1       QName - {http://www.w3.org/2001/XMLSchema}QName
-#   instance2       QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-# RETURNS
-#   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
-#   errors          String - {http://www.w3.org/2001/XMLSchema}string
-#
-instance1 = instance2 = nil
-puts obj.assertAsEqual(instance1, instance2)
-
-# SYNOPSIS
-#   startQASession(dummy)
+#   commitEdits(dummy)
 #
 # ARGS
 #   dummy           String - {http://www.w3.org/2001/XMLSchema}string
@@ -581,44 +472,71 @@ puts obj.assertAsEqual(instance1, instance2)
 #   dummy           String - {http://www.w3.org/2001/XMLSchema}string
 #
 dummy = nil
-puts obj.startQASession(dummy)
+puts obj.commitEdits(dummy)
 
 # SYNOPSIS
-#   getMostGeneralInstanceClasses(individual, classBeingEdited)
+#   initializeComplete(idRecovered, isSuccess)
 #
 # ARGS
-#   individual      QName - {http://www.w3.org/2001/XMLSchema}QName
-#   classBeingEdited QName - {http://www.w3.org/2001/XMLSchema}QName
+#   idRecovered     Int - {http://www.w3.org/2001/XMLSchema}int
+#   isSuccess       Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#
+# RETURNS
+#   idToRecover     Int - {http://www.w3.org/2001/XMLSchema}int
+#
+idRecovered = isSuccess = nil
+puts obj.initializeComplete(idRecovered, isSuccess)
+
+# SYNOPSIS
+#   getLinksForSectionAndConcept(htmlFile, concept)
+#
+# ARGS
+#   htmlFile        String - {http://www.w3.org/2001/XMLSchema}string
+#   concept         String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   links           TextbookLinkArray - {urn:auraUserData}TextbookLinkArray
+#
+htmlFile = concept = nil
+puts obj.getLinksForSectionAndConcept(htmlFile, concept)
+
+# SYNOPSIS
+#   getClassesUsedInLastQuestion(dummy)
+#
+# ARGS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
 #   classes         QNameArray - {urn:auraUserData}QNameArray
 #
-individual = classBeingEdited = nil
-puts obj.getMostGeneralInstanceClasses(individual, classBeingEdited)
+dummy = nil
+puts obj.getClassesUsedInLastQuestion(dummy)
 
 # SYNOPSIS
-#   auraFaultExporter(sOAPServerPart003)
+#   getFormattedQuestions(inputText, section)
 #
 # ARGS
-#   sOAPServerPart003 Dummy2 - {urn:auraUserData}dummy2
+#   inputText       String - {http://www.w3.org/2001/XMLSchema}string
+#   section         String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
+#   questions       StringArray - {urn:auraUserData}StringArray
+#   formattedQuestions StringArray - {urn:auraUserData}StringArray
 #
-sOAPServerPart003 = nil
-puts obj.auraFaultExporter(sOAPServerPart003)
+inputText = section = nil
+puts obj.getFormattedQuestions(inputText, section)
 
 # SYNOPSIS
-#   getVocabulary(pattern)
+#   getValidPropertyValues(individual)
 #
 # ARGS
-#   pattern         String - {http://www.w3.org/2001/XMLSchema}string
+#   individual      QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   vocabulary      VocabularyArray - {urn:auraUserData}VocabularyArray
+#   relationsArray  ValidValuesArray - {urn:auraUserData}ValidValuesArray
 #
-pattern = nil
-puts obj.getVocabulary(pattern)
+individual = nil
+puts obj.getValidPropertyValues(individual)
 
 # SYNOPSIS
 #   driGetSelection(selectionURI, selectionPath, selectionRangeStart, selectionRangeEnd)
@@ -636,18 +554,158 @@ selectionURI = selectionPath = selectionRangeStart = selectionRangeEnd = nil
 puts obj.driGetSelection(selectionURI, selectionPath, selectionRangeStart, selectionRangeEnd)
 
 # SYNOPSIS
-#   answerQuestionIpad(questionID, figuresDirectory)
+#   getRelationOptions(source, relation, target)
 #
 # ARGS
-#   questionID      String - {http://www.w3.org/2001/XMLSchema}string
-#   figuresDirectory String - {http://www.w3.org/2001/XMLSchema}string
+#   source          QName - {http://www.w3.org/2001/XMLSchema}QName
+#   relation        QName - {http://www.w3.org/2001/XMLSchema}QName
+#   target          QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   answer          String - {http://www.w3.org/2001/XMLSchema}string
-#   canContinue     Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#   options         ArrayOfRelationOptions - {urn:auraUserData}ArrayOfRelationOptions
 #
-questionID = figuresDirectory = nil
-puts obj.answerQuestionIpad(questionID, figuresDirectory)
+source = relation = target = nil
+puts obj.getRelationOptions(source, relation, target)
+
+# SYNOPSIS
+#   exportOWL(destination)
+#
+# ARGS
+#   destination     String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+destination = nil
+puts obj.exportOWL(destination)
+
+# SYNOPSIS
+#   stemString(inputString)
+#
+# ARGS
+#   inputString     String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   outputString    String - {http://www.w3.org/2001/XMLSchema}string
+#
+inputString = nil
+puts obj.stemString(inputString)
+
+# SYNOPSIS
+#   shakenFaultExporter(sOAPServerPart)
+#
+# ARGS
+#   sOAPServerPart  Dummy - {urn:auraUserData}dummy
+#
+# RETURNS
+#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+sOAPServerPart = nil
+puts obj.shakenFaultExporter(sOAPServerPart)
+
+# SYNOPSIS
+#   createNewClass(concept, conceptList)
+#
+# ARGS
+#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
+#   conceptList     QNameArray - {urn:auraUserData}QNameArray
+#
+# RETURNS
+#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+concept = conceptList = nil
+puts obj.createNewClass(concept, conceptList)
+
+# SYNOPSIS
+#   renameConcept(oldConceptName, newConceptName)
+#
+# ARGS
+#   oldConceptName  String - {http://www.w3.org/2001/XMLSchema}string
+#   newConceptName  String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+oldConceptName = newConceptName = nil
+puts obj.renameConcept(oldConceptName, newConceptName)
+
+# SYNOPSIS
+#   changeWordSense(instance, sense)
+#
+# ARGS
+#   instance        QName - {http://www.w3.org/2001/XMLSchema}QName
+#   sense           QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+# RETURNS
+#   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
+#   errors          String - {http://www.w3.org/2001/XMLSchema}string
+#
+instance = sense = nil
+puts obj.changeWordSense(instance, sense)
+
+# SYNOPSIS
+#   addLink(htmlFile, sentenceID, concept, triple)
+#
+# ARGS
+#   htmlFile        String - {http://www.w3.org/2001/XMLSchema}string
+#   sentenceID      SentenceIdentifier - {urn:auraUserData}SentenceIdentifier
+#   concept         String - {http://www.w3.org/2001/XMLSchema}string
+#   triple          StringArray - {urn:auraUserData}StringArray
+#
+# RETURNS
+#   conceptMap      ConceptMap - {urn:auraUserData}ConceptMap
+#
+htmlFile = sentenceID = concept = triple = nil
+puts obj.addLink(htmlFile, sentenceID, concept, triple)
+
+# SYNOPSIS
+#   getValidRelations(source, target)
+#
+# ARGS
+#   source          QName - {http://www.w3.org/2001/XMLSchema}QName
+#   target          QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+# RETURNS
+#   sOAPServerPart002 RelationsArray - {urn:auraUserData}relationsArray
+#
+source = target = nil
+puts obj.getValidRelations(source, target)
+
+# SYNOPSIS
+#   getVocabulary(pattern)
+#
+# ARGS
+#   pattern         String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   vocabulary      VocabularyArray - {urn:auraUserData}VocabularyArray
+#
+pattern = nil
+puts obj.getVocabulary(pattern)
+
+# SYNOPSIS
+#   extractConceptsFromText(textbooktext)
+#
+# ARGS
+#   textbooktext    String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   vocabulary      VocabularyArray - {urn:auraUserData}VocabularyArray
+#
+textbooktext = nil
+puts obj.extractConceptsFromText(textbooktext)
+
+# SYNOPSIS
+#   deleteSmeConcept(concept)
+#
+# ARGS
+#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+# RETURNS
+#   reviewList      QNameArray - {urn:auraUserData}QNameArray
+#
+concept = nil
+puts obj.deleteSmeConcept(concept)
 
 # SYNOPSIS
 #   getAllPartitions(classes)
@@ -663,48 +721,57 @@ classes = nil
 puts obj.getAllPartitions(classes)
 
 # SYNOPSIS
-#   createChemicalReaction(reaction, className, balance)
+#   getClassRelatedClasses(v_class)
 #
 # ARGS
-#   reaction        Reaction - {urn:auraUserData}Reaction
-#   className       QName - {http://www.w3.org/2001/XMLSchema}QName
-#   balance         Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#   v_class         String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   reactionClass   QName - {http://www.w3.org/2001/XMLSchema}QName
+#   classes         QNameArray - {urn:auraUserData}QNameArray
 #
-reaction = className = balance = nil
-puts obj.createChemicalReaction(reaction, className, balance)
+v_class = nil
+puts obj.getClassRelatedClasses(v_class)
 
 # SYNOPSIS
-#   commitEdits(dummy)
+#   auraFaultExporter(sOAPServerPart003)
 #
 # ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   sOAPServerPart003 Dummy2 - {urn:auraUserData}dummy2
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
 #
-dummy = nil
-puts obj.commitEdits(dummy)
+sOAPServerPart003 = nil
+puts obj.auraFaultExporter(sOAPServerPart003)
 
 # SYNOPSIS
-#   driRemoveSelection(selectionURI, selectionPath, selectionRangeStart, selectionRangeEnd)
+#   assertAsEqual(instance1, instance2)
 #
 # ARGS
-#   selectionURI    AnyURI - {http://www.w3.org/2001/XMLSchema}anyURI
-#   selectionPath   String - {http://www.w3.org/2001/XMLSchema}string
-#   selectionRangeStart Int - {http://www.w3.org/2001/XMLSchema}int
-#   selectionRangeEnd Int - {http://www.w3.org/2001/XMLSchema}int
+#   instance1       QName - {http://www.w3.org/2001/XMLSchema}QName
+#   instance2       QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   driRemoveSelectionDisposition DocumentSelectionArray - {urn:auraUserData}DocumentSelectionArray
+#   conceptMap      QuestionConceptMap - {urn:auraUserData}QuestionConceptMap
+#   errors          String - {http://www.w3.org/2001/XMLSchema}string
 #
-selectionURI = selectionPath = selectionRangeStart = selectionRangeEnd = nil
-puts obj.driRemoveSelection(selectionURI, selectionPath, selectionRangeStart, selectionRangeEnd)
+instance1 = instance2 = nil
+puts obj.assertAsEqual(instance1, instance2)
 
 # SYNOPSIS
-#   getFormattedStructuredQuestions(inputText, section)
+#   getWordSenses(instance)
+#
+# ARGS
+#   instance        QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+# RETURNS
+#   senses          ArrayOfWordSenses - {urn:auraUserData}ArrayOfWordSenses
+#
+instance = nil
+puts obj.getWordSenses(instance)
+
+# SYNOPSIS
+#   getQuestionsForGlossary(inputText, section)
 #
 # ARGS
 #   inputText       String - {http://www.w3.org/2001/XMLSchema}string
@@ -715,56 +782,43 @@ puts obj.driRemoveSelection(selectionURI, selectionPath, selectionRangeStart, se
 #   formattedStructuredQuestions String - {http://www.w3.org/2001/XMLSchema}string
 #
 inputText = section = nil
-puts obj.getFormattedStructuredQuestions(inputText, section)
+puts obj.getQuestionsForGlossary(inputText, section)
 
 # SYNOPSIS
-#   getClassDocumentation(concept, type)
+#   getDebugInfo(dummy)
+#
+# ARGS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   viewpoints      ArrayOfViewpoints - {urn:auraUserData}ArrayOfViewpoints
+#
+dummy = nil
+puts obj.getDebugInfo(dummy)
+
+# SYNOPSIS
+#   getClassSynonyms(concept)
 #
 # ARGS
 #   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
-#   type            QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   documentation   String - {http://www.w3.org/2001/XMLSchema}string
-#
-concept = type = nil
-puts obj.getClassDocumentation(concept, type)
-
-# SYNOPSIS
-#   prepareIndividual(concept)
-#
-# ARGS
-#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
-#
-# RETURNS
-#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
+#   vocabulary      VocabularyArray - {urn:auraUserData}VocabularyArray
 #
 concept = nil
-puts obj.prepareIndividual(concept)
+puts obj.getClassSynonyms(concept)
 
 # SYNOPSIS
-#   exportOWL(destination)
+#   getLinksForSection(htmlFile)
 #
 # ARGS
-#   destination     String - {http://www.w3.org/2001/XMLSchema}string
+#   htmlFile        String - {http://www.w3.org/2001/XMLSchema}string
 #
 # RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#   links           TextbookLinkArray - {urn:auraUserData}TextbookLinkArray
 #
-destination = nil
-puts obj.exportOWL(destination)
-
-# SYNOPSIS
-#   unBlockDirtParaphrase(dirtParaphrase)
-#
-# ARGS
-#   dirtParaphrase  String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-dirtParaphrase = nil
-puts obj.unBlockDirtParaphrase(dirtParaphrase)
+htmlFile = nil
+puts obj.getLinksForSection(htmlFile)
 
 # SYNOPSIS
 #   allowUnderspecification(isAllowed)
@@ -791,18 +845,6 @@ rootIndividual = nil
 puts obj.getCheckpointedGraph(rootIndividual)
 
 # SYNOPSIS
-#   endQASession(dummy)
-#
-# ARGS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-# RETURNS
-#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
-#
-dummy = nil
-puts obj.endQASession(dummy)
-
-# SYNOPSIS
 #   lastDirtParaphrasesUsed(dummy)
 #
 # ARGS
@@ -815,20 +857,20 @@ dummy = nil
 puts obj.lastDirtParaphrasesUsed(dummy)
 
 # SYNOPSIS
-#   getSmeConceptDependencies(concept)
+#   initialize(pingInterval, checkpointInterval)
 #
 # ARGS
-#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
+#   pingInterval    Int - {http://www.w3.org/2001/XMLSchema}int
+#   checkpointInterval Int - {http://www.w3.org/2001/XMLSchema}int
 #
 # RETURNS
-#   subclasses      QNameArray - {urn:auraUserData}QNameArray
-#   referrers       QNameArray - {urn:auraUserData}QNameArray
+#   idToRecover     Int - {http://www.w3.org/2001/XMLSchema}int
 #
-concept = nil
-puts obj.getSmeConceptDependencies(concept)
+pingInterval = checkpointInterval = nil
+puts obj.initialize(pingInterval, checkpointInterval)
 
 # SYNOPSIS
-#   resetQASession(dummy)
+#   endQASession(dummy)
 #
 # ARGS
 #   dummy           String - {http://www.w3.org/2001/XMLSchema}string
@@ -837,18 +879,56 @@ puts obj.getSmeConceptDependencies(concept)
 #   dummy           String - {http://www.w3.org/2001/XMLSchema}string
 #
 dummy = nil
-puts obj.resetQASession(dummy)
+puts obj.endQASession(dummy)
 
 # SYNOPSIS
-#   extractConceptsFromText(textbooktext)
+#   prepareIndividual(concept)
 #
 # ARGS
-#   textbooktext    String - {http://www.w3.org/2001/XMLSchema}string
+#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
 #
 # RETURNS
-#   vocabulary      VocabularyArray - {urn:auraUserData}VocabularyArray
+#   concept         QName - {http://www.w3.org/2001/XMLSchema}QName
 #
-textbooktext = nil
-puts obj.extractConceptsFromText(textbooktext)
+concept = nil
+puts obj.prepareIndividual(concept)
+
+# SYNOPSIS
+#   createCompound(compound, className)
+#
+# ARGS
+#   compound        Formula - {urn:auraUserData}Formula
+#   className       QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+# RETURNS
+#   compoundClass   QName - {http://www.w3.org/2001/XMLSchema}QName
+#
+compound = className = nil
+puts obj.createCompound(compound, className)
+
+# SYNOPSIS
+#   getStructuredQuestions(inputText, section)
+#
+# ARGS
+#   inputText       String - {http://www.w3.org/2001/XMLSchema}string
+#   section         String - {http://www.w3.org/2001/XMLSchema}string
+#
+# RETURNS
+#   structuredQuestions String - {http://www.w3.org/2001/XMLSchema}string
+#
+inputText = section = nil
+puts obj.getStructuredQuestions(inputText, section)
+
+# SYNOPSIS
+#   allowParaphrasing(isAllowed)
+#
+# ARGS
+#   isAllowed       Boolean - {http://www.w3.org/2001/XMLSchema}boolean
+#
+# RETURNS
+#   dummy           String - {http://www.w3.org/2001/XMLSchema}string
+#
+isAllowed = nil
+puts obj.allowParaphrasing(isAllowed)
 
 

@@ -65,6 +65,10 @@ post "/formatted_structured_questions_lists" do
   logResult(aura.get_formatted_structured_questions(params))
 end
 
+post "/get_questions_for_glossary" do
+  logResult(aura.get_questions_for_glossary(params))
+end
+
 get "*" do
   logResult(puts "#{params[:splat]} 404 not found")
   pass

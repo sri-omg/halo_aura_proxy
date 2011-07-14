@@ -115,6 +115,19 @@ html
     end
   end
   
+  
+  def get_questions_for_glossary(params)
+    xml = Builder::XmlMarkup.new
+    xml.instruct!
+
+    questions = @connection.getQuestionsForGlossary(params[:concept], "")
+    xml.questions do |questions_element|
+      questions.each do |question|
+        xml.question(question)
+      end
+    end
+  end
+  
   private
 
   def initialize(endpoint)

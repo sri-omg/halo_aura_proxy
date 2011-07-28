@@ -120,7 +120,11 @@ html
     xml = Builder::XmlMarkup.new
     xml.instruct!
 
-    questions = @connection.getQuestionsForGlossary(params[:concept], "")
+    question_xml = @connection.getQuestionsForGlossary(params[:concept], "")
+    doc = Nokogiri::XML::Document.parse(question_xml[1])
+	
+    questions = doc.search("Question").collect(&:inner_html)
+
     xml.questions do |questions_element|
       questions.each do |question|
         xml.question(question)

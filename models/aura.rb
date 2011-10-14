@@ -137,6 +137,7 @@ html
   def initialize(endpoint)
     @connection = test? ? FakeSoapServerPort.new : SOAPServerPort.new(endpoint)
     @connection.options["protocol.http.receive_timeout"] = 605 unless test? # assuming AURA has a 10 minute timeout
+    @connection.mandatorycharset = "utf-8"
     @connection.startQASession(nil);
   end
 end
